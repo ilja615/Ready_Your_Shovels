@@ -16,32 +16,34 @@ public class EffectMod extends Effect {
 	
 	public void performEffect(LivingEntity entity, int amplifier) {
 		entity.getActivePotionEffects().forEach((EffectInstance effect) -> {
-			if (this == ModEffects.increase_buff && effect.getPotion().getEffectType() == EffectType.BENEFICIAL) {
-				int time = (amplifier + 1) * 80;
+			int time = (amplifier + 1) * 160;
+			
+			if (effect.getPotion().getEffectType() == EffectType.BENEFICIAL) {
+				if (this == ModEffects.increase_buff) {
+					entity.removePotionEffect(this);
+					entity.removePotionEffect(effect.getPotion());
+					entity.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + time));
+				}
 				
-				entity.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + time));
-				entity.removeActivePotionEffect(this);
+				if (this == ModEffects.decrease_buff) {
+					entity.removePotionEffect(this);
+					entity.removePotionEffect(effect.getPotion());
+					entity.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() - time));
+				}
 			}
 			
-			if (this == ModEffects.decrease_debuff && effect.getPotion().getEffectType() == EffectType.HARMFUL) {
-				int time = (amplifier + 1) * 80;
+			if (effect.getPotion().getEffectType() == EffectType.HARMFUL) {
+				if (this == ModEffects.increase_debuff) {
+					entity.removePotionEffect(this);
+					entity.removePotionEffect(effect.getPotion());
+					entity.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + time));
+				}
 				
-				entity.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() - time));
-				entity.removeActivePotionEffect(this);
-			}
-			
-			if (this == ModEffects.increase_debuff && effect.getPotion().getEffectType() == EffectType.HARMFUL) {
-				int time = (amplifier + 1) * 100;
-				
-				entity.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + time));
-				entity.removeActivePotionEffect(this);
-			}
-			
-			if (this == ModEffects.decrease_buff && effect.getPotion().getEffectType() == EffectType.BENEFICIAL) {
-				int time = (amplifier + 1) * 100;
-				
-				entity.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() - time));
-				entity.removeActivePotionEffect(this);
+				if (this == ModEffects.decrease_debuff) {
+					entity.removePotionEffect(this);
+					entity.removePotionEffect(effect.getPotion());
+					entity.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() - time));
+				}
 			}
 		});
 	}
