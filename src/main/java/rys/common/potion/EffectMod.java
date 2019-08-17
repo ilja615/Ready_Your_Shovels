@@ -16,33 +16,35 @@ public class EffectMod extends Effect {
 	
 	public void performEffect(LivingEntity entity, int amplifier) {
 		entity.getActivePotionEffects().forEach((EffectInstance effect) -> {
-			int time = (amplifier + 1) * 160;
-			
-			if (effect.getPotion().getEffectType() == EffectType.BENEFICIAL) {
-				if (this == ModEffects.increase_buff) {
-					entity.removePotionEffect(this);
-					entity.removePotionEffect(effect.getPotion());
-					entity.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + time));
+			if (!effect.isAmbient()) {
+				int time = (amplifier + 1) * 160;
+				
+				if (effect.getPotion().getEffectType() == EffectType.BENEFICIAL) {
+					if (this == ModEffects.increase_buff) {
+						entity.removePotionEffect(this);
+						entity.removePotionEffect(effect.getPotion());
+						entity.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + time));
+					}
+					
+					if (this == ModEffects.decrease_buff) {
+						entity.removePotionEffect(this);
+						entity.removePotionEffect(effect.getPotion());
+						entity.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() - time));
+					}
 				}
 				
-				if (this == ModEffects.decrease_buff) {
-					entity.removePotionEffect(this);
-					entity.removePotionEffect(effect.getPotion());
-					entity.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() - time));
-				}
-			}
-			
-			if (effect.getPotion().getEffectType() == EffectType.HARMFUL) {
-				if (this == ModEffects.increase_debuff) {
-					entity.removePotionEffect(this);
-					entity.removePotionEffect(effect.getPotion());
-					entity.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + time));
-				}
-				
-				if (this == ModEffects.decrease_debuff) {
-					entity.removePotionEffect(this);
-					entity.removePotionEffect(effect.getPotion());
-					entity.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() - time));
+				if (effect.getPotion().getEffectType() == EffectType.HARMFUL) {
+					if (this == ModEffects.increase_debuff) {
+						entity.removePotionEffect(this);
+						entity.removePotionEffect(effect.getPotion());
+						entity.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() + time));
+					}
+					
+					if (this == ModEffects.decrease_debuff) {
+						entity.removePotionEffect(this);
+						entity.removePotionEffect(effect.getPotion());
+						entity.addPotionEffect(new EffectInstance(effect.getPotion(), effect.getDuration() - time));
+					}
 				}
 			}
 		});
