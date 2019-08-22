@@ -12,11 +12,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import rys.common.init.ModBlocks;
 import rys.common.util.EntryList;
-import rys.common.util.Reference;
 
 public class CaveFeature extends Feature<NoFeatureConfig> {
 	
@@ -33,10 +33,14 @@ public class CaveFeature extends Feature<NoFeatureConfig> {
 	}
 	
 	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
-		Reference.LOGGER.info("CaveFeature.place()");
+		int j = worldIn.getHeight(Heightmap.Type.WORLD_SURFACE_WG, pos.getX(), pos.getZ());
 		
-		if (pos.getY() > 56 && pos.getY() < 72) {
-			this.tryPlace(worldIn, pos);
+		for (int x = pos.getX(); x < pos.getX() + 16; x++) {
+			for (int z = pos.getZ(); z < pos.getZ() + 16; z++) {
+				for (int y = (j - 16); y < (j + 16); y++) {
+					this.tryPlace(worldIn, new BlockPos(x, y, z));
+				}
+			}
 		}
 		
 		return true;
@@ -45,11 +49,8 @@ public class CaveFeature extends Feature<NoFeatureConfig> {
 	private void tryPlace(IWorld worldIn, BlockPos pos) {
 		BlockState state = worldIn.getBlockState(pos);
 		
-		Reference.LOGGER.info("CaveFeature.tryPlace()");
-		
 		if (this.isStone(state)) {
-			this.setBlockState(worldIn, pos, this.getRandomBlock(worldIn));
-			Reference.LOGGER.info("CaveFeature.setBlockState() " + state.getBlock().getRegistryName().toString());
+			this.setBlockState(worldIn, pos, this.getRandomBlock());
 		}
 	}
 	
@@ -58,7 +59,7 @@ public class CaveFeature extends Feature<NoFeatureConfig> {
 		return block == Blocks.COBBLESTONE || block == Blocks.STONE || block == Blocks.GRANITE || block == Blocks.DIORITE || block == Blocks.ANDESITE;
 	}
 	
-	private BlockState getRandomBlock(IWorld worldIn) {
+	private BlockState getRandomBlock() {
 		return this.blockList.getRandom().getDefaultState();
 	}
 	
