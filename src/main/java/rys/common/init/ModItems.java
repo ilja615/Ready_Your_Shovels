@@ -5,10 +5,10 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
-import rys.common.Reference;
 import rys.common.item.BlockItemMod;
 import rys.common.item.FoodItem;
 import rys.common.item.ItemMod;
+import rys.common.util.Reference;
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModItems {

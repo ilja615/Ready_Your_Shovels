@@ -6,7 +6,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
-import rys.common.Reference;
+import rys.common.util.Reference;
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModPotions {
@@ -33,6 +33,11 @@ public class ModPotions {
 		registry.register(strong_increase_debuff);
 		registry.register(strong_decrease_debuff);
 	}
+	
+//	@SubscribeEvent
+//	public static void registerMixes(RegistryEvent.Register<PotionBrewing.MixPredicate<?>> event) {
+//		
+//	}
 	
 	public static Potion register(String name, Potion potion) {
 		potion.setRegistryName(Reference.MOD_ID, name);

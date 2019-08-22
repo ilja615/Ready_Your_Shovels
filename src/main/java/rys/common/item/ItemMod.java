@@ -1,7 +1,7 @@
 package rys.common.item;
 
 import net.minecraft.item.Item;
-import rys.common.Reference;
+import rys.common.util.Reference;
 
 public class ItemMod extends Item {
 	

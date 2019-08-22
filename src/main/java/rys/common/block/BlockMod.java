@@ -1,8 +1,8 @@
 package rys.common.block;
 
 import net.minecraft.block.Block;
-import rys.common.Reference;
 import rys.common.util.BlockType;
+import rys.common.util.Reference;
 
 public class BlockMod extends Block {
 	

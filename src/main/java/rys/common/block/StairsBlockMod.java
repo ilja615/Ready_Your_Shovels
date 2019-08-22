@@ -3,8 +3,8 @@ package rys.common.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.StairsBlock;
-import rys.common.Reference;
 import rys.common.util.BlockType;
+import rys.common.util.Reference;
 
 public class StairsBlockMod extends StairsBlock {
 	

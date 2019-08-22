@@ -5,12 +5,12 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
-import rys.common.Reference;
 import rys.common.block.BlockMod;
 import rys.common.block.SlabBlockMod;
 import rys.common.block.StairsBlockMod;
 import rys.common.block.WallBlockMod;
 import rys.common.util.BlockType;
+import rys.common.util.Reference;
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks {

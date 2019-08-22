@@ -5,11 +5,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ToolItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootParameters;
 import net.minecraft.world.storage.loot.conditions.ILootCondition;
-import rys.common.Reference;
+import rys.common.util.Reference;
 
 public class MatchHarvestLevel implements ILootCondition {
 	
@@ -24,7 +25,7 @@ public class MatchHarvestLevel implements ILootCondition {
 	public boolean test(LootContext context) {
 		ItemStack stack = context.get(LootParameters.TOOL);
 		String name = stack.getItem().getRegistryName().toString();
-		return stack != null && getLevel(name) >= this.harvestLevel && name.contains(this.harvestTool);
+		return stack != null && getLevel(name) >= this.harvestLevel && name.contains(this.harvestTool) && stack.getItem() instanceof ToolItem;
 	}
 	
 	public static int getLevel(String name) {

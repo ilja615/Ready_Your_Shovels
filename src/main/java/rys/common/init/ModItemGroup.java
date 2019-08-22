@@ -3,7 +3,7 @@ package rys.common.init;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import rys.common.Reference;
+import rys.common.util.Reference;
 
 public class ModItemGroup extends ItemGroup {
 	

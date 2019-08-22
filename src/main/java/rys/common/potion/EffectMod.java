@@ -4,8 +4,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
-import rys.common.Reference;
 import rys.common.init.ModEffects;
+import rys.common.util.Reference;
 
 public class EffectMod extends Effect {
 	
