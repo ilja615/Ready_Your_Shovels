@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.item.ItemGroup;
-import rys.common.init.ModItemGroup;
+import rys.common.item.ModItemGroup;
 
 public class Reference {
 	
