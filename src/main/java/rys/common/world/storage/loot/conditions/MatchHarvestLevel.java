@@ -28,7 +28,7 @@ public class MatchHarvestLevel implements ILootCondition {
 		return stack != null && getLevel(name) >= this.harvestLevel && name.contains(this.harvestTool) && stack.getItem() instanceof ToolItem;
 	}
 	
-	public static int getLevel(String name) {
+	private static int getLevel(String name) {
 		if (name.contains("wooden") || name.contains("golden")) {
 			return 1;
 		}
