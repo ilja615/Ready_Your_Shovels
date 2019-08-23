@@ -25,6 +25,12 @@ public class EntryList<T extends Object> {
 		return this;
 	}
 	
+	public EntryList<T> setRandom(Random random) {
+		this.random = random;
+		
+		return this;
+	}
+	
 	public T getRandom() {
 		float r = this.random.nextFloat() * this.countOfAll;
 		
