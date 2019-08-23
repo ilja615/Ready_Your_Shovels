@@ -15,14 +15,44 @@
 	"block.rys.dirt_bricks_wall": "Dirt Bricks Wall",
 	"block.rys.smooth_dirt_slab": "Smooth Dirt Slab",
 	"block.rys.smooth_dirt_stairs": "Smooth Dirt Stairs",
+	
 	"item.rys.peat": "Peat",
 	"item.rys.orange": "Orange",
 	"item.rys.apricot": "Apricot",
 	"item.rys.rotten_orange": "Rotten Orange",
 	"item.rys.rotten_apricot": "Rotten Apricot",
+	
+	"effect.rys.decrease_debuff": "Decrease Debuffs",
 	"effect.rys.increase_buff": "Increase Buffs",
 	"effect.rys.increase_debuff": "Increase Debuffs",
 	"effect.rys.decrease_buff": "Decrease Buffs",
-	"effect.rys.decrease_debuff": "Decrease Debuffs",
+	
+	"item.minecraft.potion.effect.decrease_debuff": "Potion of Decrease Debuffs",
+	"item.minecraft.potion.effect.strong_decrease_debuff": "Potion of Decrease Debuffs",
+	"item.minecraft.potion.effect.increase_buff": "Potion of Increase Buffs",
+	"item.minecraft.potion.effect.strong_increase_buff": "Potion of Increase Buffs",
+	"item.minecraft.potion.effect.increase_debuff": "Potion of Increase Debuffs",
+	"item.minecraft.potion.effect.strong_increase_debuff": "Potion of Increase Debuffs",
+	"item.minecraft.potion.effect.decrease_buff": "Potion of Decrease Buffs",
+	"item.minecraft.potion.effect.strong_decrease_buff": "Potion of Decrease Buffs",
+	
+	"item.minecraft.splash_potion.effect.decrease_debuff": "Splash Potion of Decrease Debuffs",
+	"item.minecraft.splash_potion.effect.strong_decrease_debuff": "Splash Potion of Decrease Debuffs",
+	"item.minecraft.splash_potion.effect.increase_buff": "Splash Potion of Increase Buffs",
+	"item.minecraft.splash_potion.effect.strong_increase_buff": "Splash Potion of Increase Buffs",
+	"item.minecraft.splash_potion.effect.increase_debuff": "Splash Potion of Increase Debuffs",
+	"item.minecraft.splash_potion.effect.strong_increase_debuff": "Splash Potion of Increase Debuffs",
+	"item.minecraft.splash_potion.effect.decrease_buff": "Splash Potion of Decrease Buffs",
+	"item.minecraft.splash_potion.effect.strong_decrease_buff": "Splash Potion of Decrease Buffs",
+	
+	"item.minecraft.lingering_potion.effect.decrease_debuff": "Lingering Potion of Decrease Debuffs",
+	"item.minecraft.lingering_potion.effect.strong_decrease_debuff": "Lingering Potion of Decrease Debuffs",
+	"item.minecraft.lingering_potion.effect.increase_buff": "Lingering Potion of Increase Buffs",
+	"item.minecraft.lingering_potion.effect.strong_increase_buff": "Lingering Potion of Increase Buffs",
+	"item.minecraft.lingering_potion.effect.increase_debuff": "Lingering Potion of Increase Debuffs",
+	"item.minecraft.lingering_potion.effect.strong_increase_debuff": "Lingering Potion of Increase Debuffs",
+	"item.minecraft.lingering_potion.effect.decrease_buff": "Lingering Potion of Decrease Buffs",
+	"item.minecraft.lingering_potion.effect.strong_decrease_buff": "Lingering Potion of Decrease Buffs",
+	
 	"itemGroup.rys": "Ready Your Shovels"
 }
