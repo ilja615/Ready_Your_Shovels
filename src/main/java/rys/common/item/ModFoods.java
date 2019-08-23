@@ -1,7 +1,8 @@
-package rys.common.init;
+package rys.common.item;
 
 import net.minecraft.item.Food;
 import net.minecraft.potion.EffectInstance;
+import rys.common.potion.ModEffects;
 
 public class ModFoods {
 	

@@ -1,4 +1,4 @@
-package rys.common.init;
+package rys.common.item;
 
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
