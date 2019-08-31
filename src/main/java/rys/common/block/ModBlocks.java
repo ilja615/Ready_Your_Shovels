@@ -15,7 +15,7 @@ import rys.common.util.Reference;
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks {
 	
-	public static final Block tough_dirt = create("tough_dirt", new Block(Properties.tough_dirt));
+	public static final ToughDirtBlock tough_dirt = create("tough_dirt", new ToughDirtBlock(Properties.tough_dirt));
 	public static final Block dirt_bricks = create("dirt_bricks", new Block(Properties.tough_dirt));
 	public static final Block smooth_dirt = create("smooth_dirt", new Block(Properties.tough_dirt));
 	public static final Block regolith = create("regolith", new Block(Properties.tough_dirt));
@@ -34,6 +34,8 @@ public class ModBlocks {
 	
 	public static final SlabBlock smooth_dirt_slab = create("smooth_dirt_slab", new SlabBlock(Properties.tough_dirt));
 	public static final StairsBlockMod smooth_dirt_stairs = create("smooth_dirt_stairs", new StairsBlockMod(tough_dirt.getDefaultState()));
+	
+	public static final PlanterBoxBlock planter_box = create("planter_box", new PlanterBoxBlock(Properties.planter_box));
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
@@ -58,6 +60,8 @@ public class ModBlocks {
 		
 		registry.register(smooth_dirt_slab);
 		registry.register(smooth_dirt_stairs);
+		
+		registry.register(planter_box);
 	}
 	
 	public static <T extends Block> T create(String name, T block) {
@@ -68,6 +72,7 @@ public class ModBlocks {
 	public static class Properties {
 		
 		public static final Block.Properties tough_dirt = Block.Properties.create(Material.EARTH).hardnessAndResistance(1.5F, 0.5F).sound(SoundType.GROUND).harvestLevel(1).harvestTool(ToolType.SHOVEL);
+		public static final Block.Properties planter_box = Block.Properties.create(Material.WOOD).hardnessAndResistance(2.0F, 3.0F).sound(SoundType.WOOD).harvestLevel(0).harvestTool(ToolType.AXE);
 		
 	}
 	
