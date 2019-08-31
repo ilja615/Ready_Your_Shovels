@@ -29,6 +29,7 @@ public class ModItems {
 	public static final BlockItem dirt_bricks_wall = create(ModBlocks.dirt_bricks_wall);
 	public static final BlockItem smooth_dirt_slab = create(ModBlocks.smooth_dirt_slab);
 	public static final BlockItem smooth_dirt_stairs = create(ModBlocks.smooth_dirt_stairs);
+	public static final BlockItem planter_box = create(ModBlocks.planter_box);
 	
 	public static final Item peat = create("peat", new Item(Properties.item));
 	public static final Item orange = create("orange", new Item(Properties.orange));
@@ -56,6 +57,7 @@ public class ModItems {
 		registry.register(dirt_bricks_wall);
 		registry.register(smooth_dirt_slab);
 		registry.register(smooth_dirt_stairs);
+		registry.register(planter_box);
 		
 		registry.register(peat);
 		registry.register(orange);
