@@ -23,7 +23,7 @@ public class ModFeatures {
 	public static final CaveFeature cave = create("cave", new CaveFeature(NoFeatureConfig::deserialize));
 	public static final GradientFeature gradient = create("gradient", new GradientFeature(NoFeatureConfig::deserialize));
 	public static final CaveDecorationFeature cave_decoration = create("cave_decoration", new CaveDecorationFeature(BushConfig::deserialize));
-	
+	public static final DepositsInCavesFeature deposits_in_caves = create("deposits_in_caves", new DepositsInCavesFeature(OreFeatureConfig::deserialize));
 	public static final DepositsInRiversFeature deposits_in_rivers = create("deposits_in_rivers", new DepositsInRiversFeature(OreFeatureConfig::deserialize));
 	
 	@SubscribeEvent
@@ -33,7 +33,7 @@ public class ModFeatures {
 		registry.register(cave);
 		registry.register(gradient);
 		registry.register(cave_decoration);
-		
+		registry.register(deposits_in_caves);
 		registry.register(deposits_in_rivers);
 	}
 	
@@ -45,10 +45,10 @@ public class ModFeatures {
 	public static void registerFeatures() {
 		Biome.BIOMES.forEach((Biome biome) -> {
 			// CaveFeature
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(cave, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(cave, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 			
 			// GradientFeature
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(gradient, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(gradient, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 			
 			// CaveDecorationFeature
 			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(cave_decoration, new BushConfig(Blocks.GRASS.getDefaultState()), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
@@ -56,6 +56,9 @@ public class ModFeatures {
 			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(cave_decoration, new BushConfig(Blocks.LILY_OF_THE_VALLEY.getDefaultState()), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 			
 			// DepositsInCavesFeature
+			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(deposits_in_caves, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ModBlocks.clay_deposit.getDefaultState(), 0), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(deposits_in_caves, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ModBlocks.peat_deposit.getDefaultState(), 0), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(deposits_in_caves, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ModBlocks.iron_deposit.getDefaultState(), 0), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 			
 			// DepositsInRiversFeature
 			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(deposits_in_rivers, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ModBlocks.gold_deposit.getDefaultState(), 0), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
