@@ -6,10 +6,10 @@ logoFile="logo.png"
 modId="rys"
 version="${mod_version}"
 displayName="Ready Your Shovels"
-credits="${mod_credits}"
-authors="${mod_authors}"
+credits="Axoladdy"
+authors="camiloss20"
 description='''
-${mod_description}
+Ready Your Shovels
 '''
 
 [[dependencies.rys]]
