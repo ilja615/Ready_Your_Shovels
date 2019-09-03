@@ -16,6 +16,9 @@
 	"block.rys.smooth_dirt_slab": "Smooth Dirt Slab",
 	"block.rys.smooth_dirt_stairs": "Smooth Dirt Stairs",
 	"block.rys.planter_box": "Planter Box",
+	"block.rys.apple_fruit_tree": "Apple Fruit Tree",
+	"block.rys.apricot_fruit_tree": "Apricot Fruit Tree",
+	"block.rys.orange_fruit_tree": "Orange Fruit Tree",
 	
 	"item.rys.peat": "Peat",
 	"item.rys.orange": "Orange",

@@ -30,6 +30,9 @@ public class ModItems {
 	public static final BlockItem smooth_dirt_slab = create(ModBlocks.smooth_dirt_slab);
 	public static final BlockItem smooth_dirt_stairs = create(ModBlocks.smooth_dirt_stairs);
 	public static final BlockItem planter_box = create(ModBlocks.planter_box);
+//	public static final BlockItem apple_fruit_tree = create(ModBlocks.apple_fruit_tree);
+//	public static final BlockItem apricot_fruit_tree = create(ModBlocks.apricot_fruit_tree);
+//	public static final BlockItem orange_fruit_tree = create(ModBlocks.orange_fruit_tree);
 	
 	public static final Item peat = create("peat", new Item(Properties.item));
 	public static final Item orange = create("orange", new Item(Properties.orange));
@@ -58,6 +61,9 @@ public class ModItems {
 		registry.register(smooth_dirt_slab);
 		registry.register(smooth_dirt_stairs);
 		registry.register(planter_box);
+//		registry.register(apple_fruit_tree);
+//		registry.register(apricot_fruit_tree);
+//		registry.register(orange_fruit_tree);
 		
 		registry.register(peat);
 		registry.register(orange);

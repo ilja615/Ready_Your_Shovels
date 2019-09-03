@@ -1,0 +1,12 @@
+{
+	"variants": {
+		"age=0,dead=false": { "model": "rys:block/fruit_tree" },
+		"age=1,dead=false": { "model": "rys:block/fruit_tree" },
+		"age=2,dead=false": { "model": "rys:block/fruit_tree" },
+		"age=3,dead=false": { "model": "rys:block/apricot_fruit_tree" },
+		"age=0,dead=true": { "model": "rys:block/dead_fruit_tree" },
+		"age=1,dead=true": { "model": "rys:block/dead_fruit_tree" },
+		"age=2,dead=true": { "model": "rys:block/dead_fruit_tree" },
+		"age=3,dead=true": { "model": "rys:block/dead_fruit_tree" }
+	}
+}
