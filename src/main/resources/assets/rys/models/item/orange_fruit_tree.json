@@ -1,3 +1,6 @@
 {
-    "parent": "rys:block/orange_fruit_tree"
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "rys:block/orange_fruit_tree"
+    }
 }
