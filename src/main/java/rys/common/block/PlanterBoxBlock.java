@@ -10,7 +10,7 @@ import net.minecraftforge.common.PlantType;
 
 public class PlanterBoxBlock extends Block {
 	
-	public PlanterBoxBlock(Properties properties) {
+	public PlanterBoxBlock(Block.Properties properties) {
 		super(properties);
 	}
 	
