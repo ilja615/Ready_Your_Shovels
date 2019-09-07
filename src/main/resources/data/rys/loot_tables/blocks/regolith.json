@@ -9,7 +9,10 @@
 					"conditions": [
 						{
 							"condition": "rys:match_harvest_level",
-							"harvest_level": 3,
+							"harvest_level": 3
+						},
+						{
+							"condition": "rys:match_harvest_tool",
 							"harvest_tool": "shovel"
 						}
 					],
