@@ -4,8 +4,10 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ToolItem;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootParameters;
@@ -15,30 +17,32 @@ import rys.common.util.Reference;
 public class MatchHarvestLevel implements ILootCondition {
 	
 	private int harvestLevel;
-	private String harvestTool;
 	
-	public MatchHarvestLevel(int harvestLevelIn, String harvestToolIn) {
+	public MatchHarvestLevel(int harvestLevelIn) {
 		this.harvestLevel = harvestLevelIn;
-		this.harvestTool = harvestToolIn;
 	}
 	
 	public boolean test(LootContext context) {
 		ItemStack stack = context.get(LootParameters.TOOL);
-		String name = stack.getItem().getRegistryName().toString();
-		return stack != null && getLevel(name) >= this.harvestLevel && name.contains(this.harvestTool) && stack.getItem() instanceof ToolItem;
+		return stack != null && getLevel(stack) >= this.harvestLevel;
 	}
 	
-	private static int getLevel(String name) {
-		if (name.contains("wooden") || name.contains("golden")) {
+	private static int getLevel(ItemStack stack) {
+		Tag<Item> tier_1 = ItemTags.getCollection().get(new ResourceLocation("rys", "tier_1"));
+		Tag<Item> tier_2 = ItemTags.getCollection().get(new ResourceLocation("rys", "tier_2"));
+		Tag<Item> tier_3 = ItemTags.getCollection().get(new ResourceLocation("rys", "tier_3"));
+		Tag<Item> tier_4 = ItemTags.getCollection().get(new ResourceLocation("rys", "tier_4"));
+		
+		if (tier_1.contains(stack.getItem())) {
 			return 1;
 		}
-		if (name.contains("stone")) {
+		if (tier_2.contains(stack.getItem())) {
 			return 2;
 		}
-		if (name.contains("iron")) {
+		if (tier_3.contains(stack.getItem())) {
 			return 3;
 		}
-		if (name.contains("diamond")) {
+		if (tier_4.contains(stack.getItem())) {
 			return 4;
 		}
 		
@@ -53,13 +57,11 @@ public class MatchHarvestLevel implements ILootCondition {
 		
 		public void serialize(JsonObject json, MatchHarvestLevel value, JsonSerializationContext context) {
 			json.addProperty("harvest_level", value.harvestLevel);
-			json.addProperty("harvest_tool", value.harvestTool);
 		}
 		
 		public MatchHarvestLevel deserialize(JsonObject json, JsonDeserializationContext context) {
 			int harvestLevelIn = json.get("harvest_level").getAsInt();
-			String harvestToolIn = json.get("harvest_tool").getAsString();
-			return new MatchHarvestLevel(harvestLevelIn, harvestToolIn);
+			return new MatchHarvestLevel(harvestLevelIn);
 		}
 		
 	}
