@@ -14,10 +14,12 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.ObjectHolder;
 import rys.common.block.ModBlocks;
 import rys.common.util.Reference;
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@ObjectHolder(Reference.MOD_ID)
 public class ModFeatures {
 	
 	public static final CaveFeature cave = create("cave", new CaveFeature(NoFeatureConfig::deserialize));
@@ -51,9 +53,8 @@ public class ModFeatures {
 			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(gradient, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 			
 			// CaveDecorationFeature
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(cave_decoration, new BushConfig(Blocks.GRASS.getDefaultState()), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(cave_decoration, new BushConfig(Blocks.TALL_GRASS.getDefaultState()), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(cave_decoration, new BushConfig(Blocks.LILY_OF_THE_VALLEY.getDefaultState()), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(cave_decoration, new BushConfig(Blocks.BROWN_MUSHROOM.getDefaultState()), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(cave_decoration, new BushConfig(Blocks.RED_MUSHROOM.getDefaultState()), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 			
 			// DepositsInCavesFeature
 			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(deposits_in_caves, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ModBlocks.clay_deposit.getDefaultState(), 0), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
@@ -62,6 +63,10 @@ public class ModFeatures {
 			
 			// DepositsInRiversFeature
 			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(deposits_in_rivers, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ModBlocks.gold_deposit.getDefaultState(), 0), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+			
+			// DirtInCavesFeature
+			
+			// CaveBoulderFeature
 			
 		});
 	}

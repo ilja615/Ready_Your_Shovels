@@ -1,53 +1,66 @@
 package rys.common.potion;
 
+import java.util.Map;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
-import rys.common.util.Reference;
 
 public class EffectMod extends Effect {
 	
-	public EffectMod(String name, EffectType typeIn, int liquidColorIn) {
-		super(typeIn, liquidColorIn);
-		this.setRegistryName(Reference.MOD_ID, name);
+	public EffectMod(EffectType typeIn, int colorIn) {
+		super(typeIn, colorIn);
 	}
 	
-	public void performEffect(LivingEntity entity, int amplifier) {
+	public void affectEntity(Entity source, Entity indirectSource, LivingEntity entity, int amplifier, double health) {
 		int time = (amplifier + 1) * 200;
 		
-		entity.getActivePotionEffects().forEach((EffectInstance effectInstance) -> {
-			if (this != effectInstance.getPotion()) {
+		for (Map.Entry<Effect, EffectInstance> entry : entity.getActivePotionMap().entrySet()) {
+			Effect effect = entry.getKey();
+			EffectInstance effectInstance = entry.getValue();
+			
+			if (effect != this && !effectInstance.isAmbient()) {
 				
-				if (effectInstance.getPotion().getEffectType() == EffectType.HARMFUL) {
+				if (effect.getEffectType() == EffectType.HARMFUL) {
 					
 					if (this == ModEffects.decrease_debuff) {
-						entity.addPotionEffect(new EffectInstance(effectInstance.getPotion(), effectInstance.getDuration() - time, effectInstance.getAmplifier()));
-						entity.removePotionEffect(this);
+						entity.getActivePotionMap().remove(effect);
+						entity.livingTick();
+						entity.getActivePotionMap().put(effect, new EffectInstance(effect, effectInstance.getDuration() - time, effectInstance.getAmplifier(), effectInstance.isAmbient(), effectInstance.isShowIcon()));
+						break;
 					}
 					
 					if (this == ModEffects.increase_debuff) {
-						entity.addPotionEffect(new EffectInstance(effectInstance.getPotion(), effectInstance.getDuration() + time, effectInstance.getAmplifier()));
-						entity.removePotionEffect(this);
+						entity.getActivePotionMap().remove(effect);
+						entity.livingTick();
+						entity.getActivePotionMap().put(effect, new EffectInstance(effect, effectInstance.getDuration() + time, effectInstance.getAmplifier(), effectInstance.isAmbient(), effectInstance.isShowIcon()));
+						break;
 					}
 					
 				}
 				
-				if (effectInstance.getPotion().getEffectType() == EffectType.BENEFICIAL) {
+				if (effect.getEffectType() == EffectType.BENEFICIAL) {
 					
 					if (this == ModEffects.increase_buff) {
-						entity.addPotionEffect(new EffectInstance(effectInstance.getPotion(), effectInstance.getDuration() + time, effectInstance.getAmplifier()));
-						entity.removePotionEffect(this);
+						entity.getActivePotionMap().remove(effect);
+						entity.livingTick();
+						entity.getActivePotionMap().put(effect, new EffectInstance(effect, effectInstance.getDuration() + time, effectInstance.getAmplifier(), effectInstance.isAmbient(), effectInstance.isShowIcon()));
+						break;
 					}
 					
 					if (this == ModEffects.decrease_buff) {
-						entity.addPotionEffect(new EffectInstance(effectInstance.getPotion(), effectInstance.getDuration() - time, effectInstance.getAmplifier()));
-						entity.removePotionEffect(this);
+						entity.getActivePotionMap().remove(effect);
+						entity.livingTick();
+						entity.getActivePotionMap().put(effect, new EffectInstance(effect, effectInstance.getDuration() - time, effectInstance.getAmplifier(), effectInstance.isAmbient(), effectInstance.isShowIcon()));
+						break;
 					}
 					
 				}
+				
 			}
-		});
+		}
 	}
 	
 	public boolean isInstant() {
