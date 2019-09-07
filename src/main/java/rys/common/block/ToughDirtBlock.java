@@ -10,7 +10,7 @@ import net.minecraftforge.common.PlantType;
 
 public class ToughDirtBlock extends Block {
 	
-	public ToughDirtBlock(Properties properties) {
+	public ToughDirtBlock(Block.Properties properties) {
 		super(properties);
 	}
 	
