@@ -9,7 +9,6 @@ import net.minecraft.block.IGrowable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
@@ -26,18 +25,18 @@ import net.minecraft.world.World;
 
 public class FruitTreeBlock extends BushBlock implements IGrowable {
 	
-	protected Item fruit;
-	protected Item rottenFruit;
+	private Item fruit;
+	private Item rottenFruit;
 	
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_0_3;
 	public static final BooleanProperty DEAD = BooleanProperty.create("dead");
 	
 	private static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D);
 	
-	public FruitTreeBlock(Item fruit, Item rottenFruit, Properties properties) {
+	public FruitTreeBlock(Item fruitIn, Item rottenFruitIn, Block.Properties properties) {
 		super(properties);
-		this.fruit = fruit;
-		this.rottenFruit = rottenFruit;
+		this.fruit = fruitIn;
+		this.rottenFruit = rottenFruitIn;
 		this.setDefaultState(this.stateContainer.getBaseState().with(AGE, Integer.valueOf(0)).with(DEAD, Boolean.valueOf(false)));
 	}
 	
@@ -66,20 +65,15 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
 		}
 		
 		if (age == 3 && !isDead && random.nextInt(28) == 0) {
-			worldIn.setBlockState(pos, state.with(DEAD, true), 2);
+			if (worldIn.getBlockState(pos.down()).getBlock() != ModBlocks.planter_box) {
+				worldIn.setBlockState(pos, state.with(DEAD, true), 2);
+			}
 		}
 	}
 	
 	public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		ItemStack stack = player.getHeldItem(handIn);
-		Item item = stack.getItem();
-		
 		int age = state.get(AGE);
 		boolean isDead = state.get(DEAD);
-		
-		if (item == Items.BONE_MEAL && age < 3) {
-			return false;
-		}
 		
 		if (age == 3 && !isDead) {
 			if (worldIn.rand.nextInt(10) == 0) {
