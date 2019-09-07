@@ -8,8 +8,14 @@
 					"type": "minecraft:item",
 					"conditions": [
 						{
-							"condition": "rys:match_harvest_level",
-							"harvest_level": 0,
+							"condition": "minecraft:block_state_property",
+							"block": "rys:orange_fruit_tree",
+							"properties": {
+								"dead": false
+							}
+						},
+						{
+							"condition": "rys:match_harvest_tool",
 							"harvest_tool": "axe"
 						}
 					],
