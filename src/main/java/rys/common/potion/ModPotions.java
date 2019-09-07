@@ -15,20 +15,22 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.ObjectHolder;
 import rys.common.item.ModItems;
 import rys.common.util.Reference;
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@ObjectHolder(Reference.MOD_ID)
 public class ModPotions {
 	
-	public static final Potion decrease_debuff = create("decrease_debuff", new Potion(new EffectInstance(ModEffects.decrease_debuff, 1, 0)));
-	public static final Potion strong_decrease_debuff = create("strong_decrease_debuff", new Potion(new EffectInstance(ModEffects.decrease_debuff, 1, 1)));
-	public static final Potion increase_buff = create("increase_buff", new Potion(new EffectInstance(ModEffects.increase_buff, 1, 0)));
-	public static final Potion strong_increase_buff = create("strong_increase_buff", new Potion(new EffectInstance(ModEffects.increase_buff, 1, 1)));
-	public static final Potion increase_debuff = create("increase_debuff", new Potion(new EffectInstance(ModEffects.increase_debuff, 1, 0)));
-	public static final Potion strong_increase_debuff = create("strong_increase_debuff", new Potion(new EffectInstance(ModEffects.increase_debuff, 1, 1)));
-	public static final Potion decrease_buff = create("decrease_buff", new Potion(new EffectInstance(ModEffects.decrease_buff, 1, 0)));
-	public static final Potion strong_decrease_buff = create("strong_decrease_buff", new Potion(new EffectInstance(ModEffects.decrease_buff, 1, 1)));
+	public static final Potion decrease_debuff = create("decrease_debuff", new Potion(new EffectInstance(ModEffects.decrease_debuff, 1, 1)));
+	public static final Potion strong_decrease_debuff = create("strong_decrease_debuff", new Potion(new EffectInstance(ModEffects.decrease_debuff, 1, 3)));
+	public static final Potion increase_buff = create("increase_buff", new Potion(new EffectInstance(ModEffects.increase_buff, 1, 1)));
+	public static final Potion strong_increase_buff = create("strong_increase_buff", new Potion(new EffectInstance(ModEffects.increase_buff, 1, 3)));
+	public static final Potion increase_debuff = create("increase_debuff", new Potion(new EffectInstance(ModEffects.increase_debuff, 1, 1)));
+	public static final Potion strong_increase_debuff = create("strong_increase_debuff", new Potion(new EffectInstance(ModEffects.increase_debuff, 1, 3)));
+	public static final Potion decrease_buff = create("decrease_buff", new Potion(new EffectInstance(ModEffects.decrease_buff, 1, 1)));
+	public static final Potion strong_decrease_buff = create("strong_decrease_buff", new Potion(new EffectInstance(ModEffects.decrease_buff, 1, 3)));
 	
 	@SubscribeEvent
 	public static void registerPotions(RegistryEvent.Register<Potion> event) {
@@ -49,7 +51,7 @@ public class ModPotions {
 		return potion;
 	}
 	
-	public static void registerRecipes() {
+	public static void registerPotionRecipes() {
 		createAllPotionRecipes(ModItems.orange, decrease_debuff, null, strong_decrease_debuff);
 		createAllPotionRecipes(ModItems.apricot, increase_buff, null, strong_increase_buff);
 		createAllPotionRecipes(ModItems.rotten_orange, increase_debuff, null, strong_increase_debuff);
