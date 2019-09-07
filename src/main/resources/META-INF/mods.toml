@@ -4,7 +4,7 @@ logoFile="logo.png"
 
 [[mods]]
 modId="rys"
-version="${mod_version}"
+version="0.1.8"
 displayName="Ready Your Shovels"
 credits="Axoladdy"
 authors="camiloss20"
