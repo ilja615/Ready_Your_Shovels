@@ -18,8 +18,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -30,8 +28,6 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
 	
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_0_3;
 	public static final BooleanProperty DEAD = BooleanProperty.create("dead");
-	
-	private static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D);
 	
 	public FruitTreeBlock(Item fruitIn, Item rottenFruitIn, Block.Properties properties) {
 		super(properties);
@@ -46,10 +42,6 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
 	
 	public Item getRottenFruit() {
 		return this.rottenFruit;
-	}
-	
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return SHAPE;
 	}
 	
 	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {

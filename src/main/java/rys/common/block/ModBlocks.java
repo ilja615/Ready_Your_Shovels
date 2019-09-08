@@ -34,8 +34,9 @@ public class ModBlocks {
 	public static final StairsBlockMod smooth_dirt_stairs = null;
 	public static final PlanterBoxBlock planter_box = null;
 	public static final FruitTreeBlock apple_fruit_tree = null;
-	public static final FruitTreeBlock apricot_fruit_tree = null;
 	public static final FruitTreeBlock orange_fruit_tree = null;
+	public static final FruitTreeBlock apricot_fruit_tree = null;
+	public static final DayrootBlock dayroot = null;
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
@@ -59,8 +60,9 @@ public class ModBlocks {
 		registry.register(create("smooth_dirt_stairs", new StairsBlockMod(smooth_dirt.getDefaultState(), ModBlockProperties.smooth_dirt)));
 		registry.register(create("planter_box", new PlanterBoxBlock(ModBlockProperties.planter_box)));
 		registry.register(create("apple_fruit_tree", new FruitTreeBlock(Items.APPLE, Items.APPLE, ModBlockProperties.fruit_tree)));
-		registry.register(create("apricot_fruit_tree", new FruitTreeBlock(ModItems.apricot, ModItems.rotten_apricot, ModBlockProperties.fruit_tree)));
 		registry.register(create("orange_fruit_tree", new FruitTreeBlock(ModItems.orange, ModItems.rotten_orange, ModBlockProperties.fruit_tree)));
+		registry.register(create("apricot_fruit_tree", new FruitTreeBlock(ModItems.apricot, ModItems.rotten_apricot, ModBlockProperties.fruit_tree)));
+		registry.register(create("dayroot", new DayrootBlock(ModBlockProperties.dayroot)));
 	}
 	
 	public static <T extends Block> T create(String name, T block) {
