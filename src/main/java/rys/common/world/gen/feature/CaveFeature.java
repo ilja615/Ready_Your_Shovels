@@ -35,11 +35,11 @@ public class CaveFeature extends Feature<NoFeatureConfig> {
 				String name = biome.getRegistryName().toString();
 				
 				if (!name.contains("ocean") && !name.contains("mountains") && !name.contains("river") && !name.contains("stone")) {
-					for (int y = surfaceY - 32; y < surfaceY; y++) {
+					for (int y = surfaceY - 20; y < surfaceY; y++) {
 						this.tryPlace(worldIn, pos.add(x, y, z));
 					}
 					
-					this.tryPlaceLayer(worldIn, rand, pos.add(x, surfaceY - 32, z));
+					this.tryPlaceLayer(worldIn, rand, pos.add(x, surfaceY - 20, z));
 				}
 			}
 		}
