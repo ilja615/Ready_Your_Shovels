@@ -16,9 +16,9 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 
-public class DepositsInRiversFeature extends Feature<OreFeatureConfig> {
+public class RiverDepositFeature extends Feature<OreFeatureConfig> {
 	
-	public DepositsInRiversFeature(Function<Dynamic<?>, ? extends OreFeatureConfig> configFactoryIn) {
+	public RiverDepositFeature(Function<Dynamic<?>, ? extends OreFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 	

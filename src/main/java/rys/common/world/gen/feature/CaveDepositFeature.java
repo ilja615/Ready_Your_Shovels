@@ -16,9 +16,9 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import rys.common.block.ModBlocks;
 
-public class DepositsInCavesFeature extends Feature<OreFeatureConfig> {
+public class CaveDepositFeature extends Feature<OreFeatureConfig> {
 	
-	public DepositsInCavesFeature(Function<Dynamic<?>, ? extends OreFeatureConfig> configFactoryIn) {
+	public CaveDepositFeature(Function<Dynamic<?>, ? extends OreFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 	

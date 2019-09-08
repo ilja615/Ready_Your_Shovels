@@ -25,8 +25,8 @@ public class ModFeatures {
 	public static final CaveFeature cave = create("cave", new CaveFeature(NoFeatureConfig::deserialize));
 	public static final GradientFeature gradient = create("gradient", new GradientFeature(NoFeatureConfig::deserialize));
 	public static final CaveDecorationFeature cave_decoration = create("cave_decoration", new CaveDecorationFeature(BushConfig::deserialize));
-	public static final DepositsInCavesFeature deposits_in_caves = create("deposits_in_caves", new DepositsInCavesFeature(OreFeatureConfig::deserialize));
-	public static final DepositsInRiversFeature deposits_in_rivers = create("deposits_in_rivers", new DepositsInRiversFeature(OreFeatureConfig::deserialize));
+	public static final CaveDepositFeature deposits_in_caves = create("deposits_in_caves", new CaveDepositFeature(OreFeatureConfig::deserialize));
+	public static final RiverDepositFeature deposits_in_rivers = create("deposits_in_rivers", new RiverDepositFeature(OreFeatureConfig::deserialize));
 	
 	@SubscribeEvent
 	public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
