@@ -6,15 +6,15 @@
 			"entries": [
 				{
 					"type": "minecraft:item",
-					"name": "rys:dayroot"
-				}
-			],
-			"conditions": [
-				{
-					"condition": "minecraft:match_tool",
-					"predicate": {
-						"item": "minecraft:shears"
-					}
+					"name": "rys:dayroot",
+					"conditions": [
+						{
+							"condition": "minecraft:match_tool",
+							"predicate": {
+								"item": "minecraft:shears"
+							}
+						}
+					]
 				}
 			]
 		}
