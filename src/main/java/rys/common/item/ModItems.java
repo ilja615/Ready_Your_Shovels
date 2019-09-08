@@ -32,14 +32,15 @@ public class ModItems {
 	public static final BlockItem smooth_dirt_stairs = null;
 	public static final BlockItem planter_box = null;
 	public static final BlockItem apple_fruit_tree = null;
-	public static final BlockItem apricot_fruit_tree = null;
 	public static final BlockItem orange_fruit_tree = null;
+	public static final BlockItem apricot_fruit_tree = null;
+	public static final BlockItem dayroot = null;
 	
 	public static final Item peat = null;
-	public static Item apricot = create("apricot", new Item(ModItemProperties.apricot));
 	public static Item orange = create("orange", new Item(ModItemProperties.orange));
-	public static Item rotten_apricot = create("rotten_apricot", new Item(ModItemProperties.rotten_apricot));
+	public static Item apricot = create("apricot", new Item(ModItemProperties.apricot));
 	public static Item rotten_orange = create("rotten_orange", new Item(ModItemProperties.rotten_orange));
+	public static Item rotten_apricot = create("rotten_apricot", new Item(ModItemProperties.rotten_apricot));
 	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event) {
@@ -63,14 +64,15 @@ public class ModItems {
 		registry.register(create("smooth_dirt_stairs", new BlockItem(ModBlocks.smooth_dirt_stairs, ModItemProperties.item)));
 		registry.register(create("planter_box", new BlockItem(ModBlocks.planter_box, ModItemProperties.item)));
 		registry.register(create("apple_fruit_tree", new BlockItem(ModBlocks.apple_fruit_tree, ModItemProperties.item)));
-		registry.register(create("apricot_fruit_tree", new BlockItem(ModBlocks.apricot_fruit_tree, ModItemProperties.item)));
 		registry.register(create("orange_fruit_tree", new BlockItem(ModBlocks.orange_fruit_tree, ModItemProperties.item)));
+		registry.register(create("apricot_fruit_tree", new BlockItem(ModBlocks.apricot_fruit_tree, ModItemProperties.item)));
+		registry.register(create("dayroot", new BlockItem(ModBlocks.dayroot, ModItemProperties.item)));
 		
 		registry.register(create("peat", new Item(ModItemProperties.item)));
-		registry.register(apricot);
 		registry.register(orange);
-		registry.register(rotten_apricot);
+		registry.register(apricot);
 		registry.register(rotten_orange);
+		registry.register(rotten_apricot);
 	}
 	
 	public static <T extends Item> T create(String name, T item) {

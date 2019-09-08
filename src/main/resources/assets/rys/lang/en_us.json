@@ -17,8 +17,9 @@
 	"block.rys.smooth_dirt_stairs": "Smooth Dirt Stairs",
 	"block.rys.planter_box": "Planter Box",
 	"block.rys.apple_fruit_tree": "Apple Fruit Tree",
-	"block.rys.apricot_fruit_tree": "Apricot Fruit Tree",
 	"block.rys.orange_fruit_tree": "Orange Fruit Tree",
+	"block.rys.apricot_fruit_tree": "Apricot Fruit Tree",
+	"block.rys.dayroot": "Dayroot",
 	
 	"item.rys.peat": "Peat",
 	"item.rys.orange": "Orange",
@@ -57,6 +58,15 @@
 	"item.minecraft.lingering_potion.effect.strong_increase_debuff": "Lingering Potion of Increase Debuffs",
 	"item.minecraft.lingering_potion.effect.decrease_buff": "Lingering Potion of Decrease Buffs",
 	"item.minecraft.lingering_potion.effect.strong_decrease_buff": "Lingering Potion of Decrease Buffs",
+	
+	"item.minecraft.tipped_arrow.effect.decrease_debuff": "Arrow of Decrease Debuffs",
+	"item.minecraft.tipped_arrow.effect.strong_decrease_debuff": "Arrow of Decrease Debuffs",
+	"item.minecraft.tipped_arrow.effect.increase_buff": "Arrow of Increase Buffs",
+	"item.minecraft.tipped_arrow.effect.strong_increase_buff": "Arrow of Increase Buffs",
+	"item.minecraft.tipped_arrow.effect.increase_debuff": "Arrow of Increase Debuffs",
+	"item.minecraft.tipped_arrow.effect.strong_increase_debuff": "Arrow of Increase Debuffs",
+	"item.minecraft.tipped_arrow.effect.decrease_buff": "Arrow of Decrease Buffs",
+	"item.minecraft.tipped_arrow.effect.strong_decrease_buff": "Arrow of Decrease Buffs",
 	
 	"itemGroup.rys": "Ready Your Shovels"
 }

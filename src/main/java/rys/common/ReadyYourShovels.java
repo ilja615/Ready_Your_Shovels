@@ -7,7 +7,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import rys.common.init.ModEvents;
-import rys.common.potion.ModPotions;
 import rys.common.util.Reference;
 import rys.common.world.gen.feature.ModFeatures;
 import rys.common.world.storage.loot.conditions.MatchHarvestLevel;
@@ -26,7 +25,7 @@ public class ReadyYourShovels {
 	public void commonSetup(FMLCommonSetupEvent event) {
 		ModFeatures.registerFeatures();
 		
-		ModPotions.registerPotionRecipes();
+//		ModPotions.registerRecipes();
 		
 		LootConditionManager.registerCondition(new MatchHarvestLevel.Serializer());
 		
