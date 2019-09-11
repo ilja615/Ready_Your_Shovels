@@ -29,15 +29,11 @@ public class DayrootBlock extends BushBlock {
 	}
 	
 	// BlockState updateShape(BlockState, Direction, BlockState, LevelAccessor, BlockPos, BlockPos)
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		DoubleBlockHalf doubleblockhalf = stateIn.get(HALF);
+	public BlockState updatePostPlacement(BlockState state, Direction direction, BlockState directionState, IWorld world, BlockPos currentPos, BlockPos directionPos) {
+		DoubleBlockHalf half = state.get(HALF);
 		
-		if (facing.getAxis() != Direction.Axis.Y || (doubleblockhalf == DoubleBlockHalf.LOWER) != (facing == Direction.UP) || facingState.getBlock() == this && facingState.get(HALF) != doubleblockhalf ) {
-			if ( doubleblockhalf == DoubleBlockHalf.UPPER && facing == Direction.UP && !stateIn.isValidPosition(worldIn, currentPos)) {
-				return Blocks.AIR.getDefaultState();
-			} else {
-				return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
-			}
+		if ((half == DoubleBlockHalf.UPPER && direction == Direction.DOWN && directionState.getBlock() == this && directionState.get(HALF) != half) || (half == DoubleBlockHalf.LOWER && direction == Direction.UP && directionState.getBlock() == this && directionState.get(HALF) != half) || (half == DoubleBlockHalf.LOWER && direction == Direction.DOWN) || (direction.getAxis() != Direction.Axis.Y)) {
+			return super.updatePostPlacement(state, direction, directionState, world, currentPos, directionPos);
 		} else {
 			return Blocks.AIR.getDefaultState();
 		}
@@ -45,8 +41,7 @@ public class DayrootBlock extends BushBlock {
 	
 	// BlockState getStateForPlacement(BlockPlaceContext)
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		BlockState blockstate = context.getWorld().getBlockState(context.getPos().down());
-		if (blockstate.isReplaceable(context)) {
+		if (context.getWorld().getBlockState(context.getPos().down()).isReplaceable(context)) {
 			return super.getStateForPlacement(context);
 		} else {
 			return Blocks.AIR.getDefaultState();
@@ -54,45 +49,48 @@ public class DayrootBlock extends BushBlock {
 	}
 	
 	// void setPlacedBy(Level, BlockPos, BlockState, LivingEntity, ItemStack)
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-		worldIn.setBlockState(pos.down(), this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER), 3);
+	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+		world.setBlockState(pos.down(), this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER), 3);
 	}
 	
 	// boolean canSurvive(BlockState, LevelReader, BlockPos)
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		BlockState blockstate = worldIn.getBlockState(pos.up());
+	public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos) {
+		BlockState state_1 = world.getBlockState(pos.up());
+		
 		if (state.get(HALF) == DoubleBlockHalf.UPPER) {
-			return blockstate.getBlock() == Blocks.GRASS_BLOCK || Block.isDirt(blockstate.getBlock()) || Block.isRock(blockstate.getBlock());
+			return state_1.canSustainPlant(world, pos.up(), Direction.DOWN, this);
 		} else {
-			return blockstate.getBlock() == this && blockstate.get(HALF) == DoubleBlockHalf.UPPER;
+			return state_1.getBlock() == this && state_1.get(HALF) == DoubleBlockHalf.UPPER;
 		}
 	}
 	
 	// void placeAt(LevelAccessor, BlockPos, int)
-	public void placeAt(IWorld worldIn, BlockPos pos, int flags) {
-		worldIn.setBlockState(pos, this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER), flags);
-		worldIn.setBlockState(pos.down(), this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER), flags);
+	public void placeAt(IWorld world, BlockPos pos, int flags) {
+		world.setBlockState(pos, this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER), flags);
+		world.setBlockState(pos.down(), this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER), flags);
 	}
 	
 	// void playerDestroy(Level, Player, BlockPos, BlockState, BlockEntity, ItemStack)
-	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, TileEntity te, ItemStack stack) {
-		super.harvestBlock(worldIn, player, pos, Blocks.AIR.getDefaultState(), te, stack);
+	public void harvestBlock(World world, PlayerEntity player, BlockPos pos, BlockState state, TileEntity te, ItemStack stack) {
+		super.harvestBlock(world, player, pos, Blocks.AIR.getDefaultState(), te, stack);
 	}
 	
 	// void playerWillDestroy(Level, BlockPos, BlockState, Player)
-	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-		BlockPos blockpos = pos.up();
+	public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+		BlockPos pos_1 = pos.up();
 		
 		if (state.get(HALF) == DoubleBlockHalf.UPPER) {
-			blockpos = pos.down();
+			pos_1 = pos.down();
 		}
 		
-		worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
+		world.setBlockState(pos_1, Blocks.AIR.getDefaultState(), 35);
 		
-		spawnDrops(state, worldIn, pos, null, player, player.getHeldItemMainhand());
+		if (!world.isRemote() && !player.isCreative()) {
+			spawnDrops(state, world, pos, null, player, player.getHeldItemMainhand());
+		}
 		
-		super.onBlockHarvested(worldIn, pos, state, player);
-		super.onBlockHarvested(worldIn, blockpos, state, player);
+		super.onBlockHarvested(world, pos, state, player);
+		super.onBlockHarvested(world, pos_1, state, player);
 	}
 	
 	// void createBlockStateDefinition(StateDefinition.Builder)
