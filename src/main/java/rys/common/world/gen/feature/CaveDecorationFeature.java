@@ -6,6 +6,7 @@ import java.util.function.Function;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -13,7 +14,7 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.BushConfig;
 import net.minecraft.world.gen.feature.Feature;
-import rys.common.block.ModBlocks;
+import net.minecraftforge.common.IPlantable;
 
 public class CaveDecorationFeature extends Feature<BushConfig> {
 	
@@ -28,7 +29,7 @@ public class CaveDecorationFeature extends Feature<BushConfig> {
 			for (int n = 0; n < 64; n++) {
 				int x = rand.nextInt(16);
 				int z = rand.nextInt(16);
-				int y = rand.nextInt(32);
+				int y = rand.nextInt(20);
 				
 				this.tryPlace(worldIn, rand, pos.add(x, surfaceY - y, z), config.state);
 			}
@@ -38,13 +39,15 @@ public class CaveDecorationFeature extends Feature<BushConfig> {
 	}
 	
 	private void tryPlace(IWorld world, Random random, BlockPos pos, BlockState state) {
-		for (int x = 0; x < 4; x++) {
-			for (int z = 0; z < 4; z++) {
-				BlockPos pos_n = pos.add(x, 0, z);
-				
-				if (random.nextFloat() < 0.5F) {
-					if (world.isAirBlock(pos_n) && world.getBlockState(pos_n.down()).getBlock() == ModBlocks.tough_dirt) {
-						this.setBlockState(world, pos_n, state);
+		for (int x = 0; x < 2; x++) {
+			for (int z = 0; z < 2; z++) {
+				for (int y = 0; y < 2; y++) {
+					BlockPos pos_n = pos.add(x, y, z);
+					
+					if (random.nextFloat() < 0.25F) {
+						if (world.isAirBlock(pos_n) && world.getBlockState(pos_n.down()).canSustainPlant(world, pos_n.down(), Direction.UP, (IPlantable) state.getBlock())) {
+							this.setBlockState(world, pos_n, state);
+						}
 					}
 				}
 			}

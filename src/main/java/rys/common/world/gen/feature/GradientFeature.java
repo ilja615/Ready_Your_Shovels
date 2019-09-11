@@ -5,6 +5,7 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -15,7 +16,6 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraftforge.common.Tags;
 import rys.common.block.ModBlocks;
 
 public class GradientFeature extends Feature<NoFeatureConfig> {
@@ -48,10 +48,10 @@ public class GradientFeature extends Feature<NoFeatureConfig> {
 		
 		if (state.getBlock() == Blocks.GRASS_BLOCK) {
 			for (int y = 0; y < pos.getY(); y++) {
-				if (world.getBlockState(pos.down(y)).isIn(Tags.Blocks.STONE)) {
+				if (Block.isRock(world.getBlockState(pos.down(y)).getBlock())) {
 					this.trySetBlockState(world, pos.down(y), ModBlocks.tough_dirt.getDefaultState());
 					
-					if (world.getBlockState(pos.down(y + 1)).isIn(Tags.Blocks.STONE)) {
+					if (Block.isRock(world.getBlockState(pos.down(y + 1)).getBlock())) {
 						this.trySetBlockState(world, pos.down(y + 1), ModBlocks.regolith.getDefaultState());
 					}
 					

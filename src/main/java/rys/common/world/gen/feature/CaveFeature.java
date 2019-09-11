@@ -5,6 +5,7 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -15,7 +16,6 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraftforge.common.Tags;
 import rys.common.block.ModBlocks;
 
 public class CaveFeature extends Feature<NoFeatureConfig> {
@@ -50,7 +50,7 @@ public class CaveFeature extends Feature<NoFeatureConfig> {
 	private void tryPlace(IWorld world, BlockPos pos) {
 		BlockState state = world.getBlockState(pos);
 		
-		if (state.isIn(Tags.Blocks.STONE)) {
+		if (Block.isRock(state.getBlock())) {
 			this.trySetBlockState(world, pos, ModBlocks.tough_dirt.getDefaultState());
 		}
 		
@@ -76,15 +76,15 @@ public class CaveFeature extends Feature<NoFeatureConfig> {
 		BlockState state_1 = world.getBlockState(pos_1);
 		BlockState state_2 = world.getBlockState(pos_2);
 		
-		if (state_0.isIn(Tags.Blocks.STONE) || state_0.getBlock() == ModBlocks.tough_dirt) {
+		if (Block.isRock(state_0.getBlock()) || state_0.getBlock() == ModBlocks.tough_dirt) {
 			this.trySetBlockState(world, pos_0, ModBlocks.regolith.getDefaultState());
 		}
 		
-		if (state_1.isIn(Tags.Blocks.STONE) || state_1.getBlock() == ModBlocks.tough_dirt) {
+		if (Block.isRock(state_1.getBlock()) || state_1.getBlock() == ModBlocks.tough_dirt) {
 			this.trySetBlockState(world, pos_1, ModBlocks.regolith.getDefaultState());
 		}
 		
-		if (state_2.isIn(Tags.Blocks.STONE) || state_2.getBlock() == ModBlocks.tough_dirt) {
+		if (Block.isRock(state_2.getBlock()) || state_2.getBlock() == ModBlocks.tough_dirt) {
 			this.trySetBlockState(world, pos_2, ModBlocks.regolith.getDefaultState());
 		}
 	}
