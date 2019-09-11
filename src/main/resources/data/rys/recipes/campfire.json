@@ -1,22 +1,22 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    " S ",
-    "SCS",
-    "LLL"
-  ],
-  "key": {
-    "L": {
-      "tag": "minecraft:logs"
-    },
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "C": {
-      "item": "rys:peat"
-    }
-  },
-  "result": {
-    "item": "minecraft:campfire"
-  }
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" A ",
+		"ABA",
+		"CCC"
+	],
+	"key": {
+		"A": {
+			"item": "minecraft:stick"
+		},
+		"B": {
+			"item": "rys:peat"
+		},
+		"C": {
+			"tag": "minecraft:logs"
+		}
+	},
+	"result": {
+		"item": "minecraft:campfire"
+	}
 }

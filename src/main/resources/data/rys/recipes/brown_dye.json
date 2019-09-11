@@ -1,11 +1,11 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
-    {
-      "item": "rys:peat"
-    }
-  ],
-  "result": {
-    "item": "minecraft:brown_dye"
-  }
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "rys:peat"
+		}
+	],
+	"result": {
+		"item": "minecraft:brown_dye"
+	}
 }

@@ -1,21 +1,19 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "X",
-    "#"
-  ],
-  "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "X": [
-      {
-        "item": "rys:peat"
-      }
-    ]
-  },
-  "result": {
-    "item": "minecraft:torch",
-    "count": 2
-  }
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"A",
+		"B"
+	],
+	"key": {
+		"A": {
+			"item": "rys:peat"
+		},
+		"B": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "minecraft:torch",
+		"count": 2
+	}
 }

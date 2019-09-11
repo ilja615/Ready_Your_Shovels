@@ -1,16 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "###"
-  ],
-  "key": {
-    "#": {
-      "item": "rys:dirt_bricks"
-    }
-  },
-  "result": {
-    "item": "rys:dirt_bricks_wall",
-    "count": 6
-  }
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"AAA",
+		"AAA"
+	],
+	"key": {
+		"A": {
+			"item": "rys:dirt_bricks"
+		}
+	},
+	"result": {
+		"item": "rys:dirt_bricks_wall",
+		"count": 6
+	}
 }
