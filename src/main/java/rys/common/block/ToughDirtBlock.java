@@ -14,8 +14,8 @@ public class ToughDirtBlock extends Block {
 		super(properties);
 	}
 	
-	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable) {
-		PlantType type = plantable.getPlantType(world, pos.offset(facing));
+	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction direction, IPlantable plantable) {
+		PlantType type = plantable.getPlantType(world, pos.offset(direction));
 		
 		if (type == PlantType.Plains || type == PlantType.Cave) {
 			return true;
