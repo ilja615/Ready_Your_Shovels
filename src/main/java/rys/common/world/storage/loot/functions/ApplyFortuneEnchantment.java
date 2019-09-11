@@ -28,7 +28,8 @@ public class ApplyFortuneEnchantment extends LootFunction {
 		
 		int level = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemstack);
 		
-		stack.setCount(context.getRandom().nextInt(this.bonus + 1) + (level * this.bonus + 1));
+//		stack.setCount(context.getRandom().nextInt(this.bonus + 1) + (level * this.bonus + 1));
+		stack.setCount(context.getRandom().nextInt(3) + (level * this.bonus) + 1);
 		
 		return stack;
 	}
