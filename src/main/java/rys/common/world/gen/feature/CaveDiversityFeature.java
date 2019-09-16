@@ -23,7 +23,7 @@ public class CaveDiversityFeature extends Feature<ReplaceBlockConfig> {
 	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, ReplaceBlockConfig config) {
 		int surfaceY = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, pos).getY();
 		
-		for (int n = 0; n < 8; n++) {
+		for (int n = 0; n < 16; n++) {
 			int x = rand.nextInt(16);
 			int z = rand.nextInt(16);
 			int y = rand.nextInt(20);
