@@ -44,7 +44,7 @@ public class DayrootFeature extends Feature<BushConfig> {
 					BlockPos pos_n = pos.add(x, y, z);
 					
 					if (random.nextFloat() < 0.5F) {
-						if (world.isAirBlock(pos_n) && state.isValidPosition(world, pos_n)) {
+						if (world.isAirBlock(pos_n) && world.isAirBlock(pos_n.down()) && state.isValidPosition(world, pos_n)) {
 							((DayrootBlock) state.getBlock()).placeAt(world, pos_n, 2);
 						}
 					}
