@@ -1,8 +1,5 @@
 package rys.common.potion;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
@@ -15,23 +12,37 @@ public class EffectMod extends Effect {
 	}
 	
 	public void performEffect(LivingEntity entity, int amplifier) {
-		Map<Effect, EffectInstance> map = new HashMap<>();
-		
 		int time = (amplifier + 1) * 200;
 		
 		if (this == ModEffects.decrease_debuff) {
 			entity.getActivePotionMap().forEach((Effect effect, EffectInstance effectInstance) -> {
-				if (effect.getEffectType() == EffectType.HARMFUL) {
-					map.put(effect, new EffectInstance(effect, effectInstance.getDuration() - time, effectInstance.getAmplifier(), effectInstance.isAmbient(), effectInstance.isShowIcon()));
-				} else {
-					map.put(effect, effectInstance);
+				if (effect.getEffectType() == EffectType.HARMFUL && !effectInstance.isAmbient()) {
+					entity.getActivePotionMap().replace(effect, new EffectInstance(effect, effectInstance.getDuration() - time, effectInstance.getAmplifier(), effectInstance.isAmbient(), effectInstance.isShowIcon()));
 				}
 			});
-			
-			entity.getActivePotionMap().clear();
-			
-			map.forEach((Effect effect, EffectInstance effectInstance) -> {
-				entity.getActivePotionMap().put(effect, effectInstance);
+		}
+		
+		if (this == ModEffects.increase_buff) {
+			entity.getActivePotionMap().forEach((Effect effect, EffectInstance effectInstance) -> {
+				if (effect.getEffectType() == EffectType.BENEFICIAL && !effectInstance.isAmbient()) {
+					entity.getActivePotionMap().replace(effect, new EffectInstance(effect, effectInstance.getDuration() + time, effectInstance.getAmplifier(), effectInstance.isAmbient(), effectInstance.isShowIcon()));
+				}
+			});
+		}
+		
+		if (this == ModEffects.increase_debuff) {
+			entity.getActivePotionMap().forEach((Effect effect, EffectInstance effectInstance) -> {
+				if (effect.getEffectType() == EffectType.HARMFUL && !effectInstance.isAmbient()) {
+					entity.getActivePotionMap().replace(effect, new EffectInstance(effect, effectInstance.getDuration() + time, effectInstance.getAmplifier(), effectInstance.isAmbient(), effectInstance.isShowIcon()));
+				}
+			});
+		}
+		
+		if (this == ModEffects.decrease_buff) {
+			entity.getActivePotionMap().forEach((Effect effect, EffectInstance effectInstance) -> {
+				if (effect.getEffectType() == EffectType.BENEFICIAL && !effectInstance.isAmbient()) {
+					entity.getActivePotionMap().replace(effect, new EffectInstance(effect, effectInstance.getDuration() - time, effectInstance.getAmplifier(), effectInstance.isAmbient(), effectInstance.isShowIcon()));
+				}
 			});
 		}
 	}
@@ -51,4 +62,5 @@ public class EffectMod extends Effect {
 		
 		return false;
 	}
+	
 }
