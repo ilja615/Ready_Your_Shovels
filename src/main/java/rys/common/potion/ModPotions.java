@@ -58,52 +58,6 @@ public class ModPotions {
 		PotionBrewing.addMix(Potions.AWKWARD, ModItems.rotten_apricot, ModPotions.decrease_buff);
 		PotionBrewing.addMix(ModPotions.decrease_buff, Items.GLOWSTONE_DUST, ModPotions.strong_decrease_buff);
 		
-//		createPotionRecipes(ModItems.orange, ModPotions.decrease_debuff);
-//		createStrongPotionRecipes(ModPotions.decrease_debuff, ModPotions.strong_decrease_debuff);
-//		
-//		createPotionRecipes(ModItems.apricot, ModPotions.increase_buff);
-//		createStrongPotionRecipes(ModPotions.increase_buff, ModPotions.strong_increase_buff);
-//		
-//		createPotionRecipes(ModItems.rotten_orange, ModPotions.increase_debuff);
-//		createStrongPotionRecipes(ModPotions.increase_debuff, ModPotions.strong_increase_debuff);
-//		
-//		createPotionRecipes(ModItems.rotten_apricot, ModPotions.decrease_buff);
-//		createStrongPotionRecipes(ModPotions.decrease_buff, ModPotions.strong_decrease_buff);
 	}
-	
-//	public static void createPotionRecipe(Item item, Item type_1, Potion potion_1, Item type_2, Potion potion_2) {
-//		Ingredient input_1 = Ingredient.fromStacks(new ItemStack(item));
-//		Ingredient input_2 = Ingredient.fromStacks(PotionUtils.addPotionToItemStack(new ItemStack(type_1), potion_1));
-//		ItemStack output = PotionUtils.addPotionToItemStack(new ItemStack(type_2), potion_2);
-//		
-//		BrewingRecipeRegistry.addRecipe(new BrewingRecipe(input_2, input_1, output));
-//	}
-//	
-//	public static void createPotionRecipes(Item item, Potion potion) {
-//		createPotionRecipe(item, Items.POTION, Potions.AWKWARD, Items.POTION, potion);
-//		createPotionRecipe(item, Items.SPLASH_POTION, Potions.AWKWARD, Items.SPLASH_POTION, potion);
-//		createPotionRecipe(item, Items.LINGERING_POTION, Potions.AWKWARD, Items.LINGERING_POTION, potion);
-//		
-//		createPotionRecipe(Items.GUNPOWDER, Items.POTION, potion, Items.SPLASH_POTION, potion);
-//		createPotionRecipe(Items.DRAGON_BREATH, Items.SPLASH_POTION, potion, Items.LINGERING_POTION, potion);
-//	}
-//	
-//	public static void createLongPotionRecipes(Potion potion, Potion long_potion) {
-//		createPotionRecipe(Items.REDSTONE, Items.POTION, potion, Items.POTION, long_potion);
-//		createPotionRecipe(Items.REDSTONE, Items.SPLASH_POTION, potion, Items.SPLASH_POTION, long_potion);
-//		createPotionRecipe(Items.REDSTONE, Items.LINGERING_POTION, potion, Items.LINGERING_POTION, long_potion);
-//		
-//		createPotionRecipe(Items.GUNPOWDER, Items.POTION, long_potion, Items.SPLASH_POTION, long_potion);
-//		createPotionRecipe(Items.DRAGON_BREATH, Items.SPLASH_POTION, long_potion, Items.LINGERING_POTION, long_potion);
-//	}
-//	
-//	public static void createStrongPotionRecipes(Potion potion, Potion strong_potion) {
-//		createPotionRecipe(Items.GLOWSTONE_DUST, Items.POTION, potion, Items.POTION, strong_potion);
-//		createPotionRecipe(Items.GLOWSTONE_DUST, Items.SPLASH_POTION, potion, Items.SPLASH_POTION, strong_potion);
-//		createPotionRecipe(Items.GLOWSTONE_DUST, Items.LINGERING_POTION, potion, Items.LINGERING_POTION, strong_potion);
-//		
-//		createPotionRecipe(Items.GUNPOWDER, Items.POTION, strong_potion, Items.SPLASH_POTION, strong_potion);
-//		createPotionRecipe(Items.DRAGON_BREATH, Items.SPLASH_POTION, strong_potion, Items.LINGERING_POTION, strong_potion);
-//	}
 	
 }
