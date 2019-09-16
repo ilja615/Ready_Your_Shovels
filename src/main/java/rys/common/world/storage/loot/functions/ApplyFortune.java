@@ -14,11 +14,11 @@ import net.minecraft.world.storage.loot.LootParameters;
 import net.minecraft.world.storage.loot.conditions.ILootCondition;
 import rys.common.util.Reference;
 
-public class ApplyFortuneEnchantment extends LootFunction {
+public class ApplyFortune extends LootFunction {
 	
 	private int bonus;
 	
-	protected ApplyFortuneEnchantment(ILootCondition[] conditionsIn, int bonusIn) {
+	protected ApplyFortune(ILootCondition[] conditionsIn, int bonusIn) {
 		super(conditionsIn);
 		this.bonus = bonusIn;
 	}
@@ -28,26 +28,25 @@ public class ApplyFortuneEnchantment extends LootFunction {
 		
 		int level = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemstack);
 		
-//		stack.setCount(context.getRandom().nextInt(this.bonus + 1) + (level * this.bonus + 1));
 		stack.setCount(context.getRandom().nextInt(3) + (level * this.bonus) + 1);
 		
 		return stack;
 	}
 	
-	public static class Serializer extends LootFunction.Serializer<ApplyFortuneEnchantment> {
+	public static class Serializer extends LootFunction.Serializer<ApplyFortune> {
 		
 		public Serializer() {
-			super(new ResourceLocation(Reference.MOD_ID, "apply_fortune_enchantment"), ApplyFortuneEnchantment.class);
+			super(new ResourceLocation(Reference.MOD_ID, "apply_fortune"), ApplyFortune.class);
 		}
 		
-		public void serialize(JsonObject object, ApplyFortuneEnchantment functionClazz, JsonSerializationContext serializationContext) {
+		public void serialize(JsonObject object, ApplyFortune functionClazz, JsonSerializationContext serializationContext) {
 			super.serialize(object, functionClazz, serializationContext);
 			object.addProperty("bonus", functionClazz.bonus);
 		}
 		
-		public ApplyFortuneEnchantment deserialize(JsonObject object, JsonDeserializationContext deserializationContext, ILootCondition[] conditionsIn) {
+		public ApplyFortune deserialize(JsonObject object, JsonDeserializationContext deserializationContext, ILootCondition[] conditionsIn) {
 			int bonusIn = object.get("bonus").getAsInt();
-			return new ApplyFortuneEnchantment(conditionsIn, bonusIn);
+			return new ApplyFortune(conditionsIn, bonusIn);
 		}
 		
 	}

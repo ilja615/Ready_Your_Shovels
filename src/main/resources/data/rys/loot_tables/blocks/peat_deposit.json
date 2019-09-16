@@ -48,7 +48,7 @@
 							],
 							"functions": [
 								{
-									"function": "rys:apply_fortune_enchantment",
+									"function": "rys:apply_fortune",
 									"bonus": 2
 								}
 							],
