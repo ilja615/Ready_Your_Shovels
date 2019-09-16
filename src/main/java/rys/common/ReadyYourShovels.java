@@ -7,11 +7,12 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import rys.common.init.ModEvents;
+import rys.common.potion.ModPotions;
 import rys.common.util.Reference;
 import rys.common.world.gen.feature.ModFeatures;
 import rys.common.world.storage.loot.conditions.MatchHarvestLevel;
 import rys.common.world.storage.loot.conditions.MatchHarvestTool;
-import rys.common.world.storage.loot.functions.ApplyFortuneEnchantment;
+import rys.common.world.storage.loot.functions.ApplyFortune;
 
 @Mod(Reference.MOD_ID)
 public class ReadyYourShovels {
@@ -25,13 +26,13 @@ public class ReadyYourShovels {
 	public void commonSetup(FMLCommonSetupEvent event) {
 		ModFeatures.registerFeatures();
 		
-//		ModPotions.registerRecipes();
+		ModPotions.registerPotionRecipes();
 		
 		LootConditionManager.registerCondition(new MatchHarvestLevel.Serializer());
 		
 		LootConditionManager.registerCondition(new MatchHarvestTool.Serializer());
 		
-		LootFunctionManager.registerFunction(new ApplyFortuneEnchantment.Serializer());
+		LootFunctionManager.registerFunction(new ApplyFortune.Serializer());
 	}
 	
 }

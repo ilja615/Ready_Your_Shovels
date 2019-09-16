@@ -29,12 +29,12 @@ public class CaveFeature extends Feature<NoFeatureConfig> {
 	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
-				int surfaceY = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(x, 0, z)).getY();
-				
 				Biome biome = worldIn.getBiome(pos.add(x, 0, z));
 				String name = biome.getRegistryName().toString();
 				
 				if (!name.contains("ocean") && !name.contains("mountains") && !name.contains("river") && !name.contains("stone")) {
+					int surfaceY = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(x, 0, z)).getY();
+					
 					for (int y = surfaceY - 20; y < surfaceY; y++) {
 						this.tryPlace(worldIn, pos.add(x, y, z));
 					}

@@ -77,7 +77,6 @@ public class ModFeatures {
 				
 				// DayrootFeature
 				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(dayroot, new BushConfig(ModBlocks.dayroot.getDefaultState()), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
-				
 			}
 			
 			if (name.contains("river")) {
@@ -86,9 +85,6 @@ public class ModFeatures {
 				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(deposits_in_rivers, new ReplaceBlockConfig(Blocks.DIRT.getDefaultState(), ModBlocks.gold_deposit.getDefaultState()), Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 				
 			}
-			
-			// RocksInCavesFeature
-			
 		});
 	}
 	

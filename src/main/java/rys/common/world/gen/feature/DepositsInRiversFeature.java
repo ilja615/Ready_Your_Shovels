@@ -44,8 +44,8 @@ public class DepositsInRiversFeature extends Feature<ReplaceBlockConfig> {
 				for (int y = 0; y < 4; y++) {
 					BlockPos pos_n = pos.add(x - 2, y - 2, z - 2);
 					
-					if (random.nextFloat() < 0.5F) {
-						if (pos.distanceSq(pos_n) < 16) {
+					if (random.nextFloat() < 0.25F) {
+						if (pos.distanceSq(pos_n) < 4) {
 							if (world.getBlockState(pos_n).getBlock() == target.getBlock()) {
 								this.trySetBlockState(world, pos_n, state);
 							}

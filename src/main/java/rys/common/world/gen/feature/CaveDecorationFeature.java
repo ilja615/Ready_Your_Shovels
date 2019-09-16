@@ -44,7 +44,7 @@ public class CaveDecorationFeature extends Feature<BushConfig> {
 				for (int y = 0; y < 2; y++) {
 					BlockPos pos_n = pos.add(x, y, z);
 					
-					if (random.nextFloat() < 0.25F) {
+					if (random.nextFloat() < 0.5F) {
 						if (world.isAirBlock(pos_n) && world.getBlockState(pos_n.down()).canSustainPlant(world, pos_n.down(), Direction.UP, (IPlantable) state.getBlock())) {
 							this.setBlockState(world, pos_n, state);
 						}
