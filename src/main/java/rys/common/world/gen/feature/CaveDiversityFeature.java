@@ -23,7 +23,7 @@ public class CaveDiversityFeature extends Feature<ReplaceBlockConfig> {
 	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, ReplaceBlockConfig config) {
 		int surfaceY = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, pos).getY();
 		
-		for (int n = 0; n < 16; n++) {
+		for (int n = 0; n < 4; n++) {
 			int x = rand.nextInt(16);
 			int z = rand.nextInt(16);
 			int y = rand.nextInt(20);
@@ -35,17 +35,13 @@ public class CaveDiversityFeature extends Feature<ReplaceBlockConfig> {
 	}
 	
 	private void tryPlace(IWorld world, Random random, BlockPos pos, BlockState state, BlockState target) {
-		for (int x = 0; x < 4; x++) {
-			for (int z = 0; z < 4; z++) {
-				for (int y = 0; y < 4; y++) {
-					BlockPos pos_n = pos.add(x - 2, y - 2, z - 2);
+		for (int x = 0; x < 8; x++) {
+			for (int z = 0; z < 8; z++) {
+				for (int y = 0; y < 8; y++) {
+					BlockPos pos_n = pos.add(x - 4, y - 4, z - 4);
 					
-					if (random.nextFloat() < 0.5F) {
-						if (pos.distanceSq(pos_n) < 4) {
-							if (world.getBlockState(pos_n).getBlock() == target.getBlock()) {
-								this.setBlockState(world, pos_n, state);
-							}
-						}
+					if (random.nextFloat() < 0.5F && pos.distanceSq(pos_n) < 16 && world.getBlockState(pos_n).getBlock() == target.getBlock()) {
+						this.setBlockState(world, pos_n, state);
 					}
 				}
 			}

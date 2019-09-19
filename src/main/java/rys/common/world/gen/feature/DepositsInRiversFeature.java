@@ -8,6 +8,7 @@ import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
@@ -44,12 +45,11 @@ public class DepositsInRiversFeature extends Feature<ReplaceBlockConfig> {
 				for (int y = 0; y < 4; y++) {
 					BlockPos pos_n = pos.add(x - 2, y - 2, z - 2);
 					
-					if (random.nextFloat() < 0.25F) {
-						if (pos.distanceSq(pos_n) < 4) {
-							if (world.getBlockState(pos_n).getBlock() == target.getBlock()) {
-								this.trySetBlockState(world, pos_n, state);
-							}
-						}
+					Biome biome = world.getBiome(pos_n);
+					String name = biome.getRegistryName().toString();
+					
+					if (random.nextFloat() < 0.25F && pos.distanceSq(pos_n) < 4 && world.getBlockState(pos_n).getBlock() == target.getBlock() && name.contains("river")) {
+						this.trySetBlockState(world, pos_n, state);
 					}
 				}
 			}

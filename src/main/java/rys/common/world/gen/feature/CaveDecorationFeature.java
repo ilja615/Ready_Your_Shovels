@@ -6,7 +6,6 @@ import java.util.function.Function;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -14,7 +13,6 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.BushConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraftforge.common.IPlantable;
 
 public class CaveDecorationFeature extends Feature<BushConfig> {
 	
@@ -25,7 +23,7 @@ public class CaveDecorationFeature extends Feature<BushConfig> {
 	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, BushConfig config) {
 		int surfaceY = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, pos).getY();
 		
-		if (rand.nextFloat() < 0.5F) {
+		if (rand.nextFloat() < 0.25F) {
 			for (int n = 0; n < 64; n++) {
 				int x = rand.nextInt(16);
 				int z = rand.nextInt(16);
@@ -44,10 +42,8 @@ public class CaveDecorationFeature extends Feature<BushConfig> {
 				for (int y = 0; y < 2; y++) {
 					BlockPos pos_n = pos.add(x, y, z);
 					
-					if (random.nextFloat() < 0.5F) {
-						if (world.isAirBlock(pos_n) && world.getBlockState(pos_n.down()).canSustainPlant(world, pos_n.down(), Direction.UP, (IPlantable) state.getBlock())) {
-							this.setBlockState(world, pos_n, state);
-						}
+					if (random.nextFloat() < 0.25F && state.isValidPosition(world, pos_n) && world.isAirBlock(pos_n)) {
+						this.setBlockState(world, pos_n, state);
 					}
 				}
 			}

@@ -24,7 +24,7 @@ public class DayrootFeature extends Feature<BushConfig> {
 	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, BushConfig config) {
 		int surfaceY = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, pos).getY();
 		
-		if (rand.nextFloat() < 0.5F) {
+		if (rand.nextFloat() < 0.25F) {
 			for (int n = 0; n < 64; n++) {
 				int x = rand.nextInt(16);
 				int z = rand.nextInt(16);
@@ -43,10 +43,8 @@ public class DayrootFeature extends Feature<BushConfig> {
 				for (int y = 0; y < 2; y++) {
 					BlockPos pos_n = pos.add(x, y, z);
 					
-					if (random.nextFloat() < 0.5F) {
-						if (world.isAirBlock(pos_n) && world.isAirBlock(pos_n.down()) && state.isValidPosition(world, pos_n)) {
-							((DayrootBlock) state.getBlock()).placeAt(world, pos_n, 2);
-						}
+					if (random.nextFloat() < 0.25F && state.isValidPosition(world, pos_n) && world.isAirBlock(pos_n) && world.isAirBlock(pos_n.down())) {
+						((DayrootBlock) state.getBlock()).placeAt(world, pos_n, 2);
 					}
 				}
 			}

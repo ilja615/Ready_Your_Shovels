@@ -29,6 +29,7 @@ public class CaveFeature extends Feature<NoFeatureConfig> {
 	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
+				
 				Biome biome = worldIn.getBiome(pos.add(x, 0, z));
 				String name = biome.getRegistryName().toString();
 				
@@ -41,6 +42,7 @@ public class CaveFeature extends Feature<NoFeatureConfig> {
 					
 					this.tryPlaceLayer(worldIn, rand, pos.add(x, surfaceY - 20, z));
 				}
+				
 			}
 		}
 		
@@ -53,39 +55,25 @@ public class CaveFeature extends Feature<NoFeatureConfig> {
 		if (Block.isRock(state.getBlock())) {
 			this.trySetBlockState(world, pos, ModBlocks.tough_dirt.getDefaultState());
 		}
-		
 		if (state.getBlock() == Blocks.COAL_ORE) {
 			this.trySetBlockState(world, pos, ModBlocks.peat_deposit.getDefaultState());
 		}
-		
 		if (state.getBlock() == Blocks.IRON_ORE) {
 			this.trySetBlockState(world, pos, ModBlocks.iron_deposit.getDefaultState());
 		}
-		
 		if (state.getBlock() == Blocks.GOLD_ORE) {
 			this.trySetBlockState(world, pos, ModBlocks.gold_deposit.getDefaultState());
 		}
 	}
 	
 	private void tryPlaceLayer(IWorld world, Random random, BlockPos pos) {
-		BlockPos pos_0 = pos.add(0, random.nextInt(2) - random.nextInt(2), 0);
-		BlockPos pos_1 = pos.add(0, (random.nextInt(2) - random.nextInt(2)) - 1, 0);
-		BlockPos pos_2 = pos.add(0, (random.nextInt(2) - random.nextInt(2)) - 2, 0);
-		
-		BlockState state_0 = world.getBlockState(pos_0);
-		BlockState state_1 = world.getBlockState(pos_1);
-		BlockState state_2 = world.getBlockState(pos_2);
-		
-		if (Block.isRock(state_0.getBlock()) || state_0.getBlock() == ModBlocks.tough_dirt) {
-			this.trySetBlockState(world, pos_0, ModBlocks.regolith.getDefaultState());
-		}
-		
-		if (Block.isRock(state_1.getBlock()) || state_1.getBlock() == ModBlocks.tough_dirt) {
-			this.trySetBlockState(world, pos_1, ModBlocks.regolith.getDefaultState());
-		}
-		
-		if (Block.isRock(state_2.getBlock()) || state_2.getBlock() == ModBlocks.tough_dirt) {
-			this.trySetBlockState(world, pos_2, ModBlocks.regolith.getDefaultState());
+		for (int i = 0; i < 3; i++) {
+			BlockPos pos_1 = pos.add(0, random.nextInt(3) - 1 - i, 0);
+			BlockState state = world.getBlockState(pos_1);
+			
+			if (Block.isRock(state.getBlock())) {
+				this.trySetBlockState(world, pos_1, ModBlocks.regolith.getDefaultState());
+			}
 		}
 	}
 	

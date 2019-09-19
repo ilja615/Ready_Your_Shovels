@@ -10,7 +10,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
@@ -29,13 +28,15 @@ public class GradientFeature extends Feature<NoFeatureConfig> {
 	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
-				Biome biome = worldIn.getBiome(pos.add(x, 0, z));
-				String name = biome.getRegistryName().toString();
+				int surfaceY = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(x, 0, z)).getY();
 				
-				if (name.contains("mountains") || name.contains("stone")) {
-					int surfaceY = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(x, 0, z)).getY();
+				for (int y = 0; y < surfaceY; y++) {
+					BlockPos pos_1 = pos.add(x, surfaceY, z).down(y);
+					BlockState state = worldIn.getBlockState(pos_1);
 					
-					this.tryPlace(worldIn, pos.add(x, surfaceY - 1, z));
+					if (state.getBlock() == Blocks.GRASS_BLOCK) {
+						this.tryPlace(worldIn, pos_1);
+					}
 				}
 			}
 		}
@@ -44,23 +45,21 @@ public class GradientFeature extends Feature<NoFeatureConfig> {
 	}
 	
 	private void tryPlace(IWorld world, BlockPos pos) {
-		BlockState state = world.getBlockState(pos);
-		
-		if (state.getBlock() == Blocks.GRASS_BLOCK) {
-			for (int y = 0; y < pos.getY(); y++) {
-				if (Block.isRock(world.getBlockState(pos.down(y)).getBlock())) {
-					this.trySetBlockState(world, pos.down(y), ModBlocks.tough_dirt.getDefaultState());
-					
-					if (Block.isRock(world.getBlockState(pos.down(y + 1)).getBlock())) {
-						this.trySetBlockState(world, pos.down(y + 1), ModBlocks.regolith.getDefaultState());
-					}
-					
-					break;
+		for (int y = 0; y < pos.getY(); y++) {
+			BlockPos pos_1 = pos.down(y);
+			
+			if (Block.isRock(world.getBlockState(pos_1).getBlock())) {
+				this.trySetBlockState(world, pos_1, ModBlocks.tough_dirt.getDefaultState());
+				
+				if (Block.isRock(world.getBlockState(pos_1.down()).getBlock())) {
+					this.trySetBlockState(world, pos_1.down(), ModBlocks.regolith.getDefaultState());
 				}
 				
-				if (world.isAirBlock(pos.down(y))) {
-					break;
-				}
+				return;
+			}
+			
+			if (world.isAirBlock(pos_1)) {
+				return;
 			}
 		}
 	}
