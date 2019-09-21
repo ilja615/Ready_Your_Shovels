@@ -1,6 +1,7 @@
 package rys.common.potion;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
@@ -9,6 +10,18 @@ public class EffectMod extends Effect {
 	
 	public EffectMod(EffectType typeIn, int colorIn) {
 		super(typeIn, colorIn);
+	}
+	
+	public void removeAttributesModifiersFromEntity(LivingEntity entity, AbstractAttributeMap attributeMapIn, int amplifier) {
+		this.performEffect(entity, amplifier);
+		
+		super.removeAttributesModifiersFromEntity(entity, attributeMapIn, amplifier);
+	}
+	
+	public void applyAttributesModifiersToEntity(LivingEntity entity, AbstractAttributeMap attributeMapIn, int amplifier) {
+		this.performEffect(entity, amplifier);
+		
+		super.applyAttributesModifiersToEntity(entity, attributeMapIn, amplifier);
 	}
 	
 	public void performEffect(LivingEntity entity, int amplifier) {
@@ -48,11 +61,7 @@ public class EffectMod extends Effect {
 	}
 	
 	public boolean isReady(int duration, int amplifier) {
-		if (this == ModEffects.decrease_debuff || this == ModEffects.increase_buff || this == ModEffects.increase_debuff || this == ModEffects.decrease_buff) {
-			return true;
-		}
-		
-		return false;
+		return duration >= 1;
 	}
 	
 	public boolean isInstant() {

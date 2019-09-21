@@ -18,11 +18,9 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import rys.common.block.ModBlocks;
 
-public class CaveFeature extends Feature<NoFeatureConfig> {
+public class DirtCaveFeature extends Feature<NoFeatureConfig> {
 	
-	private static BlockPos[] arrayOfPos = new BlockPos[] { new BlockPos(-1, -1, -1), new BlockPos(-1, -1, 0), new BlockPos(-1, -1, 1), new BlockPos(0, -1, -1), new BlockPos(0, -1, 0), new BlockPos(0, -1, 1), new BlockPos(1, -1, -1), new BlockPos(1, -1, 0), new BlockPos(1, -1, 1), new BlockPos(-1, 0, -1), new BlockPos(-1, 0, 0), new BlockPos(-1, 0, 1), new BlockPos(0, 0, -1), new BlockPos(0, 0, 1), new BlockPos(1, 0, -1), new BlockPos(1, 0, 0), new BlockPos(1, 0, 1), new BlockPos(-1, 1, -1), new BlockPos(-1, 1, 0), new BlockPos(-1, 1, 1), new BlockPos(0, 1, -1), new BlockPos(0, 1, 0), new BlockPos(0, 1, 1), new BlockPos(1, 1, -1), new BlockPos(1, 1, 0), new BlockPos(1, 1, 1) };
-	
-	public CaveFeature(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+	public DirtCaveFeature(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 	
@@ -53,34 +51,26 @@ public class CaveFeature extends Feature<NoFeatureConfig> {
 		BlockState state = world.getBlockState(pos);
 		
 		if (Block.isRock(state.getBlock())) {
-			this.trySetBlockState(world, pos, ModBlocks.tough_dirt.getDefaultState());
+			this.setBlockState(world, pos, ModBlocks.tough_dirt.getDefaultState());
 		}
 		if (state.getBlock() == Blocks.COAL_ORE) {
-			this.trySetBlockState(world, pos, ModBlocks.peat_deposit.getDefaultState());
+			this.setBlockState(world, pos, ModBlocks.peat_deposit.getDefaultState());
 		}
 		if (state.getBlock() == Blocks.IRON_ORE) {
-			this.trySetBlockState(world, pos, ModBlocks.iron_deposit.getDefaultState());
+			this.setBlockState(world, pos, ModBlocks.iron_deposit.getDefaultState());
 		}
 		if (state.getBlock() == Blocks.GOLD_ORE) {
-			this.trySetBlockState(world, pos, ModBlocks.gold_deposit.getDefaultState());
+			this.setBlockState(world, pos, ModBlocks.gold_deposit.getDefaultState());
 		}
 	}
 	
 	private void tryPlaceLayer(IWorld world, Random random, BlockPos pos) {
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 5; i++) {
 			BlockPos pos_1 = pos.add(0, random.nextInt(3) - 1 - i, 0);
 			BlockState state = world.getBlockState(pos_1);
 			
 			if (Block.isRock(state.getBlock())) {
-				this.trySetBlockState(world, pos_1, ModBlocks.regolith.getDefaultState());
-			}
-		}
-	}
-	
-	private void trySetBlockState(IWorld world, BlockPos pos, BlockState state) {
-		for (BlockPos posInArray : arrayOfPos) {
-			if (world.isAirBlock(pos.add(posInArray))) {
-				this.setBlockState(world, pos, state);
+				this.setBlockState(world, pos_1, ModBlocks.regolith.getDefaultState());
 			}
 		}
 	}

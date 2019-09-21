@@ -1,5 +1,7 @@
 package rys.common.block;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FarmlandBlock;
@@ -54,8 +56,12 @@ public class PlanterBoxBlock extends FarmlandBlock {
 		return VoxelShapes.fullCube();
 	}
 	
-	public void tick() {
+	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
 		
+	}
+	
+	public int tickRate(IWorldReader worldIn) {
+		return 1;
 	}
 	
 	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
