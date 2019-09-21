@@ -2,14 +2,18 @@ modLoader="javafml"
 loaderVersion="[28,)"
 logoFile="logo.png"
 
+issueTrackerURL="https://github.com/camiloss20/Ready_Your_Shovels/issues"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/ready-your-shovels"
+
 [[mods]]
+
 modId="rys"
-version="0.1.14"
+version="0.1.15"
 displayName="Ready Your Shovels"
-credits="Axoladdy"
+credits="Creator: Axoladdy, Programmer: camiloss20"
 authors="camiloss20"
 description='''
-Ready Your Shovels
+Ready Your Shovels adds a unique new dirt based cave biome across most of the world. This unique new environment offers new content to explore and a new way to play survival mode.
 '''
 
 [[dependencies.rys]]
