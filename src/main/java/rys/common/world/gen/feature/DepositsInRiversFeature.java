@@ -11,57 +11,49 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.ReplaceBlockConfig;
 
-public class DepositsInRiversFeature extends Feature<ReplaceBlockConfig> {
+public class DepositsInRiversFeature extends Feature<SphereConfig> {
 	
 	private static BlockPos[] arrayOfPos = new BlockPos[] { new BlockPos(-1, -1, -1), new BlockPos(-1, -1, 0), new BlockPos(-1, -1, 1), new BlockPos(0, -1, -1), new BlockPos(0, -1, 0), new BlockPos(0, -1, 1), new BlockPos(1, -1, -1), new BlockPos(1, -1, 0), new BlockPos(1, -1, 1), new BlockPos(-1, 0, -1), new BlockPos(-1, 0, 0), new BlockPos(-1, 0, 1), new BlockPos(0, 0, -1), new BlockPos(0, 0, 1), new BlockPos(1, 0, -1), new BlockPos(1, 0, 0), new BlockPos(1, 0, 1), new BlockPos(-1, 1, -1), new BlockPos(-1, 1, 0), new BlockPos(-1, 1, 1), new BlockPos(0, 1, -1), new BlockPos(0, 1, 0), new BlockPos(0, 1, 1), new BlockPos(1, 1, -1), new BlockPos(1, 1, 0), new BlockPos(1, 1, 1) };
 	
-	public DepositsInRiversFeature(Function<Dynamic<?>, ? extends ReplaceBlockConfig> configFactoryIn) {
+	public DepositsInRiversFeature(Function<Dynamic<?>, ? extends SphereConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 	
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, ReplaceBlockConfig config) {
-		int surfaceY = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, pos).getY();
-		
-		if (rand.nextFloat() < 0.5F) {
-			for (int n = 0; n < 16; n++) {
-				int x = rand.nextInt(16);
-				int z = rand.nextInt(16);
-				int y = rand.nextInt(20);
-				
-				this.tryPlace(worldIn, rand, pos.add(x, surfaceY - y, z), config.state, config.target);
+	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, SphereConfig config) {
+		for (int x = 0; x < config.radius * 2; x++) {
+			for (int z = 0; z < config.radius * 2; z++) {
+				for (int y = 0; y < config.radius * 2; y++) {
+					BlockPos pos_1 = pos.add(x - config.radius, y - config.radius, z - config.radius);
+					
+					Biome biome = worldIn.getBiome(pos_1);
+					String name = biome.getRegistryName().toString();
+					
+					if (name.contains("river") && rand.nextFloat() < config.integrity && pos.distanceSq(pos_1) < config.radius * config.radius && worldIn.getBlockState(pos_1).getBlock() == config.target.getBlock()) {
+						this.trySetBlockState(worldIn, pos_1, config.state);
+					}
+				}
 			}
 		}
 		
 		return true;
 	}
 	
-	private void tryPlace(IWorld world, Random random, BlockPos pos, BlockState state, BlockState target) {
-		for (int x = 0; x < 4; x++) {
-			for (int z = 0; z < 4; z++) {
-				for (int y = 0; y < 4; y++) {
-					BlockPos pos_n = pos.add(x - 2, y - 2, z - 2);
-					
-					Biome biome = world.getBiome(pos_n);
-					String name = biome.getRegistryName().toString();
-					
-					if (random.nextFloat() < 0.25F && pos.distanceSq(pos_n) < 4 && world.getBlockState(pos_n).getBlock() == target.getBlock() && name.contains("river")) {
-						this.trySetBlockState(world, pos_n, state);
-					}
-				}
-			}
+	private void trySetBlockState(IWorld world, BlockPos pos, BlockState state) {
+		if (this.hasWaterAround(world, pos)) {
+			this.setBlockState(world, pos, state);
 		}
 	}
 	
-	private void trySetBlockState(IWorld world, BlockPos pos, BlockState state) {
+	private boolean hasWaterAround(IWorld world, BlockPos pos) {
 		for (BlockPos posInArray : arrayOfPos) {
 			if (world.hasWater(pos.add(posInArray))) {
-				this.setBlockState(world, pos, state);
+				return true;
 			}
 		}
+		
+		return false;
 	}
 	
 }
