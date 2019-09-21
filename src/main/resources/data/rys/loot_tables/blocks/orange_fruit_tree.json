@@ -15,8 +15,10 @@
 							}
 						},
 						{
-							"condition": "rys:match_harvest_tool",
-							"harvest_tool": "axe"
+							"condition": "minecraft:match_tool",
+							"predicate": {
+								"item": "minecraft:shears"
+							}
 						}
 					],
 					"name": "rys:orange_fruit_tree"
