@@ -28,7 +28,7 @@ public class DirtGradientFeature extends Feature<NoFeatureConfig> {
 	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
-				int surfaceY = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(x, 0, z)).getY();
+				int surfaceY = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos.add(x, 0, z)).getY() - 1;
 				
 				for (int y = 0; y < surfaceY; y++) {
 					BlockPos pos_1 = pos.add(x, surfaceY, z).down(y);

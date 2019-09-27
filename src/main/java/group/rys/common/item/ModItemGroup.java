@@ -1,9 +1,9 @@
 package group.rys.common.item;
 
+import group.rys.core.registry.ModItems;
 import group.rys.core.util.Reference;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 
 public class ModItemGroup extends ItemGroup {
 	
@@ -12,7 +12,7 @@ public class ModItemGroup extends ItemGroup {
 	}
 	
 	public ItemStack createIcon() {
-		return new ItemStack(Items.GOLD_NUGGET);
+		return new ItemStack(ModItems.gold_deposit);
 	}
 	
 }

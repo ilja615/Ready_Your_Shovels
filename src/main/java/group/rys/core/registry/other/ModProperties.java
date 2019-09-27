@@ -1,5 +1,6 @@
-package group.rys.core.registry;
+package group.rys.core.registry.other;
 
+import group.rys.core.registry.ModFoods;
 import group.rys.core.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

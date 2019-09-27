@@ -1,5 +1,6 @@
 package group.rys.core.registry;
 
+import group.rys.core.registry.other.ModProperties;
 import group.rys.core.util.Reference;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;

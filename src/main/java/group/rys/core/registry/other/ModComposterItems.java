@@ -5,7 +5,7 @@ import net.minecraft.block.ComposterBlock;
 
 public class ModComposterItems {
 	
-	public static void register() {
+	public static void registerItems() {
 		ComposterBlock.registerCompostable(0.5F, ModItems.dayroot);
 		ComposterBlock.registerCompostable(0.65F, ModItems.orange);
 		ComposterBlock.registerCompostable(0.65F, ModItems.apricot);

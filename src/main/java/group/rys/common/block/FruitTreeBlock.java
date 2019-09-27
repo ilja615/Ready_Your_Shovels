@@ -45,12 +45,12 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
 			return;
 		}
 		
-		if (age < 3 && !isDead && worldIn.getLight(pos.up()) >= 9 && random.nextInt(7) == 0) {
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(age + 1)), 2);
-		}
-		
-		if (age == 3 && !isDead && random.nextInt(28) == 0) {
-			if (worldIn.getBlockState(pos.down()).getBlock() != ModBlocks.planter_box) {
+		if (!isDead) {
+			if (age < 3 && worldIn.getLight(pos.up()) >= 9 && random.nextInt(7) == 0) {
+				worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(age + 1)), 2);
+			}
+			
+			if (age == 3 && random.nextInt(28) == 0 && worldIn.getBlockState(pos.down()).getBlock() != ModBlocks.planter_box) {
 				worldIn.setBlockState(pos, state.with(DEAD, true), 2);
 			}
 		}
@@ -67,7 +67,7 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
 				spawnAsEntity(worldIn, pos, new ItemStack(this.fruit, 1 + worldIn.rand.nextInt(4)));
 			}
 			
-			worldIn.playSound(null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			worldIn.playSound(null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
 			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(2)), 2);
 			
 			return true;

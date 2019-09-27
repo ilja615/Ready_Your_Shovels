@@ -17,6 +17,7 @@ import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraftforge.common.BiomeDictionary;
 
 public class DirtCaveFeature extends Feature<NoFeatureConfig> {
 	
@@ -29,10 +30,9 @@ public class DirtCaveFeature extends Feature<NoFeatureConfig> {
 			for (int z = 0; z < 16; z++) {
 				
 				Biome biome = worldIn.getBiome(pos.add(x, 0, z));
-				String name = biome.getRegistryName().toString();
 				
-				if (!name.contains("ocean") && !name.contains("mountains") && !name.contains("river") && !name.contains("stone")) {
-					int surfaceY = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(x, 0, z)).getY();
+				if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.END)) {
+					int surfaceY = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos.add(x, 0, z)).getY() - 1;
 					
 					for (int y = surfaceY - 20; y < surfaceY; y++) {
 						this.tryPlace(worldIn, pos.add(x, y, z));

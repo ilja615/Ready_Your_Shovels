@@ -12,6 +12,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraftforge.common.BiomeDictionary;
 
 public class DepositsInRiversFeature extends Feature<SphereConfig> {
 	
@@ -28,9 +29,8 @@ public class DepositsInRiversFeature extends Feature<SphereConfig> {
 					BlockPos pos_1 = pos.add(x - config.radius, y - config.radius, z - config.radius);
 					
 					Biome biome = worldIn.getBiome(pos_1);
-					String name = biome.getRegistryName().toString();
 					
-					if (name.contains("river") && rand.nextFloat() < config.integrity && pos.distanceSq(pos_1) < config.radius * config.radius && worldIn.getBlockState(pos_1).getBlock() == config.target.getBlock()) {
+					if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER) && rand.nextFloat() < config.integrity && pos.distanceSq(pos_1) < config.radius * config.radius && worldIn.getBlockState(pos_1).getBlock() == config.target.getBlock()) {
 						this.trySetBlockState(worldIn, pos_1, config.state);
 					}
 				}

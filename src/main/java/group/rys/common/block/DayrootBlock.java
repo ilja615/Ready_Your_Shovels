@@ -18,10 +18,13 @@ import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class DayrootBlock extends BushBlock implements IGrowable {
 	
@@ -32,66 +35,75 @@ public class DayrootBlock extends BushBlock implements IGrowable {
 		this.setDefaultState(this.stateContainer.getBaseState().with(HALF, DoubleBlockHalf.UPPER));
 	}
 	
-	public BlockState updatePostPlacement(BlockState state, Direction direction, BlockState directionState, IWorld world, BlockPos currentPos, BlockPos directionPos) {
-		DoubleBlockHalf half = state.get(HALF);
+	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		DoubleBlockHalf half = stateIn.get(HALF);
 		
-		if ((direction.getAxis() != Direction.Axis.Y) || (half == DoubleBlockHalf.UPPER && direction == Direction.DOWN && directionState.getBlock() == this && directionState.get(HALF) != half) || (half == DoubleBlockHalf.LOWER && direction == Direction.UP && directionState.getBlock() == this && directionState.get(HALF) != half) || (half == DoubleBlockHalf.LOWER && direction == Direction.DOWN)) {
-			return super.updatePostPlacement(state, direction, directionState, world, currentPos, directionPos);
+		if (facing.getAxis() != Direction.Axis.Y || (half == DoubleBlockHalf.LOWER && facing == Direction.UP) && (facingState.getBlock() == this && facingState.get(HALF) != half) || (half == DoubleBlockHalf.UPPER && facing == Direction.DOWN) && (facingState.getBlock() == this && facingState.get(HALF) != half) || (half == DoubleBlockHalf.LOWER && facing == Direction.DOWN)) {
+			return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		} else {
 			return Blocks.AIR.getDefaultState();
 		}
 	}
 	
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		if (context.getWorld().getBlockState(context.getPos().down()).isReplaceable(context)) {
+		if (context.getPos().getY() < context.getWorld().getHeight() - 1 && context.getWorld().getBlockState(context.getPos().down()).isReplaceable(context)) {
 			return super.getStateForPlacement(context);
 		} else {
 			return null;
 		}
 	}
 	
-	public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-		world.setBlockState(pos.down(), this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER), 3);
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+		worldIn.setBlockState(pos.down(), this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER), 3);
 	}
 	
-	public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos) {
-		BlockState state_1 = world.getBlockState(pos.up());
+	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		BlockState state_1 = worldIn.getBlockState(pos.up());
 		
 		if (state.get(HALF) == DoubleBlockHalf.UPPER) {
-			return state_1.canSustainPlant(world, pos.up(), Direction.DOWN, this) || Block.isRock(state_1.getBlock());
+			return state_1.canSustainPlant(worldIn, pos.up(), Direction.DOWN, this) || Block.isRock(state_1.getBlock());
 		} else {
 			return state_1.getBlock() == this && state_1.get(HALF) == DoubleBlockHalf.UPPER;
 		}
 	}
 	
-	public void placeAt(IWorld world, BlockPos pos, int flags) {
-		world.setBlockState(pos, this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER), flags);
-		world.setBlockState(pos.down(), this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER), flags);
+	public void placeAt(IWorld worldIn, BlockPos pos, int flags) {
+		worldIn.setBlockState(pos, this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER), flags);
+		worldIn.setBlockState(pos.down(), this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER), flags);
 	}
 	
-	public void harvestBlock(World world, PlayerEntity player, BlockPos pos, BlockState state, TileEntity te, ItemStack stack) {
-		super.harvestBlock(world, player, pos, Blocks.AIR.getDefaultState(), te, stack);
+	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, TileEntity te, ItemStack stack) {
+		super.harvestBlock(worldIn, player, pos, Blocks.AIR.getDefaultState(), te, stack);
 	}
 	
-	public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
 		BlockPos pos_1 = pos.up();
 		
 		if (state.get(HALF) == DoubleBlockHalf.UPPER) {
 			pos_1 = pos.down();
 		}
 		
-		world.setBlockState(pos_1, Blocks.AIR.getDefaultState(), 35);
+		worldIn.setBlockState(pos_1, Blocks.AIR.getDefaultState(), 35);
 		
-		if (!world.isRemote() && !player.isCreative()) {
-			spawnDrops(state, world, pos, null, player, player.getHeldItemMainhand());
+		if (!worldIn.isRemote() && !player.isCreative()) {
+			spawnDrops(state, worldIn, pos, null, player, player.getHeldItemMainhand());
 		}
 		
-		super.onBlockHarvested(world, pos, state, player);
-		super.onBlockHarvested(world, pos_1, state, player);
+		super.onBlockHarvested(worldIn, pos, state, player);
+		super.onBlockHarvested(worldIn, pos_1, state, player);
 	}
 	
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(HALF);
+	}
+	
+	public Block.OffsetType getOffsetType() {
+		return Block.OffsetType.XZ;
+	}
+	
+	@OnlyIn(Dist.CLIENT)
+	public long getPositionRandom(BlockState state, BlockPos pos) {
+		return MathHelper.getCoordinateRandom(pos.getX(), pos.down(state.get(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
 	}
 	
 	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
@@ -103,19 +115,7 @@ public class DayrootBlock extends BushBlock implements IGrowable {
 	}
 	
 	public void grow(World worldIn, Random rand, BlockPos pos, BlockState state) {
-		for (int n = 0; n < 16; n++) {
-			int x = rand.nextInt(9) - 4;
-			int z = rand.nextInt(9) - 4;
-			int y = rand.nextInt(5) - 2;
-			
-			BlockPos pos_n = pos.add(x, y, z);
-			
-			if (rand.nextFloat() < 0.5F) {
-				if (worldIn.isAirBlock(pos_n) && worldIn.isAirBlock(pos_n.down()) && state.isValidPosition(worldIn, pos_n)) {
-					this.placeAt(worldIn, pos_n, 3);
-				}
-			}
-		}
+		spawnAsEntity(worldIn, pos, new ItemStack(this));
 	}
 	
 }

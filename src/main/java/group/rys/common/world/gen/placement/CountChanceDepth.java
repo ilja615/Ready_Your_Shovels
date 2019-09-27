@@ -26,11 +26,15 @@ public class CountChanceDepth extends Placement<CountChanceDepthConfig> {
 		}).mapToObj((p_215042_3_) -> {
 			int i = random.nextInt(16);
 			int j = random.nextInt(16);
-			int k = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING, pos.add(i, 0, j)).getY();
+			int k = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos.add(i, 0, j)).getY() - 1;
 			
 			int depth = random.nextInt(configIn.depth);
 			
-			return pos.add(i, k, j).down(depth);
+			if (k - depth < 0) {
+				return pos.add(i, 0, j);
+			} else {
+				return pos.add(i, k, j).down(depth);
+			}
 		});
 	}
 	

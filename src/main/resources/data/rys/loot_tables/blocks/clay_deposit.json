@@ -49,7 +49,11 @@
 							"functions": [
 								{
 									"function": "rys:apply_fortune",
-									"bonus": 2
+									"bonus": 4,
+									"count": {
+										"min": 1,
+										"max": 4
+									}
 								}
 							],
 							"name": "minecraft:clay_ball"
