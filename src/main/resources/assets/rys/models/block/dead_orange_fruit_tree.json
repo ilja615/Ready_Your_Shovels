@@ -2,6 +2,6 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/cross",
 	"textures": {
-		"cross": "rys:block/fruit_tree"
+		"cross": "rys:block/dead_orange_fruit_tree"
 	}
 }
