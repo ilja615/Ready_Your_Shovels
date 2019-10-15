@@ -7,6 +7,7 @@
 	"block.rys.peat_deposit": "Peat Deposit",
 	"block.rys.iron_deposit": "Iron Deposit",
 	"block.rys.gold_deposit": "Gold Deposit",
+	"block.rys.peat_block": "Block of Peat",
 	"block.rys.tough_dirt_slab": "Tough Dirt Slab",
 	"block.rys.tough_dirt_stairs": "Tough Dirt Stairs",
 	"block.rys.tough_dirt_wall": "Tough Dirt Wall",
@@ -16,6 +17,7 @@
 	"block.rys.smooth_dirt_slab": "Smooth Dirt Slab",
 	"block.rys.smooth_dirt_stairs": "Smooth Dirt Stairs",
 	"block.rys.planter_box": "Planter Box",
+	"block.rys.anthill": "Anthill",
 	"block.rys.apple_fruit_tree": "Apple Fruit Tree",
 	"block.rys.orange_fruit_tree": "Orange Fruit Tree",
 	"block.rys.apricot_fruit_tree": "Apricot Fruit Tree",
@@ -26,6 +28,7 @@
 	"item.rys.apricot": "Apricot",
 	"item.rys.rotten_orange": "Rotten Orange",
 	"item.rys.rotten_apricot": "Rotten Apricot",
+	"item.rys.ant_spawn_egg": "Ant Spawn Egg",
 	
 	"effect.rys.decrease_debuff": "Decrease Debuffs",
 	"effect.rys.increase_buff": "Increase Buffs",
