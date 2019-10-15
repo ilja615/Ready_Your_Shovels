@@ -5,6 +5,7 @@ import group.rys.common.world.gen.feature.DepositsInRiversFeature;
 import group.rys.common.world.gen.feature.DirtCaveFeature;
 import group.rys.common.world.gen.feature.DirtGradientFeature;
 import group.rys.common.world.gen.feature.SphereConfig;
+import group.rys.common.world.gen.feature.structure.GraveyardStructure;
 import group.rys.common.world.gen.placement.CountChanceDepthConfig;
 import group.rys.core.util.Reference;
 import net.minecraft.block.Blocks;
@@ -18,6 +19,7 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -34,6 +36,8 @@ public class ModFeatures {
 	public static final DepositsInRiversFeature deposits_in_rivers = create("deposits_in_rivers", new DepositsInRiversFeature(SphereConfig::deserialize));
 	public static final DayrootFeature dayroot = create("dayroot", new DayrootFeature(BushConfig::deserialize));
 	
+	public static final GraveyardStructure graveyard = create("graveyard", new GraveyardStructure(NoFeatureConfig::deserialize));
+	
 	@SubscribeEvent
 	public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
 		IForgeRegistry<Feature<?>> registry = event.getRegistry();
@@ -42,6 +46,8 @@ public class ModFeatures {
 		registry.register(dirt_gradient);
 		registry.register(deposits_in_rivers);
 		registry.register(dayroot);
+		
+		registry.register(graveyard);
 	}
 	
 	public static <T extends Feature<?>> T create(String name, T feature) {
@@ -82,6 +88,14 @@ public class ModFeatures {
 			
 			// Deposits In Rivers
 			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(deposits_in_rivers, new SphereConfig(Blocks.DIRT.getDefaultState(), ModBlocks.gold_deposit.getDefaultState(), 2, 1.0F), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
+			
+			if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.END)) {
+				
+				// Graveyard Structure
+				biome.addStructure(graveyard, IFeatureConfig.NO_FEATURE_CONFIG);
+				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, Biome.createDecoratedFeature(graveyard, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+				
+			}
 			
 		});
 	}
