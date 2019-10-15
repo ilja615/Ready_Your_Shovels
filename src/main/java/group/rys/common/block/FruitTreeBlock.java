@@ -37,6 +37,14 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
 		this.setDefaultState(this.stateContainer.getBaseState().with(AGE, Integer.valueOf(0)).with(DEAD, Boolean.valueOf(false)));
 	}
 	
+	public Item getFruit() {
+		return this.fruit;
+	}
+	
+	public Item getRottenFruit() {
+		return this.rottenFruit;
+	}
+	
 	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
 		int age = state.get(AGE);
 		boolean isDead = state.get(DEAD);
@@ -61,8 +69,8 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
 		boolean isDead = state.get(DEAD);
 		
 		if (age == 3 && !isDead) {
-			if (worldIn.rand.nextInt(10) == 0) {
-				spawnAsEntity(worldIn, pos, new ItemStack(this.rottenFruit));
+			if (worldIn.rand.nextInt(5) == 0) {
+				spawnAsEntity(worldIn, pos, new ItemStack(this.rottenFruit, 1 + worldIn.rand.nextInt(4)));
 			} else {
 				spawnAsEntity(worldIn, pos, new ItemStack(this.fruit, 1 + worldIn.rand.nextInt(4)));
 			}
