@@ -36,7 +36,7 @@ public class ModFeatures {
 	public static final DepositsInRiversFeature deposits_in_rivers = create("deposits_in_rivers", new DepositsInRiversFeature(SphereConfig::deserialize));
 	public static final DayrootFeature dayroot = create("dayroot", new DayrootFeature(BushConfig::deserialize));
 	
-	public static final GraveyardStructure graveyard = create("graveyard", new GraveyardStructure(NoFeatureConfig::deserialize));
+	public static final GraveyardStructure graveyard_dungeon = create("graveyard_dungeon", new GraveyardStructure(NoFeatureConfig::deserialize));
 	
 	@SubscribeEvent
 	public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
@@ -47,7 +47,7 @@ public class ModFeatures {
 		registry.register(deposits_in_rivers);
 		registry.register(dayroot);
 		
-		registry.register(graveyard);
+		registry.register(graveyard_dungeon);
 	}
 	
 	public static <T extends Feature<?>> T create(String name, T feature) {
@@ -60,40 +60,44 @@ public class ModFeatures {
 		
 		ForgeRegistries.BIOMES.forEach((Biome biome) -> {
 			
-			// Dirt Cave
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(dirt_cave, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
-			
-			// Dirt Gradient
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(dirt_gradient, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
-			
-			// Cave Diversity
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, Blocks.DIRT.getDefaultState(), 16), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, Blocks.COARSE_DIRT.getDefaultState(), 16), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, Blocks.COBBLESTONE.getDefaultState(), 16), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, Blocks.GRAVEL.getDefaultState(), 16), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 16), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
-			
-			// Deposits In Caves
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, ModBlocks.clay_deposit.getDefaultState(), 8), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, ModBlocks.peat_deposit.getDefaultState(), 8), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, ModBlocks.iron_deposit.getDefaultState(), 8), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, ModBlocks.gold_deposit.getDefaultState(), 8), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
-			
-			// Dayroot
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(dayroot, new BushConfig(ModBlocks.dayroot.getDefaultState()), ModPlacements.count_chance_depth, new CountChanceDepthConfig(2, 0.5F, 40)));
-			
-			// Cave Decoration
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.BUSH, new BushConfig(Blocks.BROWN_MUSHROOM.getDefaultState()), ModPlacements.count_chance_depth, new CountChanceDepthConfig(2, 0.5F, 40)));
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.BUSH, new BushConfig(Blocks.RED_MUSHROOM.getDefaultState()), ModPlacements.count_chance_depth, new CountChanceDepthConfig(2, 0.5F, 40)));
-			
-			// Deposits In Rivers
-			biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(deposits_in_rivers, new SphereConfig(Blocks.DIRT.getDefaultState(), ModBlocks.gold_deposit.getDefaultState(), 2, 1.0F), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
-			
-			if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.END)) {
+			if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.END)) {
 				
-				// Graveyard Structure
-				biome.addStructure(graveyard, IFeatureConfig.NO_FEATURE_CONFIG);
-				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, Biome.createDecoratedFeature(graveyard, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+				// Dirt Cave
+				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(dirt_cave, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+				
+				// Dirt Gradient
+				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(dirt_gradient, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+				
+				// Cave Diversity
+				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, Blocks.DIRT.getDefaultState(), 16), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 40)));
+				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, Blocks.COARSE_DIRT.getDefaultState(), 16), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 40)));
+				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, Blocks.COBBLESTONE.getDefaultState(), 16), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 40)));
+				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, Blocks.GRAVEL.getDefaultState(), 16), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 40)));
+				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, Blocks.MOSSY_COBBLESTONE.getDefaultState(), 16), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 40)));
+				
+				// Deposits In Caves
+				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, ModBlocks.clay_deposit.getDefaultState(), 8), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
+				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, ModBlocks.peat_deposit.getDefaultState(), 8), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
+				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, ModBlocks.iron_deposit.getDefaultState(), 8), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
+				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(tough_dirt, ModBlocks.gold_deposit.getDefaultState(), 8), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
+				
+				// Deposits In Rivers
+				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(deposits_in_rivers, new SphereConfig(Blocks.DIRT.getDefaultState(), ModBlocks.gold_deposit.getDefaultState(), 2, 1.0F), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
+				
+				if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) {
+					
+					// Dayroot
+					biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(dayroot, new BushConfig(ModBlocks.dayroot.getDefaultState()), ModPlacements.count_chance_depth, new CountChanceDepthConfig(2, 0.5F, 40)));
+					
+					// Cave Decoration
+					biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.BUSH, new BushConfig(Blocks.BROWN_MUSHROOM.getDefaultState()), ModPlacements.count_chance_depth, new CountChanceDepthConfig(2, 0.5F, 40)));
+					biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.BUSH, new BushConfig(Blocks.RED_MUSHROOM.getDefaultState()), ModPlacements.count_chance_depth, new CountChanceDepthConfig(2, 0.5F, 40)));
+					
+					// Graveyard Structure
+					biome.addStructure(graveyard_dungeon, IFeatureConfig.NO_FEATURE_CONFIG);
+					biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, Biome.createDecoratedFeature(graveyard_dungeon, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+					
+				}
 				
 			}
 			
