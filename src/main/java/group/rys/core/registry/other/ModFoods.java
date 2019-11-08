@@ -1,5 +1,6 @@
-package group.rys.core.registry;
+package group.rys.core.registry.other;
 
+import group.rys.core.registry.ModEffects;
 import net.minecraft.item.Food;
 import net.minecraft.potion.EffectInstance;
 
