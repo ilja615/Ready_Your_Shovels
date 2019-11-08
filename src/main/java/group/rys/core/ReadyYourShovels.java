@@ -6,6 +6,7 @@ import group.rys.common.world.gen.storage.loot.functions.ApplyFortune;
 import group.rys.core.event.ModEvents;
 import group.rys.core.registry.ModFeatures;
 import group.rys.core.registry.ModPotions;
+import group.rys.core.registry.ModWorldCarvers;
 import group.rys.core.registry.other.ModComposterItems;
 import group.rys.core.registry.other.ModRenderers;
 import group.rys.core.util.Reference;
@@ -32,6 +33,7 @@ public class ReadyYourShovels {
 	}
 	
 	public void commonSetup(FMLCommonSetupEvent event) {
+		ModWorldCarvers.registerWorldCarvers();
 		ModFeatures.registerFeatures();
 		ModComposterItems.registerItems();
 		ModPotions.registerRecipes();

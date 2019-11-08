@@ -32,7 +32,7 @@ public class DirtCaveFeature extends Feature<NoFeatureConfig> {
 				
 				Biome biome = worldIn.getBiome(pos.add(x, 0, z));
 				
-				if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.END) && biome != Biomes.STONE_SHORE && biome != Biomes.SHATTERED_SAVANNA && biome != Biomes.SHATTERED_SAVANNA_PLATEAU) {
+				if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.END) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER) && biome != Biomes.STONE_SHORE && biome != Biomes.SAVANNA_PLATEAU && biome != Biomes.WOODED_BADLANDS_PLATEAU && biome != Biomes.BADLANDS_PLATEAU && biome != Biomes.SHATTERED_SAVANNA_PLATEAU && biome != Biomes.MODIFIED_WOODED_BADLANDS_PLATEAU && biome != Biomes.MODIFIED_BADLANDS_PLATEAU) {
 					int surfaceY = worldIn.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos.add(x, 0, z)).getY() - 1;
 					
 					for (int y = surfaceY - 20; y < surfaceY; y++) {
