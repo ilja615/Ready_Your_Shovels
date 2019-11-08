@@ -30,7 +30,7 @@ public class GraveyardStructure extends ScatteredStructure<NoFeatureConfig> {
 	}
 	
 	public String getStructureName() {
-		return "graveyard";
+		return "graveyard_dungeon";
 	}
 	
 	public int getSize() {
