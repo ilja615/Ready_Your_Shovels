@@ -4,6 +4,7 @@ import group.rys.core.registry.other.ModProperties;
 import group.rys.core.util.Reference;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -23,6 +24,7 @@ public class ModItems {
 	public static final BlockItem iron_deposit = null;
 	public static final BlockItem gold_deposit = null;
 	public static final BlockItem peat_block = null;
+	public static final BlockItem peat_bricks = null;
 	public static final BlockItem tough_dirt_slab = null;
 	public static final BlockItem tough_dirt_stairs = null;
 	public static final BlockItem tough_dirt_wall = null;
@@ -36,14 +38,14 @@ public class ModItems {
 	public static final BlockItem orange_fruit_tree = null;
 	public static final BlockItem apricot_fruit_tree = null;
 	public static final BlockItem dayroot = null;
-//	public static final BlockItem anthill = null;
+	public static final BlockItem anthill = null;
 	
 	public static final Item peat = null;
 	public static Item orange = create("orange", new Item(ModProperties.orange));
 	public static Item apricot = create("apricot", new Item(ModProperties.apricot));
 	public static Item rotten_orange = create("rotten_orange", new Item(ModProperties.rotten_orange));
 	public static Item rotten_apricot = create("rotten_apricot", new Item(ModProperties.rotten_apricot));
-//	public static final Item ant_spawn_egg = null;
+	public static final Item ant_spawn_egg = null;
 	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event) {
@@ -59,6 +61,7 @@ public class ModItems {
 		registry.register(create("iron_deposit", new BlockItem(ModBlocks.iron_deposit, ModProperties.item)));
 		registry.register(create("gold_deposit", new BlockItem(ModBlocks.gold_deposit, ModProperties.item)));
 		registry.register(create("peat_block", new BlockItem(ModBlocks.peat_block, ModProperties.item)));
+		registry.register(create("peat_bricks", new BlockItem(ModBlocks.peat_bricks, ModProperties.item)));
 		registry.register(create("tough_dirt_slab", new BlockItem(ModBlocks.tough_dirt_slab, ModProperties.item)));
 		registry.register(create("tough_dirt_stairs", new BlockItem(ModBlocks.tough_dirt_stairs, ModProperties.item)));
 		registry.register(create("tough_dirt_wall", new BlockItem(ModBlocks.tough_dirt_wall, ModProperties.item)));
@@ -74,7 +77,7 @@ public class ModItems {
 		registry.register(create("dayroot", new BlockItem(ModBlocks.dayroot, ModProperties.item)));
 		
 		// TileEntities
-//		registry.register(create("anthill", new BlockItem(ModBlocks.anthill, ModProperties.item)));
+		registry.register(create("anthill", new BlockItem(ModBlocks.anthill, ModProperties.item)));
 		
 		// Items
 		registry.register(create("peat", new Item(ModProperties.item)));
@@ -82,7 +85,7 @@ public class ModItems {
 		registry.register(apricot);
 		registry.register(rotten_orange);
 		registry.register(rotten_apricot);
-//		registry.register(create("ant_spawn_egg", new SpawnEggItem(ModEntities.ant, 4073251, 12531212, ModProperties.item)));
+		registry.register(create("ant_spawn_egg", new SpawnEggItem(ModEntities.gatherer_ant, 4073251, 12531212, ModProperties.item)));
 	}
 	
 	public static <T extends Item> T create(String name, T item) {

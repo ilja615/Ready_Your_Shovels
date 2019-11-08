@@ -31,6 +31,7 @@ public class ModBlocks {
 	public static final Block iron_deposit = null;
 	public static final Block gold_deposit = null;
 	public static final Block peat_block = null;
+	public static final Block peat_bricks = null;
 	public static final SlabBlock tough_dirt_slab = null;
 	public static final StairsBlock tough_dirt_stairs = null;
 	public static final WallBlock tough_dirt_wall = null;
@@ -61,6 +62,7 @@ public class ModBlocks {
 		registry.register(create("iron_deposit", new Block(ModProperties.iron_deposit)));
 		registry.register(create("gold_deposit", new Block(ModProperties.gold_deposit)));
 		registry.register(create("peat_block", new Block(ModProperties.tough_dirt)));
+		registry.register(create("peat_bricks", new Block(ModProperties.tough_dirt)));
 		registry.register(create("tough_dirt_slab", new SlabBlock(ModProperties.tough_dirt)));
 		registry.register(create("tough_dirt_stairs", new StairsBlock(() -> tough_dirt.getDefaultState(), ModProperties.tough_dirt)));
 		registry.register(create("tough_dirt_wall", new WallBlock(ModProperties.tough_dirt)));
@@ -76,7 +78,7 @@ public class ModBlocks {
 		registry.register(create("dayroot", new DayrootBlock(ModProperties.dayroot)));
 		
 		// TileEntities
-//		registry.register(anthill);
+		registry.register(anthill);
 	}
 	
 	public static <T extends Block> T create(String name, T block) {
