@@ -61,7 +61,7 @@ public class DayrootBlock extends BushBlock implements IGrowable {
 		BlockState state_1 = worldIn.getBlockState(pos.up());
 		
 		if (state.get(HALF) == DoubleBlockHalf.UPPER) {
-			return state_1.canSustainPlant(worldIn, pos.up(), Direction.DOWN, this) || Block.isRock(state_1.getBlock());
+			return state_1.canSustainPlant(worldIn, pos.up(), Direction.DOWN, this);
 		} else {
 			return state_1.getBlock() == this && state_1.get(HALF) == DoubleBlockHalf.UPPER;
 		}
