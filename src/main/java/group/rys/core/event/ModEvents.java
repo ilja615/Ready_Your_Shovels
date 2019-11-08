@@ -38,6 +38,9 @@ public class ModEvents {
 		if (item == ModItems.peat) {
 			event.setBurnTime(800);
 		}
+		if (item == ModItems.peat_block) {
+			event.setBurnTime(8000);
+		}
 	}
 	
 }
