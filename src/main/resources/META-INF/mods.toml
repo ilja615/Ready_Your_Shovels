@@ -8,10 +8,10 @@ displayURL="https://www.curseforge.com/minecraft/mc-mods/ready-your-shovels"
 [[mods]]
 
 modId="rys"
-version="0.1.17"
+version="0.1.18"
 displayName="Ready Your Shovels"
-credits="Axoladdy, camiloss20, paradiscal"
-authors="Axoladdy, camiloss20"
+credits="Axoladdy, camarade20, paradiscal"
+authors="Axoladdy, camarade20"
 description='''
 Ready Your Shovels adds a unique new dirt based cave biome across most of the world. This unique new environment offers new content to explore and a new way to play survival mode.
 '''
