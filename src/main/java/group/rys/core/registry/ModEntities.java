@@ -1,6 +1,7 @@
 package group.rys.core.registry;
 
 import group.rys.common.entity.GathererAntEntity;
+import group.rys.common.entity.HuntingAntEntity;
 import group.rys.core.util.Reference;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
@@ -16,12 +17,14 @@ import net.minecraftforge.registries.ObjectHolder;
 public class ModEntities {
 	
 	public static final EntityType<GathererAntEntity> gatherer_ant = create("gatherer_ant", EntityType.Builder.create(GathererAntEntity::new, EntityClassification.MISC).size(0.3125F, 0.3125F));
-	
+	public static final EntityType<HuntingAntEntity> hunting_ant = create("hunting_ant", EntityType.Builder.create(HuntingAntEntity::new, EntityClassification.MISC).size(0.3125F, 0.3125F));
+
 	@SubscribeEvent
 	public static void registerEntityTypes(RegistryEvent.Register<EntityType<?>> event) {
 		IForgeRegistry<EntityType<?>> registry = event.getRegistry();
 		
 		registry.register(gatherer_ant);
+		registry.register(hunting_ant);
 	}
 	
 	public static <T extends Entity> EntityType<T> create(String name, EntityType.Builder<T> builder) {

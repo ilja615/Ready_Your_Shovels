@@ -1,8 +1,5 @@
 package group.rys.common.entity;
 
-import java.util.EnumSet;
-import java.util.List;
-
 import group.rys.common.block.FruitTreeBlock;
 import group.rys.core.registry.ModBlocks;
 import group.rys.core.util.InventoryUtils;
@@ -25,6 +22,9 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.EnumSet;
+import java.util.List;
 
 public class GathererAntEntity extends CreatureEntity {
 	
@@ -60,7 +60,7 @@ public class GathererAntEntity extends CreatureEntity {
 	
 	public void writeAdditional(CompoundNBT compound) {
 		super.writeAdditional(compound);
-		
+
 		compound.putInt("InvPosX", this.getInventoryPosition().getX());
 		compound.putInt("InvPosY", this.getInventoryPosition().getY());
 		compound.putInt("InvPosZ", this.getInventoryPosition().getZ());
@@ -81,6 +81,7 @@ public class GathererAntEntity extends CreatureEntity {
 		
 		this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.5F);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(5.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
 	}
 	
 	protected void registerGoals() {
@@ -211,7 +212,7 @@ public class GathererAntEntity extends CreatureEntity {
 			});
 			
 			if (!list.isEmpty()) {
-				this.ant.getNavigator().setPath(this.ant.getNavigator().getPathToEntityLiving(list.get(0), 1), 0.25D);
+				this.ant.getNavigator().setPath(this.ant.getNavigator().getPathToEntityLiving(list.get(0), 1), 0.75D);
 			}
 		}
 		
@@ -238,7 +239,7 @@ public class GathererAntEntity extends CreatureEntity {
 			ItemStack stack = this.ant.getHeldItemMainhand();
 			
 			if (state.getBlock() == ModBlocks.anthill && InventoryUtils.canStoreStackInInventory(world, pos, stack)) {
-				this.ant.getMoveHelper().setMoveTo(pos.getX(), pos.getY(), pos.getZ(), 0.25D);
+				this.ant.getMoveHelper().setMoveTo(pos.getX(), pos.getY(), pos.getZ(), 0.75D);
 				
 				if (this.ant.getPosition().distanceSq(pos) <= 1) {
 					InventoryUtils.addStackToInventory(world, pos, stack);
@@ -283,8 +284,8 @@ public class GathererAntEntity extends CreatureEntity {
 			
 			if (pos_2 != null) {
 				BlockState state = world.getBlockState(pos_2);
-				
-				this.ant.getMoveHelper().setMoveTo(pos_2.getX(), pos_2.getY(), pos_2.getZ(), 0.25D);
+
+				this.ant.getMoveHelper().setMoveTo(pos_2.getX(), pos_2.getY(), pos_2.getZ(), 0.75D);
 				
 				if (this.ant.getPosition().distanceSq(pos_2) <= 1) {
 					FruitTreeBlock block = (FruitTreeBlock) state.getBlock();
@@ -330,7 +331,7 @@ public class GathererAntEntity extends CreatureEntity {
 			BlockPos pos_2 = pos_1.add(x, y, z);
 			
 			if (world.isAirBlock(pos_2) && !world.hasWater(pos_2) && !world.isAirBlock(pos_2.down()) && !world.hasWater(pos_2.down())) {
-				this.ant.getNavigator().setPath(this.ant.getNavigator().getPathToPos(pos_2, 1), 0.25D);
+				this.ant.getNavigator().setPath(this.ant.getNavigator().getPathToPos(pos_2, 1), 0.75D);
 			}
 		}
 		
@@ -364,7 +365,7 @@ public class GathererAntEntity extends CreatureEntity {
 			BlockPos pos_2 = pos_1.add(x, y, z);
 			
 			if (pos_1.distanceSq(pos_2) <= 256 && world.isAirBlock(pos_2) && !world.hasWater(pos_2) && !world.isAirBlock(pos_2.down()) && !world.hasWater(pos_2.down())) {
-				this.ant.getNavigator().setPath(this.ant.getNavigator().getPathToPos(pos_2, 1), 0.25D);
+				this.ant.getNavigator().setPath(this.ant.getNavigator().getPathToPos(pos_2, 1), 0.75D);
 			}
 		}
 		

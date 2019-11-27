@@ -2,8 +2,8 @@ package group.rys.core.registry;
 
 import com.mojang.datafixers.DataFixUtils;
 import com.mojang.datafixers.types.Type;
-
 import group.rys.common.tileentity.AnthillTileEntity;
+import group.rys.common.tileentity.HuntingAnthillTileEntity;
 import group.rys.core.util.Reference;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -21,12 +21,15 @@ import net.minecraftforge.registries.ObjectHolder;
 public class ModTileEntities {
 	
 	public static final TileEntityType<AnthillTileEntity> anthill = create("anthill", TileEntityType.Builder.create(AnthillTileEntity::new, ModBlocks.anthill));
-	
+	public static final TileEntityType<HuntingAnthillTileEntity> hunting_anthill = create("hunting_anthill", TileEntityType.Builder.create(HuntingAnthillTileEntity::new, ModBlocks.hunting_anthill));
+
+
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<TileEntityType<?>> event) {
 		IForgeRegistry<TileEntityType<?>> registry = event.getRegistry();
 		
 		registry.register(anthill);
+		registry.register(hunting_anthill);
 	}
 	
 	public static <T extends TileEntity> TileEntityType<T> create(String name, TileEntityType.Builder<T> builder) {
