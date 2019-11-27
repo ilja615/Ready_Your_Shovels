@@ -17,7 +17,7 @@ import net.minecraftforge.registries.ObjectHolder;
 public class ModEntities {
 	
 	public static final EntityType<GathererAntEntity> gatherer_ant = create("gatherer_ant", EntityType.Builder.create(GathererAntEntity::new, EntityClassification.MISC).size(0.3125F, 0.3125F));
-	public static final EntityType<HuntingAntEntity> hunting_ant = create("hunting_ant", EntityType.Builder.create(HuntingAntEntity::new, EntityClassification.MISC).size(0.3125F, 0.3125F));
+	public static final EntityType<HuntingAntEntity> hunting_ant = create("hunting_ant", EntityType.Builder.create(HuntingAntEntity::new, EntityClassification.MISC).size(0.55F, 0.65F));
 
 	@SubscribeEvent
 	public static void registerEntityTypes(RegistryEvent.Register<EntityType<?>> event) {

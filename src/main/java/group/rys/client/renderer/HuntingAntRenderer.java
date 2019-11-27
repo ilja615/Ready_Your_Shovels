@@ -17,7 +17,7 @@ public class HuntingAntRenderer extends MobRenderer<HuntingAntEntity, HuntingAnt
     }
 
     protected ResourceLocation getEntityTexture(HuntingAntEntity entity) {
-        return new ResourceLocation(Reference.MOD_ID, "textures/entity/ember_ant.png");
+        return new ResourceLocation(Reference.MOD_ID, "textures/entity/hunting_ant.png");
     }
 
 }

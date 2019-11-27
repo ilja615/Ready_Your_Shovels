@@ -115,13 +115,13 @@ public class HuntingAntEntity extends CreatureEntity {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, LivingEntity.class, 10, true, false, TARGET) {
             @Override
             public boolean shouldExecute() {
-                return getFed() && super.shouldExecute();
+                return !getFed() && super.shouldExecute();
             }
         });
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, PlayerEntity.class, true) {
             @Override
             public boolean shouldExecute() {
-                return getFed() && super.shouldExecute();
+                return !getFed() && super.shouldExecute();
             }
         });
     }
