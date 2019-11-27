@@ -6,6 +6,7 @@ import group.rys.core.util.NestUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.monster.SpiderEntity;
@@ -103,20 +104,26 @@ public class HuntingAntEntity extends CreatureEntity {
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 0.8F, true) {
-            @Override
-            public boolean shouldExecute() {
-                return super.shouldExecute();
-            }
-        });
+        this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 0.8F, true));
         this.goalSelector.addGoal(1, new HuntingAntEntity.FindInventoryGoal(this));
         this.goalSelector.addGoal(2, new HuntingAntEntity.UpdateInventoryGoal(this));
         this.goalSelector.addGoal(3, new HuntingAntEntity.StoreFedGoal(this));
         this.goalSelector.addGoal(5, new HuntingAntEntity.WalkAroundGoal(this));
         this.goalSelector.addGoal(6, new HuntingAntEntity.WalkAroundInventoryGoal(this));
 
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, TARGET));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setCallsForHelp());
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, LivingEntity.class, 10, true, false, TARGET) {
+            @Override
+            public boolean shouldExecute() {
+                return getFed() && super.shouldExecute();
+            }
+        });
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, PlayerEntity.class, true) {
+            @Override
+            public boolean shouldExecute() {
+                return getFed() && super.shouldExecute();
+            }
+        });
     }
 
     protected void playStepSound(BlockPos pos, BlockState state) {

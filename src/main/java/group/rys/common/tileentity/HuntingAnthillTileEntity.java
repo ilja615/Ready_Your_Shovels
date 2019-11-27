@@ -65,7 +65,6 @@ public class HuntingAnthillTileEntity extends TileEntity implements ITickableTil
                     ant.setPosition(pos_2.getX() + 0.5, pos_2.getY() + 0.5, pos_2.getZ() + 0.5);
                     ant.setInventoryPosition(pos_1);
                     world.addEntity(ant);
-                    this.foodcount -= 1;
                 } else {
                     this.delay = 0;
                 }
