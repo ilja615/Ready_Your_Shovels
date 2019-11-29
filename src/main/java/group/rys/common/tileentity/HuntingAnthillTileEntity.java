@@ -14,10 +14,10 @@ import java.util.List;
 
 public class HuntingAnthillTileEntity extends TileEntity implements ITickableTileEntity {
 
-    private int foodcount = 5;
-    private int maxCount = 13;
+    private int foodcount = 0;
+    private int maxCount = 32;
     private int delay = 0;
-    private int maxDelay = 200;
+    private int maxDelay = 100;
 
     public HuntingAnthillTileEntity() {
         super(ModTileEntities.hunting_anthill);
@@ -47,12 +47,13 @@ public class HuntingAnthillTileEntity extends TileEntity implements ITickableTil
         World world = this.getWorld();
         BlockPos pos_1 = this.getPos();
 
-        if (this.delay >= this.maxDelay) {
+
+        if (this.delay >= this.maxDelay && (world.getDayTime() == 0L || world.getDayTime() == 13000L)) {
             List<HuntingAntEntity> list = world.getEntitiesWithinAABB(HuntingAntEntity.class, new AxisAlignedBB(pos_1).grow(32.0D), (entity) -> {
                 return entity instanceof HuntingAntEntity;
             });
 
-            if (list.size() < this.foodcount) {
+            if (list.size() < 8) {
                 int x = this.world.rand.nextInt(9) - 4;
                 int y = this.world.rand.nextInt(3) - 1;
                 int z = this.world.rand.nextInt(9) - 4;
@@ -65,11 +66,7 @@ public class HuntingAnthillTileEntity extends TileEntity implements ITickableTil
                     ant.setPosition(pos_2.getX() + 0.5, pos_2.getY() + 0.5, pos_2.getZ() + 0.5);
                     ant.setInventoryPosition(pos_1);
                     world.addEntity(ant);
-                } else {
-                    this.delay = 0;
                 }
-            } else {
-                this.delay = 0;
             }
 
             this.delay = 0;
