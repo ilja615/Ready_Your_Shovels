@@ -39,13 +39,12 @@ public class HuntingAntModel extends EntityModel<HuntingAntEntity> {
 
         bone = new RendererModel(this);
         bone.setRotationPoint(0.0F, -3.0F, -2.5F);
-        setRotationAngle(bone, 0.5236F, 0.0F, 0.0F);
         Head.addChild(bone);
         bone.cubeList.add(new ModelBox(bone, 16, 9, -4.0F, -4.0F, 0.0F, 8, 4, 0, 0.0F, false));
 
         bone2 = new RendererModel(this);
-        bone2.setRotationPoint(0.0F, 0.0F, -3.0F);
-        setRotationAngle(bone2, -0.6109F, 0.0F, 0.0F);
+        bone2.setRotationPoint(0.0F, 0.0F, -2.5F);
+        setRotationAngle(bone2, 0.0F, 0.0F, 0.0F);
         Head.addChild(bone2);
         bone2.cubeList.add(new ModelBox(bone2, 9, 17, -3.0F, 1.0F, 0.0F, 6, 2, 0, 0.0F, false));
 
@@ -61,47 +60,39 @@ public class HuntingAntModel extends EntityModel<HuntingAntEntity> {
 
         right_leg_for = new RendererModel(this);
         right_leg_for.setRotationPoint(0.0F, 0.0F, 0.0F);
-        setRotationAngle(right_leg_for, 0.5236F, -0.5236F, -0.5236F);
         right_leg_set.addChild(right_leg_for);
         right_leg_for.cubeList.add(new ModelBox(right_leg_for, 9, 19, -5.0F, 0.5F, -0.5F, 5, 0, 1, 0.0F, false));
 
         right_leg_back = new RendererModel(this);
         right_leg_back.setRotationPoint(0.0F, 0.0F, 0.0F);
-        setRotationAngle(right_leg_back, 0.5236F, 0.5236F, -0.5236F);
         right_leg_set.addChild(right_leg_back);
         right_leg_back.cubeList.add(new ModelBox(right_leg_back, 9, 19, -5.0F, 0.5F, -0.5F, 5, 0, 1, 0.0F, false));
 
         right_leg_mid = new RendererModel(this);
         right_leg_mid.setRotationPoint(0.0F, 0.0F, 0.0F);
-        setRotationAngle(right_leg_mid, 0.5236F, 0.0F, -0.5236F);
         right_leg_set.addChild(right_leg_mid);
         right_leg_mid.cubeList.add(new ModelBox(right_leg_mid, 9, 19, -5.0F, 0.5F, -0.5F, 5, 0, 1, 0.0F, false));
 
         left_leg_set = new RendererModel(this);
         left_leg_set.setRotationPoint(1.0F, -1.0F, 0.0F);
-        setRotationAngle(left_leg_set, 0.0F, 0.0F, 0.3491F);
         Thorax.addChild(left_leg_set);
 
         left_leg_mid = new RendererModel(this);
         left_leg_mid.setRotationPoint(0.0F, 0.0F, 0.0F);
-        setRotationAngle(left_leg_mid, -0.5236F, 3.1416F, 0.5236F);
         left_leg_set.addChild(left_leg_mid);
         left_leg_mid.cubeList.add(new ModelBox(left_leg_mid, 9, 19, -5.0F, 0.5F, -0.5F, 5, 0, 1, 0.0F, false));
 
         left_leg_for = new RendererModel(this);
         left_leg_for.setRotationPoint(0.0F, 0.0F, 0.0F);
-        setRotationAngle(left_leg_for, -0.5236F, -2.7053F, 0.5236F);
         left_leg_set.addChild(left_leg_for);
         left_leg_for.cubeList.add(new ModelBox(left_leg_for, 9, 19, -5.0F, 0.5F, -0.5F, 5, 0, 1, 0.0F, false));
 
         left_leg_back = new RendererModel(this);
         left_leg_back.setRotationPoint(0.0F, 0.0F, 0.0F);
-        setRotationAngle(left_leg_back, -0.5236F, 2.7053F, 0.5236F);
         left_leg_set.addChild(left_leg_back);
         left_leg_back.cubeList.add(new ModelBox(left_leg_back, 9, 19, -5.0F, 0.5F, -0.5F, 5, 0, 1, 0.0F, false));
 
         Rear = new RendererModel(this);
-        Rear.setRotationPoint(0.0F, 0.0F, 0.0F);
         setRotationAngle(Rear, -0.1745F, 0.0F, 0.0F);
         Body.addChild(Rear);
         Rear.cubeList.add(new ModelBox(Rear, 0, 0, -3.0F, -6.0F, 1.0F, 6, 4, 5, 0.0F, false));
@@ -116,19 +107,21 @@ public class HuntingAntModel extends EntityModel<HuntingAntEntity> {
         this.Head.rotateAngleX = headPitch * (((float) Math.PI) / 180.0F);
         this.Head.rotateAngleY = netHeadYaw * (((float) Math.PI) / 180.0F);
 
-        setRotationAngle(this.bone, 0.5236F, 0.0F, 0.0F);
+        setRotationAngle(this.bone, 0.5236F, MathHelper.sin(limbSwing * 4.00F) * (0.1F) - 0.0F, 0.0F);
 
-        setRotationAngle(this.bone2, -0.1745F, 0.0F, 0.0F);
+        setRotationAngle(this.bone2, 0.5236F, MathHelper.sin((limbSwing * 4.00F)) * (0.125F) - 0.0F, (MathHelper.sin((limbSwing * 4.00F)) * (0.125F)) + 0.0F);
 
-        setRotationAngle(left_leg_set, 0.0F, MathHelper.sin(limbSwing) * (0.8727F) - 0.3491F, 0.1745F);
-        setRotationAngle(left_leg_for, -0.5236F, -2.7053F, 0.5236F);
-        setRotationAngle(left_leg_back, -0.5236F, 3.1416F, 0.5236F);
-        setRotationAngle(left_leg_mid, -0.5236F, 2.7053F, 0.5236F);
 
-        setRotationAngle(right_leg_set, 0.0F, MathHelper.sin(limbSwing) * (0.8727F) - 0.5236F, -0.1745F);
-        setRotationAngle(right_leg_for, 0.5236F, -0.5236F, -0.5236F);
-        setRotationAngle(right_leg_back, 0.5236F, 0.0F, -0.5236F);
-        setRotationAngle(right_leg_mid, 0.5236F, 0.5236F, -0.5236F);
+        setRotationAngle(left_leg_set, 0.0F, 0.0F, 0.0F);
+        setRotationAngle(left_leg_for, -0.5236F, MathHelper.sin(limbSwing * 4.00F) * (0.2F) -2.7053F, (-MathHelper.sin((limbSwing)) * (0.25F)) + 0.5236F);
+        setRotationAngle(left_leg_back, -0.5236F, MathHelper.sin(limbSwing * 4.00F) * (0.2F) +3.1416F, (MathHelper.sin((limbSwing)) * (0.25F)) + 0.5236F);
+        setRotationAngle(left_leg_mid, -0.5236F, -MathHelper.sin(limbSwing * 4.00F) * (0.2F) +2.7053F, (-MathHelper.sin((limbSwing)) * (0.25F)) + 0.5236F);
+
+        setRotationAngle(right_leg_set, 0.0F,  0.0F, -0.0F);
+        setRotationAngle(right_leg_for, 0.5236F, -MathHelper.sin(limbSwing * 4.00F) * (0.2F) - 0.5236F, (MathHelper.sin((limbSwing)) * (0.25F)) - 0.5236F);
+        setRotationAngle(right_leg_back, 0.5236F, -MathHelper.sin(limbSwing * 4.00F) * (0.2F) + 0.0F, (-MathHelper.sin((limbSwing)) * (0.25F)) - 0.5236F);
+        setRotationAngle(right_leg_mid, 0.5236F, MathHelper.sin(limbSwing * 4.00F) * (0.2F) + 0.5236F, (MathHelper.sin((limbSwing)) * (0.25F)) - 0.5236F);
+
     }
 
     public void setRotationAngle(RendererModel modelRenderer, float x, float y, float z) {
