@@ -78,6 +78,7 @@ public class ModItems {
 		
 		// TileEntities
 		registry.register(create("anthill", new BlockItem(ModBlocks.anthill, ModProperties.item)));
+		registry.register(create("hunting_anthill", new BlockItem(ModBlocks.hunting_anthill, ModProperties.item)));
 		
 		// Items
 		registry.register(create("peat", new Item(ModProperties.item)));

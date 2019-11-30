@@ -1,10 +1,6 @@
 package group.rys.core.registry;
 
-import group.rys.common.block.AnthillBlock;
-import group.rys.common.block.DayrootBlock;
-import group.rys.common.block.FruitTreeBlock;
-import group.rys.common.block.PlanterBoxBlock;
-import group.rys.common.block.ToughDirtBlock;
+import group.rys.common.block.*;
 import group.rys.core.registry.other.ModProperties;
 import group.rys.core.util.Reference;
 import net.minecraft.block.Block;
@@ -47,6 +43,7 @@ public class ModBlocks {
 	public static final DayrootBlock dayroot = null;
 	
 	public static final AnthillBlock anthill = create("anthill", new AnthillBlock(ModProperties.tough_dirt));
+	public static final HuntingAnthillBlock hunting_anthill = create("hunting_anthill", new HuntingAnthillBlock(ModProperties.tough_dirt));
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
@@ -79,6 +76,7 @@ public class ModBlocks {
 		
 		// TileEntities
 		registry.register(anthill);
+		registry.register(hunting_anthill);
 	}
 	
 	public static <T extends Block> T create(String name, T block) {
