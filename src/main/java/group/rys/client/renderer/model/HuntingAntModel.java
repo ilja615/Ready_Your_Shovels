@@ -100,7 +100,7 @@ public class HuntingAntModel extends EntityModel<HuntingAntEntity> {
 
     public void render(HuntingAntEntity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         this.setRotationAngles(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
-        Body.render(scale);
+        this.Body.render(scale);
     }
 
     public void setRotationAngles(HuntingAntEntity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
