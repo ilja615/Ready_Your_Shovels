@@ -14,6 +14,7 @@
 		},
 		"C": {
 			"tag": "minecraft:logs"
+		}
 	},
 	"result": {
 		"item": "minecraft:campfire"
