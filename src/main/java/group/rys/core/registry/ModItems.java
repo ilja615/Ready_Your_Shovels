@@ -87,6 +87,8 @@ public class ModItems {
 		registry.register(rotten_orange);
 		registry.register(rotten_apricot);
 		registry.register(create("ant_spawn_egg", new SpawnEggItem(ModEntities.gatherer_ant, 4073251, 12531212, ModProperties.item)));
+		registry.register(create("queen_ant_spawn_egg", new SpawnEggItem(ModEntities.queen_ant, 4073251, 12531212, ModProperties.item)));
+		registry.register(create("hunting_ant_spawn_egg", new SpawnEggItem(ModEntities.hunting_ant, 4073251, 12531212, ModProperties.item)));
 	}
 	
 	public static <T extends Item> T create(String name, T item) {

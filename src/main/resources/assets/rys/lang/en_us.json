@@ -30,6 +30,8 @@
 	"item.rys.rotten_orange": "Rotten Orange",
 	"item.rys.rotten_apricot": "Rotten Apricot",
 	"item.rys.ant_spawn_egg": "Ant Spawn Egg",
+	"item.rys.queen_ant_spawn_egg": "Queen Ant Spawn Egg",
+	"item.rys.hunting_ant_spawn_egg": "Hunting Ant Spawn Egg",
 	
 	"effect.rys.decrease_debuff": "Decrease Debuffs",
 	"effect.rys.increase_buff": "Increase Buffs",
