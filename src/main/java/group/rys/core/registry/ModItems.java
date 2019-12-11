@@ -46,6 +46,8 @@ public class ModItems {
 	public static Item rotten_orange = create("rotten_orange", new Item(ModProperties.rotten_orange));
 	public static Item rotten_apricot = create("rotten_apricot", new Item(ModProperties.rotten_apricot));
 	public static final Item ant_spawn_egg = null;
+	public static final Item queen_ant_spawn_egg = null;
+	public static final Item hunting_ant_spawn_egg = null;
 	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event) {
@@ -87,6 +89,8 @@ public class ModItems {
 		registry.register(rotten_orange);
 		registry.register(rotten_apricot);
 		registry.register(create("ant_spawn_egg", new SpawnEggItem(ModEntities.gatherer_ant, 4073251, 12531212, ModProperties.item)));
+		registry.register(create("queen_ant_spawn_egg", new SpawnEggItem(ModEntities.queen_ant, 4073251, 12531212, ModProperties.item)));
+		registry.register(create("hunting_ant_spawn_egg", new SpawnEggItem(ModEntities.hunting_ant, 4073251, 12531212, ModProperties.item)));
 	}
 	
 	public static <T extends Item> T create(String name, T item) {
