@@ -18,6 +18,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
@@ -44,6 +45,7 @@ public class HuntingAntEntity extends CreatureEntity {
     public HuntingAntEntity(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
         this.setDropChance(EquipmentSlotType.MAINHAND, 1.0F);
+        this.setPathPriority(PathNodeType.WATER, -1.0F);
     }
 
     public void setInventoryPosition(BlockPos pos) {
