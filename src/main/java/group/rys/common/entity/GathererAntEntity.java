@@ -17,6 +17,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -34,6 +35,7 @@ public class GathererAntEntity extends CreatureEntity {
 		super(type, worldIn);
 		this.setCanPickUpLoot(true);
 		this.setDropChance(EquipmentSlotType.MAINHAND, 1.0F);
+		this.setPathPriority(PathNodeType.WATER, -1.0F);
 	}
 	
 	public void setInventoryPosition(BlockPos pos) {

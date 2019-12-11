@@ -1,7 +1,0 @@
-{
-	"credit": "Made with Blockbench",
-	"parent": "block/cross",
-	"textures": {
-		"cross": "rys:block/apple_fruit_tree_3"
-	}
-}

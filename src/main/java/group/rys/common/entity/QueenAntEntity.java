@@ -17,6 +17,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.FlyingPathNavigator;
 import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
@@ -44,6 +45,7 @@ public class QueenAntEntity extends HuntingAntEntity {
         super(type, worldIn);
         this.setDropChance(EquipmentSlotType.MAINHAND, 1.0F);
         this.moveController = new FlyingMovementController(this);
+        this.setPathPriority(PathNodeType.WATER, -1.0F);
     }
 
     protected PathNavigator createNavigator(World worldIn) {
@@ -98,7 +100,7 @@ public class QueenAntEntity extends HuntingAntEntity {
         super.registerAttributes();
 
         this.getAttributes().registerAttribute(SharedMonsterAttributes.FLYING_SPEED);
-        this.getAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue((double) 0.45F);
+        this.getAttribute(SharedMonsterAttributes.FLYING_SPEED).setBaseValue((double) 0.5F);
         this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.5F);
         this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(10.0D);
         this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
