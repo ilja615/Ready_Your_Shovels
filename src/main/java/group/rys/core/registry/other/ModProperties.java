@@ -10,6 +10,7 @@ import net.minecraftforge.common.ToolType;
 public class ModProperties {
 	
 	public static final Block.Properties tough_dirt = Block.Properties.create(Material.EARTH).hardnessAndResistance(1.5F, 0.5F).sound(SoundType.GROUND).harvestLevel(1).harvestTool(ToolType.SHOVEL);
+	public static final Block.Properties mossy_tough_dirt = Block.Properties.create(Material.EARTH).hardnessAndResistance(1.5F, 0.5F).sound(SoundType.GROUND).harvestLevel(1).harvestTool(ToolType.SHOVEL);
 	public static final Block.Properties dirt_bricks = Block.Properties.create(Material.EARTH).hardnessAndResistance(1.5F, 0.5F).sound(SoundType.GROUND).harvestLevel(1).harvestTool(ToolType.SHOVEL);
 	public static final Block.Properties smooth_dirt = Block.Properties.create(Material.EARTH).hardnessAndResistance(1.5F, 0.5F).sound(SoundType.GROUND).harvestLevel(1).harvestTool(ToolType.SHOVEL);
 	public static final Block.Properties regolith = Block.Properties.create(Material.EARTH).hardnessAndResistance(2.0F, 0.5F).sound(SoundType.GROUND).harvestLevel(3).harvestTool(ToolType.SHOVEL);
