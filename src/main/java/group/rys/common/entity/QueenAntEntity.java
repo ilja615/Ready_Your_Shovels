@@ -5,8 +5,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.controller.FlyingMovementController;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.entity.monster.SpiderEntity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,9 +21,11 @@ import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
@@ -32,7 +34,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.function.Predicate;
 
-public class QueenAntEntity extends HuntingAntEntity {
+public class QueenAntEntity extends HuntingAntEntity implements IRangedAttackMob {
 
     private static final DataParameter<BlockPos> INVENTORY = EntityDataManager.createKey(QueenAntEntity.class, DataSerializers.BLOCK_POS);
 
@@ -107,7 +109,7 @@ public class QueenAntEntity extends HuntingAntEntity {
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 0.8F, true));
+        this.goalSelector.addGoal(0, new RangedAttackGoal(this, 0.8F, 80, 10.0F));
         this.goalSelector.addGoal(1, new QueenAntEntity.FindInventoryGoal(this));
         this.goalSelector.addGoal(2, new QueenAntEntity.UpdateInventoryGoal(this));
         this.goalSelector.addGoal(5, new QueenAntEntity.WalkAroundGoal(this));
@@ -193,4 +195,21 @@ public class QueenAntEntity extends HuntingAntEntity {
         }
     }
 
+    @Override
+    public void attackEntityWithRangedAttack(LivingEntity target, float distanceFactor) {
+
+        this.world.playSound((PlayerEntity) null, this.posX, this.posY, this.posZ, SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (this.world.rand.nextFloat() * 0.4F + 0.8F));
+
+        HuntingAntLarvaeEntity eggEntity = new HuntingAntLarvaeEntity(this.world, this);
+
+        double d0 = target.posY + (double) target.getEyeHeight() - (double) 1.1F;
+        double d1 = target.posX - this.posX;
+        double d2 = d0 - eggEntity.posY;
+        double d3 = target.posZ - this.posZ;
+
+        float f = MathHelper.sqrt(d1 * d1 + d3 * d3) * 0.03F;
+        eggEntity.shoot(d1, d2 + (double) f, d3, 1.0F, 8.0F);
+
+        this.world.addEntity(eggEntity);
+    }
 }
