@@ -28,6 +28,9 @@ public class ModItems {
 	public static final BlockItem tough_dirt_slab = null;
 	public static final BlockItem tough_dirt_stairs = null;
 	public static final BlockItem tough_dirt_wall = null;
+	public static final BlockItem mossy_tough_dirt = null;
+	public static final BlockItem mossy_tough_dirt_stairs = null;
+	public static final BlockItem mossy_tough_dirt_slab = null;
 	public static final BlockItem dirt_bricks_slab = null;
 	public static final BlockItem dirt_bricks_stairs = null;
 	public static final BlockItem dirt_bricks_wall = null;
@@ -65,6 +68,9 @@ public class ModItems {
 		registry.register(create("tough_dirt_slab", new BlockItem(ModBlocks.tough_dirt_slab, ModProperties.item)));
 		registry.register(create("tough_dirt_stairs", new BlockItem(ModBlocks.tough_dirt_stairs, ModProperties.item)));
 		registry.register(create("tough_dirt_wall", new BlockItem(ModBlocks.tough_dirt_wall, ModProperties.item)));
+		registry.register(create("mossy_tough_dirt", new BlockItem(ModBlocks.mossy_tough_dirt, ModProperties.item)));
+		registry.register(create("mossy_tough_dirt_slab", new BlockItem(ModBlocks.mossy_tough_dirt_slab, ModProperties.item)));
+		registry.register(create("mossy_tough_dirt_stairs", new BlockItem(ModBlocks.mossy_tough_dirt_stairs, ModProperties.item)));
 		registry.register(create("dirt_bricks_slab", new BlockItem(ModBlocks.dirt_bricks_slab, ModProperties.item)));
 		registry.register(create("dirt_bricks_stairs", new BlockItem(ModBlocks.dirt_bricks_stairs, ModProperties.item)));
 		registry.register(create("dirt_bricks_wall", new BlockItem(ModBlocks.dirt_bricks_wall, ModProperties.item)));
@@ -87,6 +93,8 @@ public class ModItems {
 		registry.register(rotten_orange);
 		registry.register(rotten_apricot);
 		registry.register(create("ant_spawn_egg", new SpawnEggItem(ModEntities.gatherer_ant, 4073251, 12531212, ModProperties.item)));
+		registry.register(create("queen_ant_spawn_egg", new SpawnEggItem(ModEntities.queen_ant, 4073251, 12531212, ModProperties.item)));
+		registry.register(create("hunting_ant_spawn_egg", new SpawnEggItem(ModEntities.hunting_ant, 4073251, 12531212, ModProperties.item)));
 	}
 	
 	public static <T extends Item> T create(String name, T item) {
