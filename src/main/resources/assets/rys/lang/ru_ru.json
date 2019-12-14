@@ -1,5 +1,6 @@
 {
 	"block.rys.tough_dirt": "Каменистая земля",
+	"block.rys.mossy_tough_dirt": "Замшелая каменистая земля",
 	"block.rys.dirt_bricks": "Земляные кипричи",
 	"block.rys.smooth_dirt": "Гладкая земля",
 	"block.rys.regolith": "Реголит",
@@ -11,6 +12,8 @@
 	"block.rys.peat_bricks": "Торфяной брикет",
 	"block.rys.tough_dirt_slab": "Плита из каменистой земли",
 	"block.rys.tough_dirt_stairs": "Ступеньки из каменистой земли",
+	"block.rys.mossy_tough_dirt_slab": "Плита из замшелой каменистой земли",
+	"block.rys.mossy_tough_dirt_stairs": "Ступеньки из замшелой каменистой земли",
 	"block.rys.tough_dirt_wall": "Ограда из каменистой земли",
 	"block.rys.dirt_bricks_slab": "Плита из земляных кипричей",
 	"block.rys.dirt_bricks_stairs": "Ступеньки из земляных кипричей",
@@ -30,6 +33,8 @@
 	"item.rys.rotten_orange": "Гнилой апельсин",
 	"item.rys.rotten_apricot": "Гнилой абрикос",
 	"item.rys.ant_spawn_egg": "Яйцо призыва муравья",
+	"item.rys.queen_ant_spawn_egg": "Яйцо призыва муравьиной матки",
+	"item.rys.hunting_ant_spawn_egg": "Яйцо призыва муравья-охотника",
 	
 	"effect.rys.decrease_debuff": "Уменьшение дебаффов",
 	"effect.rys.increase_buff": "Увеличение баффов",
