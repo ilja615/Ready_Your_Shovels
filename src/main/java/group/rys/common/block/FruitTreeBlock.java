@@ -35,7 +35,6 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
 
     private Item fruit;
     private Item rottenFruit;
-    private Item fruitSapling;
 
     protected static final VoxelShape LOG_SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 16.0D, 11.0D);
 
@@ -44,11 +43,10 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
     public static final BooleanProperty CUT = BooleanProperty.create("cut");
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
-    public FruitTreeBlock(Item fruitIn, Item rottenFruitIn, Item fruitSapling, Block.Properties properties) {
+    public FruitTreeBlock(Item fruitIn, Item rottenFruitIn, Block.Properties properties) {
         super(properties);
         this.fruit = fruitIn;
         this.rottenFruit = rottenFruitIn;
-        this.fruitSapling = fruitSapling;
         this.setDefaultState(this.stateContainer.getBaseState().with(AGE, Integer.valueOf(0)).with(DEAD, Boolean.valueOf(false)).with(HALF, DoubleBlockHalf.LOWER).with(CUT, Boolean.valueOf(false)));
     }
 
@@ -60,9 +58,6 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
         return this.rottenFruit;
     }
 
-    public Item getFruitSapling() {
-        return fruitSapling;
-    }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         if (state.get(HALF) == DoubleBlockHalf.LOWER) {
@@ -128,7 +123,7 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
                 if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
                     worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(CUT, true).with(AGE, 0), 2);
                 }
-                spawnAsEntity(worldIn, pos, new ItemStack(this.getFruitSapling(), 1 + worldIn.rand.nextInt(1)));
+
                 if (age == 3) {
                     if (worldIn.rand.nextInt(5) == 0) {
                         spawnAsEntity(worldIn, pos, new ItemStack(this.rottenFruit, 1 + worldIn.rand.nextInt(4)));
