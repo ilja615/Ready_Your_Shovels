@@ -7,8 +7,10 @@ import group.rys.core.util.Reference;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.pattern.BlockMatcher;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.BiomeDictionary;
@@ -28,7 +30,8 @@ public class ModFeatures {
 	public static final DepositsInRiversFeature deposits_in_rivers = create("deposits_in_rivers", new DepositsInRiversFeature(SphereConfig::deserialize));
 	public static final DayrootFeature dayroot = create("dayroot", new DayrootFeature(BushConfig::deserialize));
 	public static final Feature<ProbabilityConfig> ant_hill = create("ant_hill", new AntHillFeature(ProbabilityConfig::deserialize, false));
-	
+    public static final AppleTreeFeature appletree = create("appletree", new AppleTreeFeature(NoFeatureConfig::deserialize));
+
 	public static final GraveyardStructure graveyard_dungeon = create("graveyard_dungeon", new GraveyardStructure(NoFeatureConfig::deserialize));
 	
 	@SubscribeEvent
@@ -79,22 +82,25 @@ public class ModFeatures {
 				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(deposits_in_rivers, new SphereConfig(Blocks.DIRT.getDefaultState(), ModBlocks.gold_deposit.getDefaultState(), 2, 1.0F), ModPlacements.count_chance_depth, new CountChanceDepthConfig(8, 1.0F, 20)));
 				
 				if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.OCEAN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MOUNTAIN) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.RIVER)) {
-					
+
 					// Dayroot
 					biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(dayroot, new BushConfig(ModBlocks.dayroot.getDefaultState()), ModPlacements.count_chance_depth, new CountChanceDepthConfig(2, 0.5F, 40)));
-					
-					// Cave Decoration
+
+                    // Cave Decoration
 					biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.BUSH, new BushConfig(Blocks.BROWN_MUSHROOM.getDefaultState()), ModPlacements.count_chance_depth, new CountChanceDepthConfig(2, 0.5F, 40)));
 					biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.BUSH, new BushConfig(Blocks.RED_MUSHROOM.getDefaultState()), ModPlacements.count_chance_depth, new CountChanceDepthConfig(2, 0.5F, 40)));
-					
-					// Graveyard Structure
+
+                    // Graveyard Structure
 					biome.addStructure(graveyard_dungeon, IFeatureConfig.NO_FEATURE_CONFIG);
 					biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, Biome.createDecoratedFeature(graveyard_dungeon, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 
 					// Ant Hill
 					biome.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(ant_hill, new ProbabilityConfig(100), Placement.TOP_SOLID_HEIGHTMAP, IPlacementConfig.NO_PLACEMENT_CONFIG));
+
+                    //AppleTree
+                    Biomes.FOREST.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new NoFeatureConfig(), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(14)));
+                    Biomes.FLOWER_FOREST.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new NoFeatureConfig(), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(12)));
 				}
-				
 			}
 			
 		});
