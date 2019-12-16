@@ -35,7 +35,6 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
 
     private Item fruit;
     private Item rottenFruit;
-    private Item fruitSapling;
 
     protected static final VoxelShape LOG_SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 16.0D, 11.0D);
 
@@ -44,11 +43,10 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
     public static final BooleanProperty CUT = BooleanProperty.create("cut");
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
-    public FruitTreeBlock(Item fruitIn, Item rottenFruitIn, Item fruitSapling, Block.Properties properties) {
+    public FruitTreeBlock(Item fruitIn, Item rottenFruitIn, Block.Properties properties) {
         super(properties);
         this.fruit = fruitIn;
         this.rottenFruit = rottenFruitIn;
-        this.fruitSapling = fruitSapling;
         this.setDefaultState(this.stateContainer.getBaseState().with(AGE, Integer.valueOf(0)).with(DEAD, Boolean.valueOf(false)).with(HALF, DoubleBlockHalf.LOWER).with(CUT, Boolean.valueOf(false)));
     }
 
@@ -59,6 +57,7 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
     public Item getRottenFruit() {
         return this.rottenFruit;
     }
+
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         if (state.get(HALF) == DoubleBlockHalf.LOWER) {
@@ -79,23 +78,33 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
     public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
         int age = state.get(AGE);
         boolean isDead = state.get(DEAD);
+        boolean isCut = state.get(CUT);
 
         if (!worldIn.isAreaLoaded(pos, 1)) {
             return;
         }
 
         if (!isDead) {
-            if (age < 3 && worldIn.getLight(pos.up()) >= 9 && random.nextInt(7) == 0 && state.get(HALF) == DoubleBlockHalf.UPPER) {
-                worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(age + 1)), 2);
-                if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
-                    worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(age + 1)), 2);
+            if (!isCut) {
+                if (age < 3 && worldIn.getLight(pos.up()) >= 9 && random.nextInt(7) == 0 && state.get(HALF) == DoubleBlockHalf.UPPER) {
+                    worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(age + 1)), 2);
+                    if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
+                        worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(age + 1)), 2);
+                    }
                 }
-            }
 
-            if (age == 3 && random.nextInt(28) == 0 && (state.get(HALF) == DoubleBlockHalf.LOWER && worldIn.getBlockState(pos.down()).getBlock() != ModBlocks.planter_box)) {
-                worldIn.setBlockState(pos, state.with(DEAD, true), 2);
-                if (worldIn.getBlockState(pos.up()).getBlock() == this.getBlock()) {
-                    worldIn.setBlockState(pos.up(), worldIn.getBlockState(pos.up()).with(DEAD, true), 2);
+                if (age == 3 && random.nextInt(28) == 0 && (state.get(HALF) == DoubleBlockHalf.LOWER && worldIn.getBlockState(pos.down()).getBlock() != ModBlocks.planter_box)) {
+                    worldIn.setBlockState(pos, state.with(DEAD, true), 2);
+                    if (worldIn.getBlockState(pos.up()).getBlock() == this.getBlock()) {
+                        worldIn.setBlockState(pos.up(), worldIn.getBlockState(pos.up()).with(DEAD, true), 2);
+                    }
+                }
+            } else {
+                if (worldIn.getLight(pos.up()) >= 9 && random.nextInt(7) == 0 && state.get(HALF) == DoubleBlockHalf.UPPER) {
+                    worldIn.setBlockState(pos, state.with(CUT, false), 2);
+                    if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
+                        worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(CUT, false), 2);
+                    }
                 }
             }
         }
@@ -104,17 +113,27 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         int age = state.get(AGE);
         boolean isDead = state.get(DEAD);
+        boolean isCut = state.get(CUT);
         ItemStack stack = player.getHeldItem(handIn);
 
-        if (stack.getItem() instanceof ShearsItem && !isDead) {
+        if (stack.getItem() instanceof ShearsItem && !isDead && !isCut) {
             if (state.get(HALF) == DoubleBlockHalf.UPPER) {
-                worldIn.setBlockState(pos, state.with(DEAD, true), 2);
+                worldIn.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                worldIn.setBlockState(pos, state.with(CUT, true).with(AGE, 0), 2);
                 if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
-                    worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(DEAD, true), 2);
+                    worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(CUT, true).with(AGE, 0), 2);
                 }
-                spawnAsEntity(worldIn, pos, new ItemStack(this.fruitSapling, 1 + worldIn.rand.nextInt(1)));
+
+                if (age == 3) {
+                    if (worldIn.rand.nextInt(5) == 0) {
+                        spawnAsEntity(worldIn, pos, new ItemStack(this.rottenFruit, 1 + worldIn.rand.nextInt(4)));
+                    } else {
+                        spawnAsEntity(worldIn, pos, new ItemStack(this.fruit, 1 + worldIn.rand.nextInt(4)));
+                    }
+                }
+
             }
-        } else if (age == 3 && !isDead) {
+        } else if (age == 3 && !isDead && !isCut) {
             if (worldIn.rand.nextInt(5) == 0) {
                 spawnAsEntity(worldIn, pos, new ItemStack(this.rottenFruit, 1 + worldIn.rand.nextInt(4)));
             } else {

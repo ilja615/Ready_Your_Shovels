@@ -40,9 +40,13 @@ public class ModBlocks {
 	public static final SlabBlock smooth_dirt_slab = null;
 	public static final StairsBlock smooth_dirt_stairs = null;
 	public static final PlanterBoxBlock planter_box = null;
-	public static final FruitTreeBlock apple_fruit_tree = null;
-	public static final FruitTreeBlock orange_fruit_tree = null;
-	public static final FruitTreeBlock apricot_fruit_tree = null;
+	public static final FruitSaplingBlock apple_fruit_sapling = null;
+	public static final FruitSaplingBlock orange_fruit_sapling = null;
+	public static final FruitSaplingBlock apricot_fruit_sapling = null;
+	public static final FruitTreeBlock apple_fruit_tree = create("apple_fruit_tree", new FruitTreeBlock(Items.APPLE, Items.APPLE, ModProperties.fruit_tree));
+	public static final FruitTreeBlock orange_fruit_tree = create("orange_fruit_tree", new FruitTreeBlock(ModItems.orange, ModItems.rotten_orange, ModProperties.fruit_tree));
+	public static final FruitTreeBlock apricot_fruit_tree = create("apricot_fruit_tree", new FruitTreeBlock(ModItems.apricot, ModItems.rotten_apricot, ModProperties.fruit_tree));
+
 	public static final DayrootBlock dayroot = null;
 	
 	public static final AnthillBlock anthill = create("anthill", new AnthillBlock(ModProperties.tough_dirt));
@@ -75,9 +79,12 @@ public class ModBlocks {
 		registry.register(create("smooth_dirt_slab", new SlabBlock(ModProperties.smooth_dirt)));
 		registry.register(create("smooth_dirt_stairs", new StairsBlock(() -> smooth_dirt.getDefaultState(), ModProperties.smooth_dirt)));
 		registry.register(create("planter_box", new PlanterBoxBlock(ModProperties.planter_box)));
-		registry.register(create("apple_fruit_tree", new FruitTreeBlock(Items.APPLE, Items.APPLE, ModItems.apple_fruit_tree, ModProperties.fruit_tree)));
-		registry.register(create("orange_fruit_tree", new FruitTreeBlock(ModItems.orange, ModItems.rotten_orange, ModItems.orange_fruit_tree, ModProperties.fruit_tree)));
-		registry.register(create("apricot_fruit_tree", new FruitTreeBlock(ModItems.apricot, ModItems.rotten_apricot, ModItems.apricot_fruit_tree, ModProperties.fruit_tree)));
+		registry.register(create("apple_fruit_sapling", new FruitSaplingBlock(ModBlocks.apple_fruit_tree, ModProperties.fruit_sapling)));
+		registry.register(create("orange_fruit_sapling", new FruitSaplingBlock(ModBlocks.orange_fruit_tree, ModProperties.fruit_sapling)));
+		registry.register(create("apricot_fruit_sapling", new FruitSaplingBlock(ModBlocks.apricot_fruit_tree, ModProperties.fruit_sapling)));
+		registry.register(apple_fruit_tree);
+		registry.register(orange_fruit_tree);
+		registry.register(apricot_fruit_tree);
 		registry.register(create("dayroot", new DayrootBlock(ModProperties.dayroot)));
 		
 		// TileEntities
