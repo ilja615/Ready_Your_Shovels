@@ -1,7 +1,7 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "1": "rys:block/appletreefruit",
+    "tree": "rys:block/appletreefruit",
     "particle": "rys:block/appletreefruit"
   },
   "elements": [
@@ -24,7 +24,7 @@
             2.25,
             2.75
           ],
-          "texture": "#1"
+          "texture": "#tree"
         },
         "east": {
           "uv": [
@@ -33,7 +33,7 @@
             2.25,
             2.75
           ],
-          "texture": "#1"
+          "texture": "#tree"
         },
         "south": {
           "uv": [
@@ -42,7 +42,7 @@
             2.25,
             2.75
           ],
-          "texture": "#1"
+          "texture": "#tree"
         },
         "west": {
           "uv": [
@@ -51,7 +51,7 @@
             2.25,
             2.75
           ],
-          "texture": "#1"
+          "texture": "#tree"
         },
         "up": {
           "uv": [
@@ -60,7 +60,7 @@
             1.5,
             0.75
           ],
-          "texture": "#1"
+          "texture": "#tree"
         },
         "down": {
           "uv": [
@@ -69,7 +69,7 @@
             2.25,
             0.75
           ],
-          "texture": "#1"
+          "texture": "#tree"
         }
       }
     }

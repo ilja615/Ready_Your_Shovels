@@ -1,12 +1,100 @@
 {
 	"variants": {
-		"age=0,dead=false": { "model": "rys:block/orange_fruit_tree_0" },
-		"age=1,dead=false": { "model": "rys:block/orange_fruit_tree_0" },
-		"age=2,dead=false": { "model": "rys:block/orange_fruit_tree_0" },
-		"age=3,dead=false": { "model": "rys:block/orange_fruit_tree_3" },
-		"age=0,dead=true": { "model": "rys:block/dead_orange_fruit_tree" },
-		"age=1,dead=true": { "model": "rys:block/dead_orange_fruit_tree" },
-		"age=2,dead=true": { "model": "rys:block/dead_orange_fruit_tree" },
-		"age=3,dead=true": { "model": "rys:block/dead_orange_fruit_tree" }
+		"age=0,dead=false,half=lower,cut=false": {
+			"model": "rys:block/orange_fruit_tree_bottom"
+		},
+		"age=1,dead=false,half=lower,cut=false": {
+			"model": "rys:block/orange_fruit_tree_bottom"
+		},
+		"age=2,dead=false,half=lower,cut=false": {
+			"model": "rys:block/orange_fruit_tree_bottom"
+		},
+		"age=3,dead=false,half=lower,cut=false": {
+			"model": "rys:block/orange_fruit_tree_bottom"
+		},
+		"age=0,dead=true,half=lower,cut=false": {
+			"model": "rys:block/orange_fruit_tree_bottom"
+		},
+		"age=1,dead=true,half=lower,cut=false": {
+			"model": "rys:block/orange_fruit_tree_bottom"
+		},
+		"age=2,dead=true,half=lower,cut=false": {
+			"model": "rys:block/orange_fruit_tree_bottom"
+		},
+		"age=3,dead=true,half=lower,cut=false": {
+			"model": "rys:block/orange_fruit_tree_bottom"
+		},
+		"age=0,dead=false,half=upper,cut=false": {
+			"model": "rys:block/orange_fruit_tree_head_without_fruit"
+		},
+		"age=1,dead=false,half=upper,cut=false": {
+			"model": "rys:block/orange_fruit_tree_head_without_fruit"
+		},
+		"age=2,dead=false,half=upper,cut=false": {
+			"model": "rys:block/orange_fruit_tree_head_without_fruit"
+		},
+		"age=3,dead=false,half=upper,cut=false": {
+			"model": "rys:block/orange_fruit_tree_head"
+		},
+		"age=0,dead=true,half=upper,cut=false": {
+			"model": "rys:block/orange_fruit_tree_head_dead"
+		},
+		"age=1,dead=true,half=upper,cut=false": {
+			"model": "rys:block/orange_fruit_tree_head_dead"
+		},
+		"age=2,dead=true,half=upper,cut=false": {
+			"model": "rys:block/orange_fruit_tree_head_dead"
+		},
+		"age=3,dead=true,half=upper,cut=false": {
+			"model": "rys:block/orange_fruit_tree_head_dead"
+		},
+		"age=0,dead=false,half=lower,cut=true": {
+			"model": "rys:block/orange_fruit_tree_bottom"
+		},
+		"age=1,dead=false,half=lower,cut=true": {
+			"model": "rys:block/orange_fruit_tree_bottom"
+		},
+		"age=2,dead=false,half=lower,cut=true": {
+			"model": "rys:block/orange_fruit_tree_bottom"
+		},
+		"age=3,dead=false,half=lower,cut=true": {
+			"model": "rys:block/orange_fruit_tree_bottom"
+		},
+		"age=0,dead=true,half=lower,cut=true": {
+			"model": "rys:block/orange_fruit_tree_bottom"
+		},
+		"age=1,dead=true,half=lower,cut=true": {
+			"model": "rys:block/orange_fruit_tree_bottom"
+		},
+		"age=2,dead=true,half=lower,cut=true": {
+			"model": "rys:block/orange_fruit_tree_bottom"
+		},
+		"age=3,dead=true,half=lower,cut=true": {
+			"model": "rys:block/orange_fruit_tree_bottom"
+		},
+		"age=0,dead=false,half=upper,cut=true": {
+			"model": "rys:block/orange_fruit_tree_head_cut"
+		},
+		"age=1,dead=false,half=upper,cut=true": {
+			"model": "rys:block/orange_fruit_tree_head_cut"
+		},
+		"age=2,dead=false,half=upper,cut=true": {
+			"model": "rys:block/orange_fruit_tree_head_cut"
+		},
+		"age=3,dead=false,half=upper,cut=true": {
+			"model": "rys:block/orange_fruit_tree_head_cut"
+		},
+		"age=0,dead=true,half=upper,cut=true": {
+			"model": "rys:block/orange_fruit_tree_head_cut"
+		},
+		"age=1,dead=true,half=upper,cut=true": {
+			"model": "rys:block/orange_fruit_tree_head_cut"
+		},
+		"age=2,dead=true,half=upper,cut=true": {
+			"model": "rys:block/orange_fruit_tree_head_cut"
+		},
+		"age=3,dead=true,half=upper,cut=true": {
+			"model": "rys:block/orange_fruit_tree_head_cut"
+		}
 	}
 }
