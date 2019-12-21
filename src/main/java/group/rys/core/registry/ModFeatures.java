@@ -30,7 +30,7 @@ public class ModFeatures {
 	public static final DepositsInRiversFeature deposits_in_rivers = create("deposits_in_rivers", new DepositsInRiversFeature(SphereConfig::deserialize));
 	public static final DayrootFeature dayroot = create("dayroot", new DayrootFeature(BushConfig::deserialize));
 	public static final Feature<ProbabilityConfig> ant_hill = create("ant_hill", new AntHillFeature(ProbabilityConfig::deserialize, false));
-    public static final AppleTreeFeature appletree = create("appletree", new AppleTreeFeature(NoFeatureConfig::deserialize));
+	public static final AppleTreeFeature appletree = create("appletree", new AppleTreeFeature(BushConfig::deserialize));
 
 	public static final GraveyardStructure graveyard_dungeon = create("graveyard_dungeon", new GraveyardStructure(NoFeatureConfig::deserialize));
 	
@@ -98,8 +98,17 @@ public class ModFeatures {
 					biome.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(ant_hill, new ProbabilityConfig(100), Placement.TOP_SOLID_HEIGHTMAP, IPlacementConfig.NO_PLACEMENT_CONFIG));
 
                     //AppleTree
-                    Biomes.FOREST.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new NoFeatureConfig(), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(14)));
-                    Biomes.FLOWER_FOREST.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new NoFeatureConfig(), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(12)));
+					Biomes.FOREST.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new BushConfig(ModBlocks.apple_fruit_tree.getDefaultState()), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(14)));
+					Biomes.FLOWER_FOREST.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new BushConfig(ModBlocks.apple_fruit_tree.getDefaultState()), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(12)));
+
+					Biomes.BIRCH_FOREST.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new BushConfig(ModBlocks.apricot_fruit_tree.getDefaultState()), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(12)));
+					Biomes.BIRCH_FOREST_HILLS.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new BushConfig(ModBlocks.apricot_fruit_tree.getDefaultState()), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(12)));
+					Biomes.TALL_BIRCH_FOREST.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new BushConfig(ModBlocks.apricot_fruit_tree.getDefaultState()), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(14)));
+					Biomes.TALL_BIRCH_HILLS.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new BushConfig(ModBlocks.apricot_fruit_tree.getDefaultState()), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(14)));
+					
+					Biomes.DARK_FOREST.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new BushConfig(ModBlocks.orange_fruit_tree.getDefaultState()), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(12)));
+					Biomes.DARK_FOREST_HILLS.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new BushConfig(ModBlocks.orange_fruit_tree.getDefaultState()), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(12)));
+
 				}
 			}
 			
