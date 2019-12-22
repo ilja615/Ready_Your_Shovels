@@ -273,9 +273,9 @@ public class HuntingAntEntity extends CreatureEntity {
         public void startExecuting() {
             World world = this.ant.world;
 
-            int x = world.rand.nextInt(33) - 16;
-            int y = world.rand.nextInt(33) - 16;
-            int z = world.rand.nextInt(33) - 16;
+            int x = world.rand.nextInt(32) - 16;
+            int y = world.rand.nextInt(32) - 16;
+            int z = world.rand.nextInt(32) - 16;
 
             BlockPos pos_1 = this.ant.getPosition();
             BlockPos pos_2 = pos_1.add(x, y, z);
@@ -307,14 +307,14 @@ public class HuntingAntEntity extends CreatureEntity {
         public void startExecuting() {
             World world = this.ant.world;
 
-            int x = world.rand.nextInt(33) - 16;
-            int y = world.rand.nextInt(33) - 16;
-            int z = world.rand.nextInt(33) - 16;
+            int x = world.rand.nextInt(32) - 16;
+            int y = world.rand.nextInt(32) - 16;
+            int z = world.rand.nextInt(32) - 16;
 
             BlockPos pos_1 = this.ant.getInventoryPosition();
             BlockPos pos_2 = pos_1.add(x, y, z);
 
-            if (pos_1.distanceSq(pos_2) <= 256 && world.isAirBlock(pos_2) && !world.hasWater(pos_2) && !world.isAirBlock(pos_2.down()) && !world.hasWater(pos_2.down())) {
+            if (world.isAirBlock(pos_2) && !world.hasWater(pos_2) && !world.isAirBlock(pos_2.down()) && !world.hasWater(pos_2.down())) {
                 this.ant.getNavigator().setPath(this.ant.getNavigator().getPathToPos(pos_2, 1), 0.75D);
             }
         }
