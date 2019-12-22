@@ -35,6 +35,7 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
 
     private Item fruit;
     private Item rottenFruit;
+    private Block fruitSapling;
 
     protected static final VoxelShape LOG_SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 16.0D, 11.0D);
 
@@ -43,10 +44,11 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
     public static final BooleanProperty CUT = BooleanProperty.create("cut");
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
-    public FruitTreeBlock(Item fruitIn, Item rottenFruitIn, Block.Properties properties) {
+    public FruitTreeBlock(Item fruitIn, Item rottenFruitIn, Block fruitSapling, Block.Properties properties) {
         super(properties);
         this.fruit = fruitIn;
         this.rottenFruit = rottenFruitIn;
+        this.fruitSapling = fruitSapling;
         this.setDefaultState(this.stateContainer.getBaseState().with(AGE, Integer.valueOf(0)).with(DEAD, Boolean.valueOf(false)).with(HALF, DoubleBlockHalf.LOWER).with(CUT, Boolean.valueOf(false)));
     }
 
@@ -58,6 +60,9 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
         return this.rottenFruit;
     }
 
+    public Block getFruitSapling() {
+        return fruitSapling;
+    }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         if (state.get(HALF) == DoubleBlockHalf.LOWER) {
@@ -93,7 +98,7 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
                     }
                 }
 
-                if (age == 3 && random.nextInt(28) == 0 && (state.get(HALF) == DoubleBlockHalf.LOWER && worldIn.getBlockState(pos.down()).getBlock() != ModBlocks.planter_box)) {
+                if (age < 3 && random.nextInt(28) == 0 && (state.get(HALF) == DoubleBlockHalf.LOWER && worldIn.getBlockState(pos.down()).getBlock() != ModBlocks.planter_box)) {
                     worldIn.setBlockState(pos, state.with(DEAD, true), 2);
                     if (worldIn.getBlockState(pos.up()).getBlock() == this.getBlock()) {
                         worldIn.setBlockState(pos.up(), worldIn.getBlockState(pos.up()).with(DEAD, true), 2);
@@ -123,6 +128,8 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
                 if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
                     worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(CUT, true).with(AGE, 0), 2);
                 }
+
+                spawnAsEntity(worldIn, pos, new ItemStack(this.fruitSapling, 1 + worldIn.rand.nextInt(2)));
 
                 if (age == 3) {
                     if (worldIn.rand.nextInt(5) == 0) {
