@@ -32,6 +32,7 @@ import java.util.EnumSet;
 import java.util.function.Predicate;
 
 public class HuntingAntEntity extends CreatureEntity {
+    private int lifetime;
 
     private static final DataParameter<BlockPos> INVENTORY = EntityDataManager.createKey(HuntingAntEntity.class, DataSerializers.BLOCK_POS);
 
@@ -75,12 +76,15 @@ public class HuntingAntEntity extends CreatureEntity {
     protected void registerData() {
         super.registerData();
 
+
         this.dataManager.register(INVENTORY, BlockPos.ZERO);
         this.dataManager.register(FED, false);
     }
 
     public void writeAdditional(CompoundNBT compound) {
         super.writeAdditional(compound);
+
+        compound.putInt("Lifetime", this.lifetime);
 
         compound.putInt("InvPosX", this.getInventoryPosition().getX());
         compound.putInt("InvPosY", this.getInventoryPosition().getY());
@@ -89,6 +93,8 @@ public class HuntingAntEntity extends CreatureEntity {
 
     public void readAdditional(CompoundNBT compound) {
         super.readAdditional(compound);
+
+        this.lifetime = compound.getInt("Lifetime");
 
         int i = compound.getInt("InvPosX");
         int j = compound.getInt("InvPosY");
@@ -107,11 +113,11 @@ public class HuntingAntEntity extends CreatureEntity {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 0.8F, true));
-        this.goalSelector.addGoal(1, new HuntingAntEntity.FindInventoryGoal(this));
-        this.goalSelector.addGoal(2, new HuntingAntEntity.UpdateInventoryGoal(this));
-        this.goalSelector.addGoal(3, new HuntingAntEntity.StoreFedGoal(this));
+        //this.goalSelector.addGoal(1, new HuntingAntEntity.FindInventoryGoal(this));
+        //this.goalSelector.addGoal(2, new HuntingAntEntity.UpdateInventoryGoal(this));
+        //this.goalSelector.addGoal(3, new HuntingAntEntity.StoreFedGoal(this));
         this.goalSelector.addGoal(5, new HuntingAntEntity.WalkAroundGoal(this));
-        this.goalSelector.addGoal(6, new HuntingAntEntity.WalkAroundInventoryGoal(this));
+        //this.goalSelector.addGoal(6, new HuntingAntEntity.WalkAroundInventoryGoal(this));
 
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setCallsForHelp());
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, LivingEntity.class, 10, true, false, TARGET) {
@@ -150,6 +156,19 @@ public class HuntingAntEntity extends CreatureEntity {
 
     public CreatureAttribute getCreatureAttribute() {
         return CreatureAttribute.ARTHROPOD;
+    }
+
+    public void livingTick() {
+        super.livingTick();
+        if (!this.world.isRemote) {
+            if (!this.isNoDespawnRequired()) {
+                ++this.lifetime;
+            }
+
+            if (this.lifetime >= 2400) {
+                this.remove();
+            }
+        }
     }
 
     public void tick() {
@@ -273,9 +292,9 @@ public class HuntingAntEntity extends CreatureEntity {
         public void startExecuting() {
             World world = this.ant.world;
 
-            int x = world.rand.nextInt(33) - 16;
-            int y = world.rand.nextInt(33) - 16;
-            int z = world.rand.nextInt(33) - 16;
+            int x = world.rand.nextInt(32) - 16;
+            int y = world.rand.nextInt(32) - 16;
+            int z = world.rand.nextInt(32) - 16;
 
             BlockPos pos_1 = this.ant.getPosition();
             BlockPos pos_2 = pos_1.add(x, y, z);
@@ -307,14 +326,14 @@ public class HuntingAntEntity extends CreatureEntity {
         public void startExecuting() {
             World world = this.ant.world;
 
-            int x = world.rand.nextInt(33) - 16;
-            int y = world.rand.nextInt(33) - 16;
-            int z = world.rand.nextInt(33) - 16;
+            int x = world.rand.nextInt(32) - 16;
+            int y = world.rand.nextInt(32) - 16;
+            int z = world.rand.nextInt(32) - 16;
 
             BlockPos pos_1 = this.ant.getInventoryPosition();
             BlockPos pos_2 = pos_1.add(x, y, z);
 
-            if (pos_1.distanceSq(pos_2) <= 256 && world.isAirBlock(pos_2) && !world.hasWater(pos_2) && !world.isAirBlock(pos_2.down()) && !world.hasWater(pos_2.down())) {
+            if (world.isAirBlock(pos_2) && !world.hasWater(pos_2) && !world.isAirBlock(pos_2.down()) && !world.hasWater(pos_2.down())) {
                 this.ant.getNavigator().setPath(this.ant.getNavigator().getPathToPos(pos_2, 1), 0.75D);
             }
         }

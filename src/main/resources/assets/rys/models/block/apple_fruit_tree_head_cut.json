@@ -1,7 +1,7 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "2": "rys:block/appletreebare",
+    "tree": "rys:block/appletreebare",
     "particle": "rys:block/appletreebare"
   },
   "elements": [
@@ -34,7 +34,7 @@
             5.25,
             12.375
           ],
-          "texture": "#2"
+          "texture": "#tree"
         },
         "east": {
           "uv": [
@@ -43,7 +43,7 @@
             5.25,
             12.375
           ],
-          "texture": "#2"
+          "texture": "#tree"
         },
         "south": {
           "uv": [
@@ -52,7 +52,7 @@
             5.25,
             12.375
           ],
-          "texture": "#2"
+          "texture": "#tree"
         },
         "west": {
           "uv": [
@@ -61,7 +61,7 @@
             5.25,
             12.375
           ],
-          "texture": "#2"
+          "texture": "#tree"
         },
         "up": {
           "uv": [
@@ -70,7 +70,7 @@
             5.25,
             12.375
           ],
-          "texture": "#2"
+          "texture": "#tree"
         },
         "down": {
           "uv": [
@@ -79,7 +79,7 @@
             5.25,
             12.375
           ],
-          "texture": "#2"
+          "texture": "#tree"
         }
       }
     },
@@ -112,7 +112,7 @@
             5.25,
             12.375
           ],
-          "texture": "#2"
+          "texture": "#tree"
         },
         "east": {
           "uv": [
@@ -121,7 +121,7 @@
             5.25,
             12.375
           ],
-          "texture": "#2"
+          "texture": "#tree"
         },
         "south": {
           "uv": [
@@ -130,7 +130,7 @@
             5.25,
             12.375
           ],
-          "texture": "#2"
+          "texture": "#tree"
         },
         "west": {
           "uv": [
@@ -139,7 +139,7 @@
             5.25,
             12.375
           ],
-          "texture": "#2"
+          "texture": "#tree"
         },
         "up": {
           "uv": [
@@ -148,7 +148,7 @@
             5.25,
             12.375
           ],
-          "texture": "#2"
+          "texture": "#tree"
         },
         "down": {
           "uv": [
@@ -157,7 +157,7 @@
             5.25,
             12.375
           ],
-          "texture": "#2"
+          "texture": "#tree"
         }
       }
     }

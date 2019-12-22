@@ -28,7 +28,8 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class GathererAntEntity extends CreatureEntity {
-	
+    private int lifetime;
+
 	private static final DataParameter<BlockPos> INVENTORY = EntityDataManager.createKey(GathererAntEntity.class, DataSerializers.BLOCK_POS);
 	
 	public GathererAntEntity(EntityType<? extends CreatureEntity> type, World worldIn) {
@@ -63,6 +64,8 @@ public class GathererAntEntity extends CreatureEntity {
 	public void writeAdditional(CompoundNBT compound) {
 		super.writeAdditional(compound);
 
+        compound.putInt("Lifetime", this.lifetime);
+
 		compound.putInt("InvPosX", this.getInventoryPosition().getX());
 		compound.putInt("InvPosY", this.getInventoryPosition().getY());
 		compound.putInt("InvPosZ", this.getInventoryPosition().getZ());
@@ -70,7 +73,9 @@ public class GathererAntEntity extends CreatureEntity {
 	
 	public void readAdditional(CompoundNBT compound) {
 		super.readAdditional(compound);
-		
+
+        this.lifetime = compound.getInt("Lifetime");
+
 		int i = compound.getInt("InvPosX");
 		int j = compound.getInt("InvPosY");
 		int k = compound.getInt("InvPosZ");
@@ -87,13 +92,13 @@ public class GathererAntEntity extends CreatureEntity {
 	}
 	
 	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new GathererAntEntity.FindInventoryGoal(this));
-		this.goalSelector.addGoal(1, new GathererAntEntity.UpdateInventoryGoal(this));
+        //this.goalSelector.addGoal(0, new GathererAntEntity.FindInventoryGoal(this));
+        //this.goalSelector.addGoal(1, new GathererAntEntity.UpdateInventoryGoal(this));
 //		this.goalSelector.addGoal(2, new AntEntity.FindItemsGoal(this));
 //		this.goalSelector.addGoal(3, new AntEntity.StoreItemsGoal(this));
 //		this.goalSelector.addGoal(4, new AntEntity.HarvestFruitTreeGoal(this));
 		this.goalSelector.addGoal(5, new GathererAntEntity.WalkAroundGoal(this));
-		this.goalSelector.addGoal(6, new GathererAntEntity.WalkAroundInventoryGoal(this));
+        //this.goalSelector.addGoal(6, new GathererAntEntity.WalkAroundInventoryGoal(this));
 	}
 	
 	protected void playStepSound(BlockPos pos, BlockState state) {
@@ -119,7 +124,20 @@ public class GathererAntEntity extends CreatureEntity {
 	public CreatureAttribute getCreatureAttribute() {
 		return CreatureAttribute.ARTHROPOD;
 	}
-	
+
+    public void livingTick() {
+        super.livingTick();
+        if (!this.world.isRemote) {
+            if (!this.isNoDespawnRequired()) {
+                ++this.lifetime;
+            }
+
+            if (this.lifetime >= 2400) {
+                this.remove();
+            }
+        }
+    }
+
 	public void tick() {
 		super.tick();
 	}
@@ -324,10 +342,10 @@ public class GathererAntEntity extends CreatureEntity {
 		
 		public void startExecuting() {
 			World world = this.ant.world;
-			
-			int x = world.rand.nextInt(33) - 16;
-			int y = world.rand.nextInt(33) - 16;
-			int z = world.rand.nextInt(33) - 16;
+
+			int x = world.rand.nextInt(32) - 16;
+			int y = world.rand.nextInt(32) - 16;
+			int z = world.rand.nextInt(32) - 16;
 			
 			BlockPos pos_1 = this.ant.getPosition();
 			BlockPos pos_2 = pos_1.add(x, y, z);
@@ -358,15 +376,15 @@ public class GathererAntEntity extends CreatureEntity {
 		
 		public void startExecuting() {
 			World world = this.ant.world;
-			
-			int x = world.rand.nextInt(33) - 16;
-			int y = world.rand.nextInt(33) - 16;
-			int z = world.rand.nextInt(33) - 16;
+
+			int x = world.rand.nextInt(32) - 16;
+			int y = world.rand.nextInt(32) - 16;
+			int z = world.rand.nextInt(32) - 16;
 			
 			BlockPos pos_1 = this.ant.getInventoryPosition();
 			BlockPos pos_2 = pos_1.add(x, y, z);
-			
-			if (pos_1.distanceSq(pos_2) <= 256 && world.isAirBlock(pos_2) && !world.hasWater(pos_2) && !world.isAirBlock(pos_2.down()) && !world.hasWater(pos_2.down())) {
+
+			if (world.isAirBlock(pos_2) && !world.hasWater(pos_2) && !world.isAirBlock(pos_2.down()) && !world.hasWater(pos_2.down())) {
 				this.ant.getNavigator().setPath(this.ant.getNavigator().getPathToPos(pos_2, 1), 0.75D);
 			}
 		}
