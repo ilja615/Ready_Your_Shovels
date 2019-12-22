@@ -295,8 +295,8 @@ public class GathererAntEntity extends CreatureEntity {
 			
 			for (BlockPos pos_3 : BlockPos.getAllInBoxMutable(pos_1.getX() - 16, pos_1.getY() - 16, pos_1.getZ() - 16, pos_1.getX() + 16, pos_1.getY() + 16, pos_1.getZ() + 16)) {
 				BlockState state = world.getBlockState(pos_3);
-				
-				if (state.getBlock() instanceof FruitTreeBlock && state.get(FruitTreeBlock.AGE) == 3 && state.get(FruitTreeBlock.DEAD) == false) {
+
+				if (state.getBlock() instanceof FruitTreeBlock && state.get(FruitTreeBlock.AGE) == 3) {
 					pos_2 = pos_3;
 					break;
 				}
