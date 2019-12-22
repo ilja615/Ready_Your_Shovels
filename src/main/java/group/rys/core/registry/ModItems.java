@@ -77,9 +77,9 @@ public class ModItems {
 		registry.register(create("smooth_dirt_slab", new BlockItem(ModBlocks.smooth_dirt_slab, ModProperties.item)));
 		registry.register(create("smooth_dirt_stairs", new BlockItem(ModBlocks.smooth_dirt_stairs, ModProperties.item)));
 		registry.register(create("planter_box", new BlockItem(ModBlocks.planter_box, ModProperties.item)));
-		registry.register(create("apple_fruit_tree", new BlockItem(ModBlocks.apple_fruit_tree, ModProperties.item)));
-		registry.register(create("orange_fruit_tree", new BlockItem(ModBlocks.orange_fruit_tree, ModProperties.item)));
-		registry.register(create("apricot_fruit_tree", new BlockItem(ModBlocks.apricot_fruit_tree, ModProperties.item)));
+		registry.register(create("apple_fruit_tree", new BlockItem(ModBlocks.apple_fruit_sapling, ModProperties.item)));
+		registry.register(create("orange_fruit_tree", new BlockItem(ModBlocks.orange_fruit_sapling, ModProperties.item)));
+		registry.register(create("apricot_fruit_tree", new BlockItem(ModBlocks.apricot_fruit_sapling, ModProperties.item)));
 		registry.register(create("dayroot", new BlockItem(ModBlocks.dayroot, ModProperties.item)));
 		
 		// TileEntities
