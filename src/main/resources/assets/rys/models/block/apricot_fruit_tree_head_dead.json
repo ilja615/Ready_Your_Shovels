@@ -1,7 +1,7 @@
 {
   "parent": "rys:block/apple_fruit_tree_head_dead",
   "textures": {
-    "tree": "rys:block/apricottreefruit",
-    "particle": "rys:block/apricottreefruit"
+    "tree": "rys:block/dead_apricot_tree",
+    "particle": "rys:block/dead_apricot_tree"
   }
 }

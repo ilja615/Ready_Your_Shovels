@@ -105,7 +105,7 @@ public class ModFeatures {
 					Biomes.BIRCH_FOREST_HILLS.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new BushConfig(ModBlocks.apricot_fruit_tree.getDefaultState()), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(12)));
 					Biomes.TALL_BIRCH_FOREST.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new BushConfig(ModBlocks.apricot_fruit_tree.getDefaultState()), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(14)));
 					Biomes.TALL_BIRCH_HILLS.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new BushConfig(ModBlocks.apricot_fruit_tree.getDefaultState()), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(14)));
-					
+
 					Biomes.DARK_FOREST.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new BushConfig(ModBlocks.orange_fruit_tree.getDefaultState()), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(12)));
 					Biomes.DARK_FOREST_HILLS.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new BushConfig(ModBlocks.orange_fruit_tree.getDefaultState()), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(12)));
 
