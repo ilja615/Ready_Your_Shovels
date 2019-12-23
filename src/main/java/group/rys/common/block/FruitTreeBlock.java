@@ -100,9 +100,9 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
                 worldIn.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
 
-                worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(2)), 2);
+                worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(1)), 2);
                 if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
-                    worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(2)), 2);
+                    worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(1)), 2);
                 }
 
                 spawnAsEntity(worldIn, pos, new ItemStack(this.fruitSapling, 1 + worldIn.rand.nextInt(2)));
@@ -199,8 +199,8 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
     }
 
     public void placeAt(IWorld worldIn, BlockPos pos, int flags) {
-        worldIn.setBlockState(pos, this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER), flags);
-        worldIn.setBlockState(pos.up(), this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER), flags);
+        worldIn.setBlockState(pos, this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER).with(AGE, 2), flags);
+        worldIn.setBlockState(pos.up(), this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER).with(AGE, 2), flags);
     }
 
     public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
