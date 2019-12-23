@@ -35,7 +35,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.function.Predicate;
 
 public class QueenAntEntity extends HuntingAntEntity implements IRangedAttackMob {
-    private int lifetime;
     private static final DataParameter<BlockPos> INVENTORY = EntityDataManager.createKey(QueenAntEntity.class, DataSerializers.BLOCK_POS);
 
 
@@ -83,8 +82,6 @@ public class QueenAntEntity extends HuntingAntEntity implements IRangedAttackMob
     public void writeAdditional(CompoundNBT compound) {
         super.writeAdditional(compound);
 
-        compound.putInt("Lifetime", this.lifetime);
-
         compound.putInt("InvPosX", this.getInventoryPosition().getX());
         compound.putInt("InvPosY", this.getInventoryPosition().getY());
         compound.putInt("InvPosZ", this.getInventoryPosition().getZ());
@@ -93,7 +90,6 @@ public class QueenAntEntity extends HuntingAntEntity implements IRangedAttackMob
     public void readAdditional(CompoundNBT compound) {
         super.readAdditional(compound);
 
-        this.lifetime = compound.getInt("Lifetime");
 
         int i = compound.getInt("InvPosX");
         int j = compound.getInt("InvPosY");
@@ -166,16 +162,6 @@ public class QueenAntEntity extends HuntingAntEntity implements IRangedAttackMob
         Vec3d vec3d = this.getMotion();
         if (!this.onGround && vec3d.y < 0.0D) {
             this.setMotion(vec3d.mul(1.0D, 0.6D, 1.0D));
-        }
-
-        if (!this.world.isRemote) {
-            if (!this.isNoDespawnRequired()) {
-                ++this.lifetime;
-            }
-
-            if (this.lifetime >= 2400) {
-                this.remove();
-            }
         }
     }
 

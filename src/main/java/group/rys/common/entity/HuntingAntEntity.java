@@ -161,12 +161,14 @@ public class HuntingAntEntity extends CreatureEntity {
     public void livingTick() {
         super.livingTick();
         if (!this.world.isRemote) {
-            if (!this.isNoDespawnRequired()) {
-                ++this.lifetime;
-            }
+            if (!(this instanceof QueenAntEntity)) {
+                if (!this.isNoDespawnRequired()) {
+                    ++this.lifetime;
+                }
 
-            if (this.lifetime >= 2400) {
-                this.remove();
+                if (this.lifetime >= 2400) {
+                    this.remove();
+                }
             }
         }
     }
