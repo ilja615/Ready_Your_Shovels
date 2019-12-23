@@ -17,7 +17,7 @@ public class HuntingAnthillTileEntity extends TileEntity implements ITickableTil
     private int foodcount = 0;
     private int maxCount = 32;
     private int delay = 0;
-    private int maxDelay = 100;
+    private int maxDelay = 300;
 
     public HuntingAnthillTileEntity() {
         super(ModTileEntities.hunting_anthill);
@@ -48,7 +48,7 @@ public class HuntingAnthillTileEntity extends TileEntity implements ITickableTil
         BlockPos pos_1 = this.getPos();
 
 
-        if (this.delay >= this.maxDelay && (world.getDayTime() == 0L || world.getDayTime() == 13000L)) {
+        if (this.delay >= this.maxDelay) {
             List<HuntingAntEntity> list = world.getEntitiesWithinAABB(HuntingAntEntity.class, new AxisAlignedBB(pos_1).grow(32.0D), (entity) -> {
                 return entity instanceof HuntingAntEntity;
             });
