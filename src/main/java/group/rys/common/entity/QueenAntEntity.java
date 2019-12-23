@@ -216,13 +216,13 @@ public class QueenAntEntity extends HuntingAntEntity implements IRangedAttackMob
 
         HuntingAntLarvaeEntity eggEntity = new HuntingAntLarvaeEntity(this.world, this);
 
-        double d0 = target.posY + (double) target.getEyeHeight() - (double) 1.1F;
+        double d0 = target.posY + (double) target.getEyeHeight();
         double d1 = target.posX - this.posX;
         double d2 = d0 - eggEntity.posY;
         double d3 = target.posZ - this.posZ;
 
         float f = MathHelper.sqrt(d1 * d1 + d3 * d3) * 0.03F;
-        eggEntity.shoot(d1, d2 + (double) f, d3, 1.0F, 8.0F);
+        eggEntity.shoot(d1, d2 + (double) f, d3, 1.6F, 8.0F);
 
         this.world.addEntity(eggEntity);
     }
