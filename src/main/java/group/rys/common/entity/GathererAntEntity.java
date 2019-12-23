@@ -333,7 +333,7 @@ public class GathererAntEntity extends CreatureEntity {
 		}
 		
 		public boolean shouldExecute() {
-			return !this.ant.hasInventory() && this.ant.getNavigator().noPath();
+            return this.ant.getNavigator().noPath();
 		}
 		
 		public boolean shouldContinueExecuting() {
