@@ -1,6 +1,5 @@
 package group.rys.common.block;
 
-import group.rys.core.registry.ModBlocks;
 import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -8,7 +7,6 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShearsItem;
-import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
@@ -35,19 +33,19 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
 
     private Item fruit;
     private Item rottenFruit;
+    private Item fruitSapling;
 
     protected static final VoxelShape LOG_SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 16.0D, 11.0D);
 
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_0_3;
-    public static final BooleanProperty DEAD = BooleanProperty.create("dead");
-    public static final BooleanProperty CUT = BooleanProperty.create("cut");
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
-    public FruitTreeBlock(Item fruitIn, Item rottenFruitIn, Block.Properties properties) {
+    public FruitTreeBlock(Item fruitIn, Item rottenFruitIn, Item fruitSapling, Block.Properties properties) {
         super(properties);
         this.fruit = fruitIn;
         this.rottenFruit = rottenFruitIn;
-        this.setDefaultState(this.stateContainer.getBaseState().with(AGE, Integer.valueOf(0)).with(DEAD, Boolean.valueOf(false)).with(HALF, DoubleBlockHalf.LOWER).with(CUT, Boolean.valueOf(false)));
+        this.fruitSapling = fruitSapling;
+        this.setDefaultState(this.stateContainer.getBaseState().with(AGE, Integer.valueOf(0)).with(HALF, DoubleBlockHalf.LOWER));
     }
 
     public Item getFruit() {
@@ -58,6 +56,9 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
         return this.rottenFruit;
     }
 
+    public Item getFruitSapling() {
+        return fruitSapling;
+    }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         if (state.get(HALF) == DoubleBlockHalf.LOWER) {
@@ -77,63 +78,42 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
 
     public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
         int age = state.get(AGE);
-        boolean isDead = state.get(DEAD);
-        boolean isCut = state.get(CUT);
-
         if (!worldIn.isAreaLoaded(pos, 1)) {
             return;
         }
 
-        if (!isDead) {
-            if (!isCut) {
-                if (age < 3 && worldIn.getLight(pos.up()) >= 9 && random.nextInt(7) == 0 && state.get(HALF) == DoubleBlockHalf.UPPER) {
-                    worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(age + 1)), 2);
-                    if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
-                        worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(age + 1)), 2);
-                    }
-                }
 
-                if (age == 3 && random.nextInt(28) == 0 && (state.get(HALF) == DoubleBlockHalf.LOWER && worldIn.getBlockState(pos.down()).getBlock() != ModBlocks.planter_box)) {
-                    worldIn.setBlockState(pos, state.with(DEAD, true), 2);
-                    if (worldIn.getBlockState(pos.up()).getBlock() == this.getBlock()) {
-                        worldIn.setBlockState(pos.up(), worldIn.getBlockState(pos.up()).with(DEAD, true), 2);
-                    }
-                }
-            } else {
-                if (worldIn.getLight(pos.up()) >= 9 && random.nextInt(7) == 0 && state.get(HALF) == DoubleBlockHalf.UPPER) {
-                    worldIn.setBlockState(pos, state.with(CUT, false), 2);
-                    if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
-                        worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(CUT, false), 2);
-                    }
-                }
+        if (age < 3 && worldIn.getLight(pos.up()) >= 9 && random.nextInt(7) == 0 && state.get(HALF) == DoubleBlockHalf.UPPER) {
+            worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(age + 1)), 2);
+            if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
+                worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(age + 1)), 2);
             }
         }
     }
 
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         int age = state.get(AGE);
-        boolean isDead = state.get(DEAD);
-        boolean isCut = state.get(CUT);
         ItemStack stack = player.getHeldItem(handIn);
 
-        if (stack.getItem() instanceof ShearsItem && !isDead && !isCut) {
+        if (stack.getItem() instanceof ShearsItem && age == 3) {
             if (state.get(HALF) == DoubleBlockHalf.UPPER) {
                 worldIn.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                worldIn.setBlockState(pos, state.with(CUT, true).with(AGE, 0), 2);
+
+
+                worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(1)), 2);
                 if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
-                    worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(CUT, true).with(AGE, 0), 2);
+                    worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(1)), 2);
                 }
 
-                if (age == 3) {
-                    if (worldIn.rand.nextInt(5) == 0) {
-                        spawnAsEntity(worldIn, pos, new ItemStack(this.rottenFruit, 1 + worldIn.rand.nextInt(4)));
-                    } else {
-                        spawnAsEntity(worldIn, pos, new ItemStack(this.fruit, 1 + worldIn.rand.nextInt(4)));
-                    }
-                }
+                spawnAsEntity(worldIn, pos, new ItemStack(this.fruitSapling, 1 + worldIn.rand.nextInt(2)));
 
+                if (worldIn.rand.nextInt(5) == 0) {
+                    spawnAsEntity(worldIn, pos, new ItemStack(this.rottenFruit, 1 + worldIn.rand.nextInt(4)));
+                } else {
+                    spawnAsEntity(worldIn, pos, new ItemStack(this.fruit, 1 + worldIn.rand.nextInt(4)));
+                }
             }
-        } else if (age == 3 && !isDead && !isCut) {
+        } else if (age == 3) {
             if (worldIn.rand.nextInt(5) == 0) {
                 spawnAsEntity(worldIn, pos, new ItemStack(this.rottenFruit, 1 + worldIn.rand.nextInt(4)));
             } else {
@@ -160,7 +140,7 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
     }
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(AGE, DEAD, HALF, CUT);
+        builder.add(AGE, HALF);
     }
 
     public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
@@ -219,8 +199,8 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
     }
 
     public void placeAt(IWorld worldIn, BlockPos pos, int flags) {
-        worldIn.setBlockState(pos, this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER), flags);
-        worldIn.setBlockState(pos.up(), this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER), flags);
+        worldIn.setBlockState(pos, this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER).with(AGE, 2), flags);
+        worldIn.setBlockState(pos.up(), this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER).with(AGE, 2), flags);
     }
 
     public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {

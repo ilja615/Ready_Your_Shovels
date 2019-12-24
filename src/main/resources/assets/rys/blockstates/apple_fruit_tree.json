@@ -1,100 +1,28 @@
 {
 	"variants": {
-      "age=0,dead=false,half=lower,cut=false": {
+      "age=0,half=lower": {
         "model": "rys:block/apple_fruit_tree_bottom"
       },
-      "age=1,dead=false,half=lower,cut=false": {
+      "age=1,half=lower": {
         "model": "rys:block/apple_fruit_tree_bottom"
       },
-      "age=2,dead=false,half=lower,cut=false": {
+      "age=2,half=lower": {
         "model": "rys:block/apple_fruit_tree_bottom"
       },
-      "age=3,dead=false,half=lower,cut=false": {
+      "age=3,half=lower": {
         "model": "rys:block/apple_fruit_tree_bottom"
       },
-      "age=0,dead=true,half=lower,cut=false": {
-        "model": "rys:block/apple_fruit_tree_bottom"
+      "age=0,half=upper": {
+        "model": "rys:block/apple_fruit_tree_head_dead"
       },
-      "age=1,dead=true,half=lower,cut=false": {
-        "model": "rys:block/apple_fruit_tree_bottom"
+      "age=1,half=upper": {
+        "model": "rys:block/apple_fruit_tree_head_dead"
       },
-      "age=2,dead=true,half=lower,cut=false": {
-        "model": "rys:block/apple_fruit_tree_bottom"
-      },
-      "age=3,dead=true,half=lower,cut=false": {
-        "model": "rys:block/apple_fruit_tree_bottom"
-      },
-      "age=0,dead=false,half=upper,cut=false": {
+      "age=2,half=upper": {
         "model": "rys:block/apple_fruit_tree_head_without_fruit"
       },
-      "age=1,dead=false,half=upper,cut=false": {
-        "model": "rys:block/apple_fruit_tree_head_without_fruit"
-      },
-      "age=2,dead=false,half=upper,cut=false": {
-        "model": "rys:block/apple_fruit_tree_head_without_fruit"
-      },
-      "age=3,dead=false,half=upper,cut=false": {
+      "age=3,half=upper": {
         "model": "rys:block/apple_fruit_tree_head"
-      },
-      "age=0,dead=true,half=upper,cut=false": {
-        "model": "rys:block/apple_fruit_tree_head_dead"
-      },
-      "age=1,dead=true,half=upper,cut=false": {
-        "model": "rys:block/apple_fruit_tree_head_dead"
-      },
-      "age=2,dead=true,half=upper,cut=false": {
-        "model": "rys:block/apple_fruit_tree_head_dead"
-      },
-      "age=3,dead=true,half=upper,cut=false": {
-        "model": "rys:block/apple_fruit_tree_head_dead"
-      },
-      "age=0,dead=false,half=lower,cut=true": {
-        "model": "rys:block/apple_fruit_tree_bottom"
-      },
-      "age=1,dead=false,half=lower,cut=true": {
-        "model": "rys:block/apple_fruit_tree_bottom"
-      },
-      "age=2,dead=false,half=lower,cut=true": {
-        "model": "rys:block/apple_fruit_tree_bottom"
-      },
-      "age=3,dead=false,half=lower,cut=true": {
-        "model": "rys:block/apple_fruit_tree_bottom"
-      },
-      "age=0,dead=true,half=lower,cut=true": {
-        "model": "rys:block/apple_fruit_tree_bottom"
-      },
-      "age=1,dead=true,half=lower,cut=true": {
-        "model": "rys:block/apple_fruit_tree_bottom"
-      },
-      "age=2,dead=true,half=lower,cut=true": {
-        "model": "rys:block/apple_fruit_tree_bottom"
-      },
-      "age=3,dead=true,half=lower,cut=true": {
-        "model": "rys:block/apple_fruit_tree_bottom"
-      },
-      "age=0,dead=false,half=upper,cut=true": {
-        "model": "rys:block/apple_fruit_tree_head_cut"
-      },
-      "age=1,dead=false,half=upper,cut=true": {
-        "model": "rys:block/apple_fruit_tree_head_cut"
-      },
-      "age=2,dead=false,half=upper,cut=true": {
-        "model": "rys:block/apple_fruit_tree_head_cut"
-      },
-      "age=3,dead=false,half=upper,cut=true": {
-        "model": "rys:block/apple_fruit_tree_head_cut"
-      },
-      "age=0,dead=true,half=upper,cut=true": {
-        "model": "rys:block/apple_fruit_tree_head_cut"
-      },
-      "age=1,dead=true,half=upper,cut=true": {
-        "model": "rys:block/apple_fruit_tree_head_cut"
-      },
-      "age=2,dead=true,half=upper,cut=true": {
-        "model": "rys:block/apple_fruit_tree_head_cut"
-      },
-      "age=3,dead=true,half=upper,cut=true": {
-        "model": "rys:block/apple_fruit_tree_head_cut"
       }
 	}
 }

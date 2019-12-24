@@ -43,9 +43,9 @@ public class ModBlocks {
 	public static final FruitSaplingBlock apple_fruit_sapling = null;
 	public static final FruitSaplingBlock orange_fruit_sapling = null;
 	public static final FruitSaplingBlock apricot_fruit_sapling = null;
-	public static final FruitTreeBlock apple_fruit_tree = create("apple_fruit_tree", new FruitTreeBlock(Items.APPLE, Items.APPLE, ModProperties.fruit_tree));
-	public static final FruitTreeBlock orange_fruit_tree = create("orange_fruit_tree", new FruitTreeBlock(ModItems.orange, ModItems.rotten_orange, ModProperties.fruit_tree));
-	public static final FruitTreeBlock apricot_fruit_tree = create("apricot_fruit_tree", new FruitTreeBlock(ModItems.apricot, ModItems.rotten_apricot, ModProperties.fruit_tree));
+	public static final FruitTreeBlock apple_fruit_tree = create("apple_fruit_tree", new FruitTreeBlock(Items.APPLE, Items.APPLE, ModItems.apple_fruit_tree, ModProperties.fruit_tree));
+	public static final FruitTreeBlock orange_fruit_tree = create("orange_fruit_tree", new FruitTreeBlock(ModItems.orange, ModItems.rotten_orange, ModItems.orange_fruit_tree, ModProperties.fruit_tree));
+	public static final FruitTreeBlock apricot_fruit_tree = create("apricot_fruit_tree", new FruitTreeBlock(ModItems.apricot, ModItems.rotten_apricot, ModItems.apricot_fruit_tree, ModProperties.fruit_tree));
 
 	public static final DayrootBlock dayroot = null;
 	
@@ -91,7 +91,7 @@ public class ModBlocks {
 		registry.register(anthill);
 		registry.register(hunting_anthill);
 	}
-	
+
 	public static <T extends Block> T create(String name, T block) {
 		block.setRegistryName(Reference.MOD_ID, name);
 		return block;

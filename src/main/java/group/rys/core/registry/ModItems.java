@@ -99,6 +99,10 @@ public class ModItems {
 	
 	public static <T extends Item> T create(String name, T item) {
 		item.setRegistryName(Reference.MOD_ID, name);
+
+		if (item instanceof BlockItem) {
+			Item.BLOCK_TO_ITEM.put(((BlockItem) item).getBlock(), item);
+		}
 		return item;
 	}
 	
