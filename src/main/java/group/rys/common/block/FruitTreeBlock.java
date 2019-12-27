@@ -105,8 +105,7 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
                     worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(1)), 2);
                 }
 
-                spawnAsEntity(worldIn, pos, new ItemStack(this.fruitSapling, 1 + worldIn.rand.nextInt(2)));
-
+                this.spawnAdditionalDrops(state, worldIn, pos, new ItemStack(this.fruitSapling, 1 + worldIn.rand.nextInt(2)));
                 if (worldIn.rand.nextInt(5) == 0) {
                     spawnAsEntity(worldIn, pos, new ItemStack(this.rottenFruit, 1 + worldIn.rand.nextInt(4)));
                 } else {
