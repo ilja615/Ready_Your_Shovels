@@ -22,9 +22,9 @@
 	"block.rys.smooth_dirt_stairs": "Ступеньки из гладкой земли",
 	"block.rys.planter_box": "Ящик садовода",
 	"block.rys.anthill": "Муравейник",
-	"block.rys.apple_fruit_tree": "Яблоня",
-	"block.rys.orange_fruit_tree": "Апельсиновое дерево",
-	"block.rys.apricot_fruit_tree": "Абрикосовое дерево",
+  "block.rys.apple_fruit_sapling": "Яблоня",
+  "block.rys.orange_fruit_sapling": "Апельсиновое дерево",
+  "block.rys.apricot_fruit_sapling": "Абрикосовое дерево",
 	"block.rys.dayroot": "Корень света",
 	
 	"item.rys.peat": "Торф",

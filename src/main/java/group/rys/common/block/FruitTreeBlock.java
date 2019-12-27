@@ -37,7 +37,7 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
 
     protected static final VoxelShape LOG_SHAPE = Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 16.0D, 11.0D);
 
-	public static final IntegerProperty AGE = BlockStateProperties.AGE_0_3;
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_0_3;
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
     public FruitTreeBlock(Item fruitIn, Item rottenFruitIn, Item fruitSapling, Block.Properties properties) {
@@ -87,6 +87,8 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
             worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(age + 1)), 2);
             if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
                 worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(age + 1)), 2);
+            } else if (worldIn.getBlockState(pos.up()).isAir()) {
+                worldIn.setBlockState(pos.up(), this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER).with(AGE, Integer.valueOf(1)), 2);
             }
         }
     }
@@ -95,25 +97,26 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
         int age = state.get(AGE);
         ItemStack stack = player.getHeldItem(handIn);
 
-        if (stack.getItem() instanceof ShearsItem && age == 3) {
-            if (state.get(HALF) == DoubleBlockHalf.UPPER) {
-                worldIn.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        if (stack.getItem() instanceof ShearsItem && age == 3 && state.get(HALF) == DoubleBlockHalf.UPPER) {
+            worldIn.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
 
 
-                worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(1)), 2);
-                if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
-                    worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(1)), 2);
-                }
-
-                spawnAsEntity(worldIn, pos, new ItemStack(this.fruitSapling, 1 + worldIn.rand.nextInt(2)));
-
-                if (worldIn.rand.nextInt(5) == 0) {
-                    spawnAsEntity(worldIn, pos, new ItemStack(this.rottenFruit, 1 + worldIn.rand.nextInt(4)));
-                } else {
-                    spawnAsEntity(worldIn, pos, new ItemStack(this.fruit, 1 + worldIn.rand.nextInt(4)));
-                }
+            worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(1)), 2);
+            if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
+                worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(1)), 2);
             }
-        } else if (age == 3) {
+
+            if (worldIn.rand.nextInt(5) == 0) {
+                spawnAsEntity(worldIn, pos, new ItemStack(this.rottenFruit, 1 + worldIn.rand.nextInt(4)));
+            } else {
+                spawnAsEntity(worldIn, pos, new ItemStack(this.fruit, 1 + worldIn.rand.nextInt(4)));
+            }
+        } else if (age == 3 && state.get(HALF) == DoubleBlockHalf.UPPER) {
+            worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(2)), 2);
+            if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
+                worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(2)), 2);
+            }
+
             if (worldIn.rand.nextInt(5) == 0) {
                 spawnAsEntity(worldIn, pos, new ItemStack(this.rottenFruit, 1 + worldIn.rand.nextInt(4)));
             } else {
@@ -121,17 +124,6 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
             }
 
             worldIn.playSound(null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-            if (state.get(HALF) == DoubleBlockHalf.UPPER) {
-                worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(2)), 2);
-                if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
-                    worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(2)), 2);
-                }
-            } else if (state.get(HALF) == DoubleBlockHalf.LOWER) {
-                worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(2)), 2);
-                if (worldIn.getBlockState(pos.up()).getBlock() == this.getBlock()) {
-                    worldIn.setBlockState(pos.up(), worldIn.getBlockState(pos.up()).with(AGE, Integer.valueOf(2)), 2);
-                }
-            }
 
             return true;
         }
@@ -144,7 +136,7 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
     }
 
     public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
-        return state.get(AGE) < 3;
+        return state.get(AGE) < 3 || state.get(HALF) == DoubleBlockHalf.LOWER;
     }
 
     public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
@@ -163,6 +155,8 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
             worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(i)), 2);
             if (worldIn.getBlockState(pos.up()).getBlock() == this.getBlock()) {
                 worldIn.setBlockState(pos.up(), worldIn.getBlockState(pos.up()).with(AGE, Integer.valueOf(i)), 2);
+            } else if (worldIn.getBlockState(pos.up()).isAir()) {
+                worldIn.setBlockState(pos.up(), this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER).with(AGE, Integer.valueOf(1)), 2);
             }
         }
     }

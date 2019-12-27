@@ -22,9 +22,9 @@
 	"block.rys.smooth_dirt_stairs": "Smooth Dirt Stairs",
 	"block.rys.planter_box": "Planter Box",
 	"block.rys.anthill": "Anthill",
-	"block.rys.apple_fruit_tree": "Apple Fruit Tree",
-	"block.rys.orange_fruit_tree": "Orange Fruit Tree",
-	"block.rys.apricot_fruit_tree": "Apricot Fruit Tree",
+	"block.rys.apple_fruit_sapling": "Apple Fruit Sapling",
+	"block.rys.orange_fruit_sapling": "Orange Fruit Sapling",
+	"block.rys.apricot_fruit_sapling": "Apricot Fruit Sapling",
 	"block.rys.dayroot": "Dayroot",
 	
 	"item.rys.peat": "Peat",

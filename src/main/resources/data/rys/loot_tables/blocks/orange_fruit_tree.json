@@ -8,20 +8,13 @@
 					"type": "minecraft:item",
 					"conditions": [
 						{
-							"condition": "minecraft:block_state_property",
-							"block": "rys:orange_fruit_tree",
-							"properties": {
-								"dead": false
-							}
-						},
-						{
 							"condition": "minecraft:match_tool",
 							"predicate": {
 								"item": "minecraft:shears"
 							}
 						}
 					],
-					"name": "rys:orange_fruit_tree"
+                  "name": "rys:orange_fruit_sapling"
 				}
 			],
 			"conditions": [
