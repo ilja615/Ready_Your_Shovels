@@ -2,7 +2,7 @@
   "credit": "Made with Blockbench",
   "textures": {
     "tree": "rys:block/appletreefruit",
-    "particle": "rys:block/appletreefruit"
+    "particle": "minecraft:block/oak_log"
   },
   "elements": [
     {
