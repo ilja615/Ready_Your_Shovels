@@ -32,6 +32,7 @@
 	"item.rys.apricot": "Apricot",
 	"item.rys.rotten_orange": "Rotten Orange",
 	"item.rys.rotten_apricot": "Rotten Apricot",
+	"item.rys.colly_music_disc": "Music Disc",
 	"item.rys.ant_spawn_egg": "Ant Spawn Egg",
 	"item.rys.queen_ant_spawn_egg": "Queen Ant Spawn Egg",
 	"item.rys.hunting_ant_spawn_egg": "Hunting Ant Spawn Egg",
@@ -76,6 +77,7 @@
 	"item.minecraft.tipped_arrow.effect.strong_increase_debuff": "Arrow of Increase Debuffs",
 	"item.minecraft.tipped_arrow.effect.decrease_buff": "Arrow of Decrease Buffs",
 	"item.minecraft.tipped_arrow.effect.strong_decrease_buff": "Arrow of Decrease Buffs",
-	
+	"item.rys.colly_music_disc.desc": "Axoladdy - Colly",
+
 	"itemGroup.rys": "Ready Your Shovels"
 }

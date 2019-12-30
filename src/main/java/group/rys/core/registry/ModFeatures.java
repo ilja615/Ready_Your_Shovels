@@ -1,7 +1,7 @@
 package group.rys.core.registry;
 
 import group.rys.common.world.gen.feature.*;
-import group.rys.common.world.gen.feature.structure.GraveyardStructure;
+import group.rys.common.world.gen.feature.structure.AnthillStructure;
 import group.rys.common.world.gen.placement.CountChanceDepthConfig;
 import group.rys.core.util.Reference;
 import net.minecraft.block.Blocks;
@@ -31,9 +31,9 @@ public class ModFeatures {
 	public static final DayrootFeature dayroot = create("dayroot", new DayrootFeature(BushConfig::deserialize));
 	public static final Feature<ProbabilityConfig> ant_hill = create("ant_hill", new AntHillFeature(ProbabilityConfig::deserialize, false));
 	public static final AppleTreeFeature appletree = create("appletree", new AppleTreeFeature(BushConfig::deserialize));
+    public static final AnthillStructure anthill_structure = create("anthill_structure", new AnthillStructure(NoFeatureConfig::deserialize));
 
-	public static final GraveyardStructure graveyard_dungeon = create("graveyard_dungeon", new GraveyardStructure(NoFeatureConfig::deserialize));
-	
+
 	@SubscribeEvent
 	public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {
 		IForgeRegistry<Feature<?>> registry = event.getRegistry();
@@ -43,8 +43,8 @@ public class ModFeatures {
 		registry.register(deposits_in_rivers);
 		registry.register(dayroot);
 		registry.register(ant_hill);
-		
-		registry.register(graveyard_dungeon);
+
+        registry.register(anthill_structure);
 	}
 	
 	public static <T extends Feature<?>> T create(String name, T feature) {
@@ -58,7 +58,8 @@ public class ModFeatures {
 		ForgeRegistries.BIOMES.forEach((Biome biome) -> {
 			
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
-				
+                //Structure
+                biome.addStructure(anthill_structure, IFeatureConfig.NO_FEATURE_CONFIG);
 				// Dirt Cave
 				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(dirt_cave, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 				
@@ -90,12 +91,10 @@ public class ModFeatures {
 					biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.BUSH, new BushConfig(Blocks.BROWN_MUSHROOM.getDefaultState()), ModPlacements.count_chance_depth, new CountChanceDepthConfig(2, 0.5F, 40)));
 					biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.BUSH, new BushConfig(Blocks.RED_MUSHROOM.getDefaultState()), ModPlacements.count_chance_depth, new CountChanceDepthConfig(2, 0.5F, 40)));
 
-                    // Graveyard Structure
-					biome.addStructure(graveyard_dungeon, IFeatureConfig.NO_FEATURE_CONFIG);
-					biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, Biome.createDecoratedFeature(graveyard_dungeon, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
-
 					// Ant Hill
 					biome.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS, Biome.createDecoratedFeature(ant_hill, new ProbabilityConfig(100), Placement.TOP_SOLID_HEIGHTMAP, IPlacementConfig.NO_PLACEMENT_CONFIG));
+                    //Ant hill Structure
+                    biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, Biome.createDecoratedFeature(anthill_structure, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 
                     //AppleTree
 					Biomes.FOREST.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(appletree, new BushConfig(ModBlocks.apple_fruit_tree.getDefaultState()), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(14)));
