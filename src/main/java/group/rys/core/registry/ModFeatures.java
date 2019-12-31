@@ -58,8 +58,6 @@ public class ModFeatures {
 		ForgeRegistries.BIOMES.forEach((Biome biome) -> {
 			
 			if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.OVERWORLD)) {
-                //Structure
-                biome.addStructure(anthill_structure, IFeatureConfig.NO_FEATURE_CONFIG);
 				// Dirt Cave
 				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(dirt_cave, IFeatureConfig.NO_FEATURE_CONFIG, Placement.NOPE, IPlacementConfig.NO_PLACEMENT_CONFIG));
 				
@@ -86,7 +84,10 @@ public class ModFeatures {
 
 					// Dayroot
 					biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(dayroot, new BushConfig(ModBlocks.dayroot.getDefaultState()), ModPlacements.count_chance_depth, new CountChanceDepthConfig(2, 0.5F, 40)));
-
+                    if (!BiomeDictionary.hasType(biome, BiomeDictionary.Type.SANDY) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MESA)) {
+                        //Structure
+                        biome.addStructure(anthill_structure, IFeatureConfig.NO_FEATURE_CONFIG);
+                    }
                     // Cave Decoration
 					biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.BUSH, new BushConfig(Blocks.BROWN_MUSHROOM.getDefaultState()), ModPlacements.count_chance_depth, new CountChanceDepthConfig(2, 0.5F, 40)));
 					biome.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.BUSH, new BushConfig(Blocks.RED_MUSHROOM.getDefaultState()), ModPlacements.count_chance_depth, new CountChanceDepthConfig(2, 0.5F, 40)));
