@@ -1,5 +1,6 @@
 package group.rys.core.registry;
 
+import group.rys.common.item.ModMusicDiscItem;
 import group.rys.core.registry.other.ModProperties;
 import group.rys.core.util.Reference;
 import net.minecraft.item.BlockItem;
@@ -48,6 +49,7 @@ public class ModItems {
 	public static Item apricot = create("apricot", new Item(ModProperties.apricot));
 	public static Item rotten_orange = create("rotten_orange", new Item(ModProperties.rotten_orange));
 	public static Item rotten_apricot = create("rotten_apricot", new Item(ModProperties.rotten_apricot));
+    public static Item colly_music_disc = create("colly_music_disc", new ModMusicDiscItem(12, ModSounds.RECORD_COLLY, ModProperties.record_colly));
 	public static final Item ant_spawn_egg = null;
 	
 	@SubscribeEvent
@@ -92,6 +94,7 @@ public class ModItems {
 		registry.register(apricot);
 		registry.register(rotten_orange);
 		registry.register(rotten_apricot);
+        registry.register(colly_music_disc);
 		registry.register(create("ant_spawn_egg", new SpawnEggItem(ModEntities.gatherer_ant, 4073251, 12531212, ModProperties.item)));
 		registry.register(create("queen_ant_spawn_egg", new SpawnEggItem(ModEntities.queen_ant, 4073251, 12531212, ModProperties.item)));
 		registry.register(create("hunting_ant_spawn_egg", new SpawnEggItem(ModEntities.hunting_ant, 4073251, 12531212, ModProperties.item)));
