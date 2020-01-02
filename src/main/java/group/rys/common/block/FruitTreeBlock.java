@@ -6,17 +6,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ShearsItem;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -60,6 +56,11 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
         return fruitSapling;
     }
 
+    @Override
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT_MIPPED;
+    }
+
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         if (state.get(HALF) == DoubleBlockHalf.LOWER) {
             return LOG_SHAPE;
@@ -97,21 +98,7 @@ public class FruitTreeBlock extends BushBlock implements IGrowable {
         int age = state.get(AGE);
         ItemStack stack = player.getHeldItem(handIn);
 
-        if (stack.getItem() instanceof ShearsItem && age == 3 && state.get(HALF) == DoubleBlockHalf.UPPER) {
-            worldIn.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 1.0F);
-
-
-            worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(1)), 2);
-            if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
-                worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(1)), 2);
-            }
-
-            if (worldIn.rand.nextInt(5) == 0) {
-                spawnAsEntity(worldIn, pos, new ItemStack(this.rottenFruit, 1 + worldIn.rand.nextInt(4)));
-            } else {
-                spawnAsEntity(worldIn, pos, new ItemStack(this.fruit, 1 + worldIn.rand.nextInt(4)));
-            }
-        } else if (age == 3 && state.get(HALF) == DoubleBlockHalf.UPPER) {
+        if (age == 3 && state.get(HALF) == DoubleBlockHalf.UPPER) {
             worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(2)), 2);
             if (worldIn.getBlockState(pos.down()).getBlock() == this.getBlock()) {
                 worldIn.setBlockState(pos.down(), worldIn.getBlockState(pos.down()).with(AGE, Integer.valueOf(2)), 2);
