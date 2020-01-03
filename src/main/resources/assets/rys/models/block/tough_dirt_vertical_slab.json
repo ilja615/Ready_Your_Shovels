@@ -1,0 +1,8 @@
+{
+    "parent": "rys:block/vertical_slab",
+    "textures": {
+        "side": "rys:block/tough_dirt",
+        "top": "rys:block/tough_dirt",
+        "bottom": "rys:block/tough_dirt"
+    }
+}

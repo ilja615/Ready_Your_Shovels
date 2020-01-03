@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
@@ -83,6 +84,15 @@ public class ModItems {
         registry.register(create("orange_fruit_sapling", new BlockItem(ModBlocks.orange_fruit_sapling, ModProperties.item)));
         registry.register(create("apricot_fruit_sapling", new BlockItem(ModBlocks.apricot_fruit_sapling, ModProperties.item)));
 		registry.register(create("dayroot", new BlockItem(ModBlocks.dayroot, ModProperties.item)));
+
+		// QuarkBlocks
+		if(ModList.get().isLoaded("quark"))
+		{
+			registry.register(create("tough_dirt_vertical_slab", new BlockItem(ModBlocks.tough_dirt_vertical_slab, ModProperties.item)));
+			registry.register(create("smooth_dirt_vertical_slab", new BlockItem(ModBlocks.smooth_dirt_vertical_slab, ModProperties.item)));
+			registry.register(create("mossy_tough_dirt_vertical_slab", new BlockItem(ModBlocks.mossy_tough_dirt_vertical_slab, ModProperties.item)));
+			registry.register(create("dirt_bricks_vertical_slab", new BlockItem(ModBlocks.dirt_bricks_vertical_slab, ModProperties.item)));
+		}
 		
 		// TileEntities
 		registry.register(create("anthill", new BlockItem(ModBlocks.anthill, ModProperties.item)));

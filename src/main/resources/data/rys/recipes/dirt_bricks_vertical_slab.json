@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"A",
+		"A",
+		"A"
+	],
+	"key": {
+		"A": {
+			"item": "rys:dirt_bricks_slab"
+		}
+	},
+	"result": {
+		"item": "rys:dirt_bricks_vertical_slab",
+		"count": 3
+	}
+}

@@ -10,9 +10,11 @@ import net.minecraft.block.WallBlock;
 import net.minecraft.item.Items;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
+
 
 @Mod.EventBusSubscriber(modid = Reference.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 @ObjectHolder(Reference.MOD_ID)
@@ -51,6 +53,12 @@ public class ModBlocks {
 	
 	public static final AnthillBlock anthill = create("anthill", new AnthillBlock(ModProperties.tough_dirt));
 	public static final HuntingAnthillBlock hunting_anthill = create("hunting_anthill", new HuntingAnthillBlock(ModProperties.tough_dirt));
+
+	public static final VerticalSlabBlock tough_dirt_vertical_slab = null;
+    public static final VerticalSlabBlock smooth_dirt_vertical_slab = null;
+    public static final VerticalSlabBlock mossy_tough_dirt_vertical_slab = null;
+    public static final VerticalSlabBlock dirt_bricks_vertical_slab = null;
+
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
@@ -90,6 +98,15 @@ public class ModBlocks {
 		// TileEntities
 		registry.register(anthill);
 		registry.register(hunting_anthill);
+
+        if(ModList.get().isLoaded("quark"))
+        {
+            registry.register(create("tough_dirt_vertical_slab", new VerticalSlabBlock(ModProperties.tough_dirt)));
+            registry.register(create("smooth_dirt_vertical_slab", new VerticalSlabBlock(ModProperties.smooth_dirt)));
+            registry.register(create("mossy_tough_dirt_vertical_slab", new VerticalSlabBlock(ModProperties.mossy_tough_dirt)));
+            registry.register(create("dirt_bricks_vertical_slab", new VerticalSlabBlock(ModProperties.dirt_bricks)));
+
+        }
 	}
 
 	public static <T extends Block> T create(String name, T block) {

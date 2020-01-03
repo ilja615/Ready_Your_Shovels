@@ -26,6 +26,11 @@
 	"block.rys.orange_fruit_sapling": "Orange Fruit Sapling",
 	"block.rys.apricot_fruit_sapling": "Apricot Fruit Sapling",
 	"block.rys.dayroot": "Dayroot",
+
+	"block.rys.tough_dirt_vertical_slab": "Tough Dirt Vertical Slab",
+	"block.rys.mossy_tough_dirt_vertical_slab": "Mossy Tough Dirt Vertical Slab",
+	"block.rys.smooth_dirt_vertical_slab": "Smooth Dirt Vertical Slab",
+	"block.rys.dirt_bricks_vertical_slab": "Dirt Bricks Vertical Slab",
 	
 	"item.rys.peat": "Peat",
 	"item.rys.orange": "Orange",
